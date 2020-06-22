@@ -2,99 +2,106 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState{
+    idle,
+    walking,
+    attacking
+
+}
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb;
+    [Header("Player Public References")]
+    public PlayerState currentState;
+
+    [Space]
+    [Header("Player Private References")]
     private Animator _animator;
+    private Rigidbody2D _rigidbody;
+    
+    [Space]
+    [Header("Player Public Statistics")]
+    public float movementSpeed;
+    public float startTimeBtwAttacks;
+
+    [Space]
+    [Header("Player Private Statistics")]
     private Vector2 _movement;
-    public Transform rightCheck, bottomCheck, leftCheck;
-    public LayerMask groundLayer;
+    private float _base_speed;
+    private float _timeBtwAttacks;
 
-    [Space]
-    [Header("Stats")]
-    public float speed = 10;
-    public float jumpForce = 50;
-    public float slideSpeed = 5;
-    public float wallJumpLerp = 10;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-    public float collisionRadius;
-
-    [Space]
-    [Header("Booleans")]
-    private bool _isGround;
-    private bool _isWall;
-
-    [Space]
-
-    private bool groundTouch;
-    private bool _facingRight = true;
-
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
+    private void Awake() {
+        _timeBtwAttacks = startTimeBtwAttacks;
+        _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-
-       
     }
-    void Update()
-    {
-        //Collision checking
-        CheckCollision();
+    private void Update() {
+        GetInputs();
 
-        //Movement
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        _movement = new Vector2(horizontalInput, 0);
-
-         if (horizontalInput < 0f && _facingRight == true)
+        //Handling States
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {
-            Flip();
+            currentState = PlayerState.attacking;
         }
-        else if (horizontalInput > 0f && _facingRight == false)
+        else if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Walking"))
         {
+            currentState = PlayerState.walking;
+        }
+        else
+        {
+            currentState = PlayerState.idle; ;
+
+        }
+
         
-            Flip();
-        }
-
-        //Jumping Gravity testing
-        if(_rb.velocity.y < 0)
-        {
-            _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }else if(_rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            _rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-
-        //Jumping
-        if(Input.GetButtonDown("Jump")){
-            if(_isGround){
-
-                Jump();
-            }
-        }
-
     }
 
+    void GetInputs()
+    {
+        //Walking Part
+        if (currentState != PlayerState.attacking)
+        {
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+            _movement = new Vector2(horizontalInput, verticalInput);
+            _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
+            _movement.Normalize();
+        }
+
+        if (_timeBtwAttacks < 0)
+        {
+            if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attacking)
+            {
+                Attack();
+                _timeBtwAttacks = startTimeBtwAttacks;
+            }
+            
+        }
+        else
+        {
+            _timeBtwAttacks -= Time.deltaTime;
+
+        }
+        
+        Debug.Log(_timeBtwAttacks);
+
+    }
     private void FixedUpdate()
     {
-        float horizontalVelocity = _movement.normalized.x * speed;
-        _rb.velocity = new Vector2(horizontalVelocity, _rb.velocity.y);
-       
+        _rigidbody.velocity = _movement * movementSpeed * _base_speed;
     }
 
-    private void Jump()
+    private void LateUpdate()
     {
-        _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if(_movement!=Vector2.zero){
+            _animator.SetFloat("Horizontal", _movement.x);
+            _animator.SetFloat("Vertical", _movement.y);
+        }
+        _animator.SetFloat("Velocity", _movement.sqrMagnitude);
     }
 
-    private void CheckCollision(){
-        _isGround = Physics2D.OverlapCircle(bottomCheck.position, collisionRadius, groundLayer);
-        _isWall = Physics2D.OverlapCircle(leftCheck.position, collisionRadius, groundLayer) || Physics2D.OverlapCircle(leftCheck.position, collisionRadius, groundLayer);
-
-        Debug.Log(_isGround);
+    private void Attack()
+    {
+        _animator.SetTrigger("Attack");
     }
-    private void Flip() {
-        _facingRight = !_facingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
+    
 }

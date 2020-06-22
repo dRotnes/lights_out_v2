@@ -14,7 +14,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Player
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2745313349
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 3759574659
+    locked: 0
+  - name: Player
+    uniqueID: 3698606975
+    locked: 0
+  - name: ForeGround
+    uniqueID: 3251159529
     locked: 0
