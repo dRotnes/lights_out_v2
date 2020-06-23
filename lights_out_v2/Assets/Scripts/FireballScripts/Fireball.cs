@@ -1,31 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public Transform _fireballPosition;
-    public float baseDistance;
-    public float speed;
-    private void Awake()
-    {
-        
-        _fireballPosition = GameObject.Find("FireballPosition").transform;
-    }
-    void Start()
-    {
-        transform.position = _fireballPosition.position;
-    }
-    
+    public GameObject globalLight;
+    public float intensity;
+
     void Update()
     {
-        float distance = Vector2.Distance(transform.position, _fireballPosition.position);
-        
-        if(distance > baseDistance)
+        if(globalLight.activeSelf == true)
         {
-        
-            transform.position = Vector2.MoveTowards(transform.position, _fireballPosition.position, speed * Time.deltaTime);
+            gameObject.GetComponent<Light2D>().intensity = 0;
         }
-        
+        else
+        {
+            gameObject.GetComponent<Light2D>().intensity = intensity;
+        }
     }
 }

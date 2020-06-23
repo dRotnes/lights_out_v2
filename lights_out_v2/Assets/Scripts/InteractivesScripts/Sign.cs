@@ -28,7 +28,7 @@ public class Sign : Interactive
         }
         else
         {
-            if (dialog.ReturnState() == DialogState.active && canDesactivate)
+            if (dialog.ReturnState() == DialogState.active || dialog.ReturnState() == DialogState.finished && canDesactivate)
             {
                 dialog.EndDialog();
                 canDesactivate = false;
