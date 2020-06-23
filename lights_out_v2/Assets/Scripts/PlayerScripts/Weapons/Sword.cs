@@ -5,9 +5,9 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     public float attackDamage;
-    private void OnCollisionEnter2D()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Attacking correctly " + attackDamage.ToString());
+        Debug.Log("Attacking correctly the " + collision.name);
     }
 
 }

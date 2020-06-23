@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
         
-        Debug.Log(_timeBtwAttacks);
 
     }
     private void FixedUpdate()
