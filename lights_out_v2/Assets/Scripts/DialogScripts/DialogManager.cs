@@ -24,38 +24,43 @@ public class DialogManager : MonoBehaviour
     private void Awake()
     {
         currentState = DialogState.unactive;
+
     }
     public void StartDialog(Dialog dialog, bool type)
     {
+        
         _isTyped = type;
-        if (currentState == DialogState.unactive)
+        dialogBox.SetActive(true);
+        titleDisplay.text = dialog.name;
+
+        foreach (string sentence in dialog.sentences)
         {
-            dialogBox.SetActive(true);
-            titleDisplay.text = dialog.name;
-            sentenceQueue.Clear();
-
-            foreach (string sentence in dialog.sentences)
-            {
-                sentenceQueue.Enqueue(sentence);
-            }
-
-            if (_isTyped == true)
-            {
-                StartCoroutine(DisplayTyped());
-            }
-            else
-            {
-                DisplayNonTyped();
-            }
-            currentState = DialogState.active;
+            sentenceQueue.Enqueue(sentence);
         }
+
+        if (_isTyped == true)
+        {
+            StartCoroutine(DisplayTyped());
+        }
+
+        currentState = DialogState.active;
+        
         
 
     }
+    
     private void Update()
     {
         
-        if (Input.GetKeyDown("space") && !_isTyped && currentState == DialogState.active)
+        if(currentState == DialogState.active)
+        {
+            if(sentenceQueue.Count == 0)
+            {
+                currentState = DialogState.finished;
+            }
+        }
+        
+        if (Input.GetKeyDown("space") && !_isTyped && currentState != DialogState.unactive)
         {
             DisplayNonTyped();
         }
@@ -63,25 +68,21 @@ public class DialogManager : MonoBehaviour
 
     private void DisplayNonTyped()
     {
-        if (sentenceQueue.Count == 0)
+        if(currentState == DialogState.finished)
         {
-            currentState = DialogState.finished;
-            Debug.Log("cabou");
+            EndDialog();
             return;
         }
         string sentence = sentenceQueue.Dequeue();
         textDisplay.text = sentence;
 
-
     }
     private IEnumerator DisplayTyped()
     {
-
-        if (sentenceQueue.Count == 0)
+        if (currentState == DialogState.finished)
         {
-            currentState = DialogState.finished;
             EndDialog();
-            yield return null;
+            yield break;
         }
 
         textDisplay.text = "";
@@ -95,6 +96,8 @@ public class DialogManager : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(timeBetweenPhrases);
         StartCoroutine(DisplayTyped());
+    
+
 
 
     }

@@ -10,13 +10,15 @@ public class Fireball : MonoBehaviour
 
     void Update()
     {
+        
+
         if(globalLight.activeSelf == true)
         {
-            gameObject.GetComponent<Light2D>().intensity = 0;
+            gameObject.GetComponentInChildren<Light2D>().intensity = 0;
         }
         else
         {
-            gameObject.GetComponent<Light2D>().intensity = intensity;
+            gameObject.GetComponentInChildren<Light2D>().intensity = intensity;
         }
     }
 }

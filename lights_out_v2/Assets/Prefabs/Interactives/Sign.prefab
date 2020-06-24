@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6473a7facf30b4fb4d8e8f0ea5672b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   dialog:
     name: Sign
     sentences:
@@ -198,6 +199,7 @@ MonoBehaviour:
   playerInRange: 0
   spriteRenderer: {fileID: 1468304284165848529}
   dialog: {fileID: 1468304284165848531}
+  canDesactivate: 0
 --- !u!61 &1468304284967029223
 BoxCollider2D:
   m_ObjectHideFlags: 0

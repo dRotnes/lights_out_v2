@@ -5,12 +5,14 @@ using TMPro;
 
 public class DialogTrigger : MonoBehaviour
 {
+    private DialogManager _dialogManager;
     public Dialog dialog;
     public bool isTyped;
     public bool playOnAwake;
 
     private void Start()
     {
+        _dialogManager = FindObjectOfType<DialogManager>();
         if (playOnAwake)
         {
             TriggerDialog();
@@ -18,17 +20,17 @@ public class DialogTrigger : MonoBehaviour
     }
     public void TriggerDialog()
     {
-        FindObjectOfType<DialogManager>().StartDialog(dialog, isTyped);
+        _dialogManager.StartDialog(dialog, isTyped);
     }
 
     public void EndDialog()
     {
-        FindObjectOfType<DialogManager>().EndDialog();
+        _dialogManager.EndDialog();
     }
 
     public DialogState ReturnState()
     {
-        DialogState currentState =  FindObjectOfType<DialogManager>().currentState;
+        DialogState currentState = _dialogManager.currentState;
         return currentState;
     }
 

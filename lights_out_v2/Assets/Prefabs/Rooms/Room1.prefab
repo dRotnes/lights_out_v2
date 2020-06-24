@@ -143,10 +143,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.56, y: 0.64}
-      - {x: -2.56, y: 0.64}
+    - - {x: 2.88, y: 1.28}
+      - {x: -2.56, y: 1.28}
       - {x: -2.56, y: -4.16}
-      - {x: 2.56, y: -4.16}
+      - {x: 2.88, y: -4.16}
 --- !u!114 &7368954523639978874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,8 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 7362546767017452969}
-  bounds: {fileID: 0}
-  boundActive: 0
 --- !u!1 &7362546767017452969
 GameObject:
   m_ObjectHideFlags: 0

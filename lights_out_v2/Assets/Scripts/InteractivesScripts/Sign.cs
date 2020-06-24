@@ -3,36 +3,26 @@
 public class Sign : Interactive
 {
     public DialogTrigger dialog;
-    private bool canDesactivate;
+    public bool canDesactivate;
 
     private void Update()
     {
         if (playerInRange)
         {
             canDesactivate = true;
-            if(Input.GetKeyDown("space"))
+            if(Input.GetKeyDown("space") && dialog.ReturnState() == DialogState.unactive)
             {
-                if (dialog.ReturnState() == DialogState.unactive)
-                {
-                    Debug.Log("hello");
-
-                    dialog.TriggerDialog();
-
-                }
-                else if(dialog.ReturnState() == DialogState.finished)
-                {
-                    dialog.EndDialog();
-                }
+                dialog.TriggerDialog();
             }
 
         }
         else
         {
-            if (dialog.ReturnState() == DialogState.active || dialog.ReturnState() == DialogState.finished && canDesactivate)
+            if (dialog.ReturnState() != DialogState.unactive && canDesactivate)
             {
                 dialog.EndDialog();
-                canDesactivate = false;
             }
+            canDesactivate = false;
         }
     }
   

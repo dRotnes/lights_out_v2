@@ -5,7 +5,8 @@ using UnityEngine;
 public enum PlayerState{
     idle,
     walking,
-    attacking
+    attacking,
+    blocked
 
 }
 public class PlayerMovement : MonoBehaviour
@@ -28,8 +29,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movement;
     private float _base_speed;
     private float _timeBtwAttacks;
+    private bool _canMove;
 
     private void Awake() {
+        _canMove = true;
         _timeBtwAttacks = startTimeBtwAttacks;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -57,29 +60,33 @@ public class PlayerMovement : MonoBehaviour
 
     void GetInputs()
     {
-        //Walking Part
-        if (currentState != PlayerState.attacking)
+        if (_canMove)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
-            _movement = new Vector2(horizontalInput, verticalInput);
-            _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
-            _movement.Normalize();
-        }
 
-        if (_timeBtwAttacks < 0)
-        {
-            if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attacking)
+            //Walking Part
+            if (currentState != PlayerState.attacking)
             {
-                Attack();
-                _timeBtwAttacks = startTimeBtwAttacks;
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                float verticalInput = Input.GetAxisRaw("Vertical");
+                _movement = new Vector2(horizontalInput, verticalInput);
+                _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
+                _movement.Normalize();
             }
-            
-        }
-        else
-        {
-            _timeBtwAttacks -= Time.deltaTime;
 
+            if (_timeBtwAttacks < 0)
+            {
+                if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attacking)
+                {
+                    Attack();
+                    _timeBtwAttacks = startTimeBtwAttacks;
+                }
+            
+            }
+            else
+            {
+                _timeBtwAttacks -= Time.deltaTime;
+
+            }
         }
         
 
@@ -101,6 +108,20 @@ public class PlayerMovement : MonoBehaviour
     private void Attack()
     {
         _animator.SetTrigger("Attack");
+    }
+
+    public void BlockOrAllowMovement()
+    {
+        if(_canMove == true)
+        {
+            _canMove = false;
+            _movement = Vector2.zero;
+            _rigidbody.velocity = _movement;
+        }
+        else
+        {
+            _canMove = true;
+        }
     }
     
 }
