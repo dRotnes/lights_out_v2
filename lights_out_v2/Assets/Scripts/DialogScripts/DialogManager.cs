@@ -42,6 +42,9 @@ public class DialogManager : MonoBehaviour
         {
             StartCoroutine(DisplayTyped());
         }
+        else{
+            DisplayNonTyped();
+        }
 
         currentState = DialogState.active;
         
@@ -59,22 +62,29 @@ public class DialogManager : MonoBehaviour
                 currentState = DialogState.finished;
             }
         }
-        
-        if (Input.GetKeyDown("space") && !_isTyped && currentState != DialogState.unactive)
+
+        if (!_isTyped)
         {
             DisplayNonTyped();
         }
+        
     }
 
     private void DisplayNonTyped()
     {
-        if(currentState == DialogState.finished)
+        if (Input.GetKeyDown("space") && currentState != DialogState.unactive)
         {
-            EndDialog();
-            return;
+
+            if (currentState == DialogState.finished)
+            {
+                EndDialog();
+                return;
+            }
+
+            string sentence = sentenceQueue.Dequeue();
+            textDisplay.text = sentence;
         }
-        string sentence = sentenceQueue.Dequeue();
-        textDisplay.text = sentence;
+        
 
     }
     private IEnumerator DisplayTyped()
