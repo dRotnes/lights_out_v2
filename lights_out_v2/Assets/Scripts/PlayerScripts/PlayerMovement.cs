@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Public References")]
     public PlayerState currentState;
+    
 
     [Space]
     [Header("Player Private References")]
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update() {
         GetInputs();
-
+       
         //Handling States
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {
