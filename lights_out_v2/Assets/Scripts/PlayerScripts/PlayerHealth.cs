@@ -8,33 +8,52 @@ public class PlayerHealth : MonoBehaviour
     public FloatValue currentHealth;
     public Collider2D footCollider;
 
+    private PlayerMovement _playerMovement;
     private bool _isInvencible;
     private Animator _animator;
 
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _animator = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            TakeDamage(1);
+        }
+    }
     public void TakeDamage(float damage, bool invencibility = false)
     {
-
+        
+       
         if (_isInvencible == false)
         {
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
             currentHealth.RuntimeValue -= damage;
             playerHealthSignal.RaiseSignal();
-            _animator.SetTrigger("hit");
-            if(invencibility == true)
+            /* _animator.SetTrigger("hit");*/
+            if (invencibility == true)
             {
                 StartCoroutine(Invencible());
             }
 
         }
+
+        if (currentHealth.RuntimeValue <= 0)
+        {
+            Die();
+        }
+
     }
 
     private void Die()
     {
-        
-        _animator.SetTrigger("die");
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().Sleep();
+        _animator.SetTrigger("Die");
+        _playerMovement.currentState = PlayerState.dead;
         footCollider.enabled = false;
+        this.enabled = false;
     }
 
     public void Fall()

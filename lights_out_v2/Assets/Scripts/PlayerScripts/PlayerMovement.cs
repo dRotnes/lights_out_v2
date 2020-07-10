@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayerState{
-    idle,
     walking,
     attacking,
-    blocked
+    blocked,
+    dead
 
 }
 public class PlayerMovement : MonoBehaviour
@@ -33,67 +33,71 @@ public class PlayerMovement : MonoBehaviour
     private bool _canMove;
 
     private void Awake() {
+        currentState = PlayerState.walking;
         _canMove = true;
         _timeBtwAttacks = startTimeBtwAttacks;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
     private void Update() {
-        GetInputs();
-       
-        //Handling States
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+        if (currentState != PlayerState.dead && _canMove)
         {
-            currentState = PlayerState.attacking;
-        }
-        else if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Walking"))
-        {
-            currentState = PlayerState.walking;
+            GetInputs();
         }
         else
         {
-            currentState = PlayerState.idle; ;
-
+            this.enabled = false;
         }
-
-        
     }
 
     void GetInputs()
     {
-        if (_canMove)
+
+        //Walking Part
+        if(currentState == PlayerState.walking)
         {
 
-            //Walking Part
-            if (currentState != PlayerState.attacking)
-            {
-                float horizontalInput = Input.GetAxisRaw("Horizontal");
-                float verticalInput = Input.GetAxisRaw("Vertical");
-                _movement = new Vector2(horizontalInput, verticalInput);
-                _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
-                _movement.Normalize();
-            }
-
-            if (_timeBtwAttacks < 0)
-            {
-                if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attacking)
-                {
-                    Attack();
-                    _timeBtwAttacks = startTimeBtwAttacks;
-                }
-            
-            }
-            else
-            {
-                _timeBtwAttacks -= Time.deltaTime;
-
-            }
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+            _movement = new Vector2(horizontalInput, verticalInput);
+            _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
+        
         }
+        else
+        {
+            _movement = Vector2.zero;
+        }
+
+        if (currentState != PlayerState.attacking && Input.GetButtonDown("Fire1"))
+        {
+           
+            StartCoroutine(Attack());
+            
+        }
+        
+        _movement.Normalize();
+
+        
+            
+           /* if (_timeBtwAttacks < 0)
+            {
+                StartCoroutine(Attack());
+                _timeBtwAttacks = startTimeBtwAttacks;
+            }
+            
+        }
+        else
+        {
+            _timeBtwAttacks -= Time.deltaTime;
+
+        }*/
+        
         
 
     }
     private void FixedUpdate()
     {
+        
         _rigidbody.velocity = _movement * movementSpeed * _base_speed;
     }
 
@@ -106,9 +110,14 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Velocity", _movement.sqrMagnitude);
     }
 
-    private void Attack()
+    private IEnumerator Attack()
     {
-        _animator.SetTrigger("Attack");
+        currentState = PlayerState.attacking;
+        _animator.SetBool("Attack", true);
+        yield return null;
+        _animator.SetBool("Attack", false);
+        yield return new WaitForSeconds(.5f);
+        currentState = PlayerState.walking;
     }
 
     public void BlockOrAllowMovement()
