@@ -40,9 +40,12 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
     private void Update() {
-        if (currentState != PlayerState.dead && _canMove)
+        if (currentState != PlayerState.dead)
         {
-            GetInputs();
+            if (_canMove)
+                GetInputs();
+            else
+                return;
         }
         else
         {
@@ -122,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void BlockOrAllowMovement()
     {
+        Debug.Log(_canMove);
         if(_canMove == true)
         {
             _canMove = false;

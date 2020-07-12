@@ -3,21 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 public class WoodBlock : MonoBehaviour
 { 
-    private bool _isOpen;
+    public bool isOpen;
     public Animator animator;
-    public Collider2D doorCollider;   
+    public Collider2D doorCollider;
+
+    private void Start()
+    {
+        if (isOpen)
+        {
+            OpenDoor();
+        }
+        else
+        {
+            CloseDoor();
+        }
+    }
     public void OpenDoor() {
 
-        _isOpen = true;
+        isOpen = true;
         doorCollider.enabled = false;
-        animator.SetBool("isOpen", _isOpen);
+        animator.SetBool("isOpen", isOpen);
     }
 
     public void CloseDoor()
     {
-        _isOpen = false;
+        isOpen = false;
         doorCollider.enabled = true;
-        animator.SetBool("isOpen", _isOpen);
+        animator.SetBool("isOpen", isOpen);
     }
 
 }
