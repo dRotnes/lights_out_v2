@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   isFixed: 0
+  interrogation: 1
   spriteRenderer: {fileID: 1468304284165848529}
   signalOn: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd, type: 2}
   signalOff: {fileID: 11400000, guid: 6f54626171cec984e90a0100d6d87b00, type: 2}

@@ -6,6 +6,7 @@ public enum PlayerState{
     walking,
     attacking,
     blocked,
+    receiving,
     dead
 
 }
@@ -13,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Public References")]
     public PlayerState currentState;
-    
+    public Inventory playerInventory;
+    public SpriteRenderer receivedItemSprite;
+
 
     [Space]
     [Header("Player Private References")]
@@ -31,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private float _base_speed;
     private float _timeBtwAttacks;
     private bool _canMove;
+    private bool _isInteracting;
 
     private void Awake() {
         currentState = PlayerState.walking;
@@ -111,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetFloat("Vertical", _movement.y);
         }
         _animator.SetFloat("Velocity", _movement.sqrMagnitude);
+        _animator.SetBool("Receive", _isInteracting);
     }
 
     private IEnumerator Attack()
@@ -121,6 +126,29 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("Attack", false);
         yield return new WaitForSeconds(.5f);
         currentState = PlayerState.walking;
+    }
+
+    public void RaiseItem()
+    {
+        if (playerInventory.currentItem != null)
+        {
+
+            if (currentState!=PlayerState.receiving)
+            {
+                _isInteracting = true;
+                currentState = PlayerState.receiving;
+                receivedItemSprite.sprite = playerInventory.currentItem.sprite;
+
+            }
+            else
+            {
+                _isInteracting = false;
+                receivedItemSprite.sprite = null;
+                playerInventory.currentItem = null;
+                currentState = PlayerState.walking;
+            }
+        }
+
     }
 
     public void BlockOrAllowMovement()

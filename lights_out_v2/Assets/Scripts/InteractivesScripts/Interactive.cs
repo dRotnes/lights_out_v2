@@ -6,6 +6,7 @@ public class Interactive : MonoBehaviour
 {
     public bool playerInRange;
     public bool isFixed;
+    public bool interrogation = true;
     public SpriteRenderer spriteRenderer;
     public SignalSend signalOn;
     public SignalSend signalOff;
@@ -14,7 +15,8 @@ public class Interactive : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            signalOn.RaiseSignal();
+            if(interrogation)
+                signalOn.RaiseSignal();
             playerInRange = true;
             if (!isFixed)
             {
@@ -26,7 +28,8 @@ public class Interactive : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            signalOff.RaiseSignal();
+            if (interrogation)
+                signalOff.RaiseSignal();
             playerInRange = false;
             if (!isFixed)
             {
