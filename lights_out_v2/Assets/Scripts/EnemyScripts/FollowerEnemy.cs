@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class FollowerEnemy : Enemy
 {
+    public float startTimeBtwAttacks;
+    private float _timeBtwAttacks;
+
+    public float attackRange;
+    public LayerMask playerLayer;
+    public Transform attackPoint;
+
     public float chasingDistance;
     public float stoppingDistance;
     public float attackingDistance;
@@ -16,12 +23,15 @@ public class FollowerEnemy : Enemy
 
     private bool _canAttack;
     private bool _playerDead;
+    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
+        _timeBtwAttacks = startTimeBtwAttacks;
         _startingPosition = transform.position;
         _target = GameObject.FindGameObjectWithTag("Player").transform;
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -39,26 +49,32 @@ public class FollowerEnemy : Enemy
 
         if (currentState == EnemyState.dead || _playerDead)
         {
-            GetComponent<Rigidbody2D>().Sleep();
-            GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject, 5f);
         }
-        /*else
+
+        else
         {
-            *//*if (_canAttack)
+            if (_canAttack)
             {
                 if (_timeBtwAttacks < -0)
                 {
-                    animator.SetTrigger("attack");
+                    animator.SetTrigger("Attack");
                     _timeBtwAttacks = startTimeBtwAttacks;
                 }
                 else
                 {
                     _timeBtwAttacks -= Time.deltaTime;
                 }
-            }*//*
-        }*/
-
+            }
+        }
+        if (_target.position.y > transform.position.y)
+        {
+            _spriteRenderer.sortingLayerName = "ForeGround";
+        }
+        else
+        {
+            _spriteRenderer.sortingLayerName = "Enemy";
+        }
     }
     private void FixedUpdate()
     {
@@ -106,17 +122,33 @@ public class FollowerEnemy : Enemy
         }
     }
 
-    /*public void Attack()
+    public void Attack()
     {
 
         Collider2D[] hitArray = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
-
+        int counter = 0;
         foreach (Collider2D collider in hitArray)
         {
-            GameObject player = collider.gameObject;
-            knockback.Knock(player);
-            player.GetComponent<PlayerController>().TakeDamage(attackDamage);
+            if (collider.CompareTag("Player") && counter < 1)
+            {
+                /*Debug.Log(collider.name);*/
+                /*GameObject player = collider.gameObject;*/
+                /*knockback.Knock(player);*/
+                collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage/2);
+                counter += 1;
+            }
 
         }
-    }*/
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
 }
+
+      
+    

@@ -10,6 +10,7 @@ public class Death : StateMachineBehaviour
         animator.gameObject.GetComponent<Collider2D>().enabled = false;
         animator.gameObject.GetComponent<Rigidbody2D>().Sleep();
 
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

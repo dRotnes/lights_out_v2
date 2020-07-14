@@ -34,12 +34,12 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        animator.SetTrigger("Hit");
+        /*animator.SetTrigger("Hit");*/
         health -= damage;
     }
     public void Die()
     {
         currentState = EnemyState.dead;
-        animator.SetTrigger("Die");
+        animator.SetBool("Dead", true);
     }
 }
