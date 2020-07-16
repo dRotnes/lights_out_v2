@@ -41,5 +41,6 @@ public class Enemy : MonoBehaviour
     {
         currentState = EnemyState.dead;
         animator.SetBool("Dead", true);
+        Destroy(gameObject, 5f);
     }
 }

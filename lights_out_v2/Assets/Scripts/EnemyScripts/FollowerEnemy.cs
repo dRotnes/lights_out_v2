@@ -27,6 +27,7 @@ public class FollowerEnemy : Enemy
 
     private void Start()
     {
+        currentState = EnemyState.idle;
         _timeBtwAttacks = startTimeBtwAttacks;
         _startingPosition = transform.position;
         _target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -47,26 +48,20 @@ public class FollowerEnemy : Enemy
             Die();
         }
 
-        if (currentState == EnemyState.dead || _playerDead)
+        if (_canAttack && !_playerDead)
         {
-            Destroy(gameObject, 5f);
-        }
-
-        else
-        {
-            if (_canAttack)
+            if (_timeBtwAttacks < -0)
             {
-                if (_timeBtwAttacks < -0)
-                {
-                    animator.SetTrigger("Attack");
-                    _timeBtwAttacks = startTimeBtwAttacks;
-                }
-                else
-                {
-                    _timeBtwAttacks -= Time.deltaTime;
-                }
+                animator.SetTrigger("Attack");
+                currentState = EnemyState.attacking;
+                _timeBtwAttacks = startTimeBtwAttacks;
+            }
+            else
+            {
+                _timeBtwAttacks -= Time.deltaTime;
             }
         }
+        
         if (_target.position.y > transform.position.y)
         {
             _spriteRenderer.sortingLayerName = "ForeGround";
@@ -78,7 +73,7 @@ public class FollowerEnemy : Enemy
     }
     private void FixedUpdate()
     {
-        if (currentState != EnemyState.dead && !_playerDead)
+        if (currentState != EnemyState.dead && currentState != EnemyState.attacking && !_playerDead)
         {
             CheckingDistance();
         }
@@ -98,6 +93,7 @@ public class FollowerEnemy : Enemy
 
     private void CheckingDistance()
     {
+        
         float distance = Vector2.Distance(transform.position, _target.position);
         if (distance <= chasingDistance && distance > stoppingDistance)
         {
@@ -105,12 +101,14 @@ public class FollowerEnemy : Enemy
             Vector3 temporaryMove = Vector2.MoveTowards(transform.position, _target.position, speed * Time.deltaTime);
             _rb.MovePosition(temporaryMove);
             _canAttack = false;
+            currentState = EnemyState.chasing;
         }
         else if (distance < stoppingDistance && distance > attackingDistance)
         {
             transform.position = this.transform.position;
             _movement = Vector2.zero;
             _canAttack = true;
+            currentState = EnemyState.idle;
 
         }
         else if (distance > chasingDistance)
@@ -119,6 +117,12 @@ public class FollowerEnemy : Enemy
             Vector3 temporaryMove = Vector2.MoveTowards(transform.position, _startingPosition, speed * Time.deltaTime);
             _rb.MovePosition(temporaryMove);
             _canAttack = false;
+            currentState = EnemyState.returning;
+        }
+
+        if(transform.position == _startingPosition)
+        {
+            currentState = EnemyState.idle;
         }
     }
 
@@ -139,6 +143,7 @@ public class FollowerEnemy : Enemy
             }
 
         }
+        currentState = EnemyState.idle;
     }
 
 

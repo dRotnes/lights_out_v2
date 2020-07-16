@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 183608516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14883,7 +14883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837355116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.882, y: -10.749, z: 0}
+  m_LocalPosition: {x: 1.772, y: -10.435, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 686262860}
@@ -15025,6 +15025,53 @@ MonoBehaviour:
   playerHealthSignal: {fileID: 11400000, guid: 4a3d3a4e96533c644914977d206a1ec2, type: 2}
   currentHealth: {fileID: 11400000, guid: eb001ec7d7b877a4c8fd2bc2c9592093, type: 2}
   footCollider: {fileID: 1996575099}
+--- !u!1 &860729979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 860729980}
+  - component: {fileID: 860729981}
+  m_Layer: 11
+  m_Name: Bounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &860729980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860729979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1931996013}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &860729981
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860729979}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.022639632, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.37170863
 --- !u!1 &873402320
 GameObject:
   m_ObjectHideFlags: 0
@@ -22607,7 +22654,7 @@ GameObject:
   - component: {fileID: 1931996016}
   - component: {fileID: 1931996015}
   - component: {fileID: 1931996017}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GreenMushie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -22677,6 +22724,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 183608516}
+  - {fileID: 860729980}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
