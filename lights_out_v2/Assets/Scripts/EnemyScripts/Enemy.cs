@@ -13,12 +13,12 @@ public enum EnemyState
 public class Enemy : MonoBehaviour
 {
     public float health;
-    public float speed;
     public float attackDamage;
 
     public EnemyState currentState;
     public Animator animator;
     public FloatValue maxHealth;
+    public GameObject destroyable;
 
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     {
         currentState = EnemyState.dead;
         animator.SetBool("Dead", true);
-        Destroy(gameObject, 5f);
+        Destroy(destroyable, 5f);
+        
     }
 }

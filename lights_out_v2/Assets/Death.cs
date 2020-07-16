@@ -7,10 +7,17 @@ public class Death : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.GetComponent<Collider2D>().enabled = false;
-        animator.gameObject.GetComponent<Rigidbody2D>().Sleep();
+        if (animator.gameObject.GetComponent<Collider2D>())
+        {
 
-
+            animator.gameObject.GetComponent<Collider2D>().enabled = false;
+            animator.gameObject.GetComponent<Rigidbody2D>().Sleep();
+        }
+        else
+        {
+            animator.gameObject.GetComponentInParent<Collider2D>().enabled = false;
+            animator.gameObject.GetComponentInParent<Rigidbody2D>().Sleep();
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
