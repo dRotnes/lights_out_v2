@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  attackDamage: 1
+  attackDamage: 0
   currentState: 0
   animator: {fileID: 112488821}
   maxHealth: {fileID: 11400000, guid: c5e9503515973e347aa74be7c414b046, type: 2}
@@ -427,7 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119428146}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: attackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15078,7 +15078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837355116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.71, y: -6.98, z: 0}
+  m_LocalPosition: {x: 1.01, y: -10.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 686262860}
@@ -15520,6 +15520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 934362594}
   - component: {fileID: 934362593}
+  - component: {fileID: 934362595}
   m_Layer: 0
   m_Name: A.I.Manager
   m_TagString: Untagged
@@ -15541,7 +15542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACwn+vSVsi2dgIAAB0FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxscG4t5YQ0kM+JqSTiy+ytcYaZMkjyQGS4b9XkgV23BPL28/3duUvRLlqoNBCbiUlj4IA+jlB1kY/Jr3zAU54L/iOfsI15p0SXdkg7GJesabC4KFNU6IGLWnxi++ZDQ4M2HJaCllvyB7WQmll4BIzBcYlhbbZ3EBfE3QyP9PUppyNNU+s9WmsNJhcjFkA1yD70GAWJkEShqtk4VOm4XwWpdEqSlKfOg1ncbJYBstVvJkGK1en5QXDdQPEkurLLWZx7OtY04VyQ9lHBbNobocQjFHlR0b63DhJdk0FEqwmhGKjgBsznEUGqIDuK235DLOfy1KB9gJJfL6j0kjZlUW/RadvjdWhm+8Ds9Y2mgdxx6Gr+vhfwDR07lKK+uHaOAxsE13R4vCKzwVWerCBIXw3mN3pdMTsgHMG7xXwJ7GVouXEOLVsbWqrYH7X/71xW1dQHHq8G3UEts1gj1714LazyeXi6J/WjNa5Ez/ugB0TTnF3JSDNev6Ygd0NKV/CoHaKvwre8H54bN5xT6XSxuVZcjteLlppQ9HGaWbZtHotJAcH+6Eb4Jjp84spo8c7HPkGbUeee2yflW/ufdfXMkpxcB8fBCPXizjelqUqcXwEVT23mlE+LGY9T0aoteC8uzE18tq8XStLXEBPdt9S8v22EAnjZAlzAlGYpEEeTHFKyCqHRZEvo9UyzZE7PsoNUcxeukm9PmZtvC/OzaFdPzeTrcSNu3ci8XFLP2sx0JzyUuwKCcCfv1VQIE0P8zTJhlAj0A60ptztG31liIniACS7xWeO6OakJc569hlq6IfQFsnQ2n1eMnRBl39QSwMEFAAACAgAALCf65gobshtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKKoYm5WapRSqqxobmlQZKBbqJlSopFUqppcpKZsYWZZZJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAALCf69JWyLZ2AgAAHQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAALCf65gobshtAAAAeAAAAAkAJAAAAAAAAAAAAAAAwwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAB7AwAAAAA=
+    dataString: UEsDBBQAAAgIAACwn+tqlUPMuAIAAKkFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFtVNtu2kAQ/RW0zwXZ3Ax9a4GQVkqCQqs81HlYvANesd619hIgEf/e2bXBDq2E5OHM/czMfhAuTQmZVXqpOXtQDMjXDvEy+dJplPdwpDsl1/wdLjYvnNncG9Fg80wtV4jH3s2oAqzm2Te5E944QtBJvlW6WLAdzJSxBuEtFQZQpZX13hKhjw454qc79S4nlPqJl95RmkadM4oZSAu6MY16cRIlcTxJRrVLN+73BtPBZJBMa9du3Bsmo3E0ngwX3WgS4jiZCVqUwHxTTbhRbzis43gxmEpsubaKeoO+L0IJwU1dMrGnMlCyLnPQ4DlhnCIDocy4N0AgB77Lre+n7f203RqwNUGanuZcI5VVWPJdVfwW1Oyr+t6ocD5RPxpWPVRRH/4x6MZBvdWquL8kjiOfxOY82z/TU0aNbU2gDc9btQeeDlTs6UbASw7yUS21cpKh0mrnXZ2B/rz5e+1tlkO2b/Cq1BvQla051qxH15l1zufQ/nEmeLEJ5A8rYC1UYDxsCWgczw8sOOyQqUMg6qv4beAX3bWXrVbccW0squoupS9vo5z2pmQROPPdODtTWkKA66JLkFTY0wrD2NsZ3uhaaW80d9SfVZ281l2u5cYlwI19FN2oVurQDMvAT1eUK8WlXQPVWd6KZ3J1eACTPzkruIQbzSOyOFNSVgto/uO3dnpLM2iYsHC0TsOcWhruAIvCNWFtV2Q0eEgnhN/I0IYP/gfb8L9Xz3JOMa8IMHlUMpzQp++r34Sd4+zznhMWD5Mx9BkM4mQabaIunTI22cAo24wHk/F0Q8IhcImkU7GqWKtnhSskm14kLv3l6essNS3D7TFND0v+XqjW/LncqnWmAeTTpwgGNObAZ4ItGMcu12Atl2H3yEdKhMr2wNKrfRp4XRytpmnDWEpK/qasR1IyC09dSs7k/BdQSwMEFAAACAgAALCf65gobshtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKKoYm5WapRSqqxobmlQZKBbqJlSopFUqppcpKZsYWZZZJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAALCf62qVQ8y4AgAAqQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAALCf65gobshtAAAAeAAAAAkAJAAAAAAAAAAAAAAABQMAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAC9AwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -15628,6 +15629,25 @@ Transform:
   m_Father: {fileID: 201348055}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &934362595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934362592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1764de1de43cc4d19af52679d3eaae06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  desiredSimulationFPS: 20
+  workerThreads: 2
+  doubleBuffering: 0
+  symmetryBreakingBias: 0.1
+  movementPlane: 1
+  drawObstacles: 1
 --- !u!1 &967357560
 GameObject:
   m_ObjectHideFlags: 0
@@ -15719,7 +15739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017313527}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: StartingPosition
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
