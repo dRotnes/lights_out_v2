@@ -23,6 +23,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(1);
         }
+        if (currentHealth.RuntimeValue <= 0)
+        {
+            Die();
+        }
     }
     public void TakeDamage(float damage, bool invencibility = false)
     {
@@ -39,11 +43,6 @@ public class PlayerHealth : MonoBehaviour
                 StartCoroutine(Invencible());
             }
 
-        }
-
-        if (currentHealth.RuntimeValue <= 0)
-        {
-            Die();
         }
 
     }

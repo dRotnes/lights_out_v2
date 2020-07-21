@@ -53,27 +53,42 @@ public class FollowerEnemy : Enemy
     private void Update()
     {
         
-        if (_reachedEnd && target == player.transform)
+        if (health <= 0)
         {
-            currentState = EnemyState.attacking;
-            if (_timeBtwAttacks < 0)
+            Die();
+           
+            Debug.Log("im dead bitch");
+        }
+        if (currentState != EnemyState.dead)
+        {
+
+            if (_reachedEnd && target == player.transform)
             {
-                animator.SetTrigger("Attack");
-                _timeBtwAttacks = startTimeBtwAttacks;
+                currentState = EnemyState.attacking;
+                if (_timeBtwAttacks < 0)
+                {
+                    animator.SetTrigger("Attack");
+                    _timeBtwAttacks = startTimeBtwAttacks;
+                }
+                else
+                {
+                    _timeBtwAttacks -= Time.deltaTime;
+                }
+            }
+        
+            if (player.transform.position.y > transform.position.y)
+            {
+                GetComponent<SpriteRenderer>().sortingLayerName = "ForeGround";
             }
             else
             {
-                _timeBtwAttacks -= Time.deltaTime;
+                GetComponent<SpriteRenderer>().sortingLayerName = "Enemy";
             }
-        }
-        
-        if (player.transform.position.y > transform.position.y)
-        {
-            GetComponent<SpriteRenderer>().sortingLayerName = "ForeGround";
         }
         else
         {
             GetComponent<SpriteRenderer>().sortingLayerName = "Enemy";
+            this.enabled = false;
         }
         
     }

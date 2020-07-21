@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake() {
         currentState = PlayerState.walking;
         _canMove = true;
-        _timeBtwAttacks = startTimeBtwAttacks;
+        _timeBtwAttacks = 0;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
@@ -53,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            this.enabled = false;
+            _movement = Vector2.zero;
+            _rigidbody.velocity = _movement;
         }
     }
 
@@ -75,36 +76,32 @@ public class PlayerMovement : MonoBehaviour
             _movement = Vector2.zero;
         }
 
-        if (currentState != PlayerState.attacking && Input.GetButtonDown("Fire1"))
-        {
-           
-            StartCoroutine(Attack());
-            
-        }
-        
-        _movement.Normalize();
 
-        
-            
-           /* if (_timeBtwAttacks < 0)
+
+
+        if (_timeBtwAttacks <= 0)
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                StartCoroutine(Attack());
+
+                Attack();
                 _timeBtwAttacks = startTimeBtwAttacks;
             }
-            
         }
         else
         {
             _timeBtwAttacks -= Time.deltaTime;
+        }
 
-        }*/
+
+
+        _movement.Normalize();
         
         
 
     }
     private void FixedUpdate()
     {
-        
         _rigidbody.velocity = _movement * movementSpeed * _base_speed;
     }
 
@@ -118,14 +115,11 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("Receive", _isInteracting);
     }
 
-    private IEnumerator Attack()
+    private void Attack()
     {
         currentState = PlayerState.attacking;
-        _animator.SetBool("Attack", true);
-        yield return null;
-        _animator.SetBool("Attack", false);
-        yield return new WaitForSeconds(.5f);
-        currentState = PlayerState.walking;
+        _movement = Vector2.zero;
+        _animator.SetTrigger("Attack");
     }
 
     public void RaiseItem()

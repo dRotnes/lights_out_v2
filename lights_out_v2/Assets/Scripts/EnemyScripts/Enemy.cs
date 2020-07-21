@@ -25,13 +25,6 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.idle;
         health = maxHealth.initialValue;
     }
-    private void Update()
-    {
-        if(health <= 0)
-        {
-            Die();
-        }
-    }
     public void TakeDamage(float damage)
     {
         /*animator.SetTrigger("Hit");*/
