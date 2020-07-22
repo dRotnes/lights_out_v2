@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -206,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 1468304284165848558, guid: 122d85b17bfe01843a8a7908880754d6,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1468304284967029224, guid: 122d85b17bfe01843a8a7908880754d6,
         type: 3}
@@ -12980,6 +12980,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &484607360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+    type: 3}
+  m_PrefabInstance: {fileID: 1340835320361266742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6473a7facf30b4fb4d8e8f0ea5672b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &507540679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2616602910263518228, guid: ea4f4aa26d9cc68438730f6a38e50a1f,
@@ -15181,7 +15193,7 @@ PrefabInstance:
     - target: {fileID: 5019608872186270924, guid: ea4f4aa26d9cc68438730f6a38e50a1f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5019608872186270924, guid: ea4f4aa26d9cc68438730f6a38e50a1f,
         type: 3}
@@ -17302,7 +17314,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -20263,12 +20275,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab988a10178306438f8fe03993cf179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   titleDisplay: {fileID: 2105396813}
   textDisplay: {fileID: 731789962}
   dialogBox: {fileID: 1264283522}
   typingSpeed: 0.05
-  timeBetweenPhrases: 1
+  timeBetweenPhrases: 3
+  currentState: 0
+  canpass: 0
+  stateImage: {fileID: 2012637905}
+  continueImage: {fileID: 21300000, guid: 0f0faaf72c1a6f9459511b48acada989, type: 3}
+  finishedImage: {fileID: 21300000, guid: 672c5b848e6dbc740a10789f6c7e9b82, type: 3}
+  writingImage: {fileID: 21300000, guid: ac167623cf123eb42a7f5d17ff588a9f, type: 3}
 --- !u!4 &1574502917
 Transform:
   m_ObjectHideFlags: 0
@@ -22200,6 +22217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign
       objectReference: {fileID: 0}
+    - target: {fileID: 1468304284165848558, guid: 122d85b17bfe01843a8a7908880754d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122d85b17bfe01843a8a7908880754d6, type: 3}
 --- !u!1 &1717507296
@@ -22295,39 +22317,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1468304284165848531, guid: 122d85b17bfe01843a8a7908880754d6,
-        type: 3}
-      propertyPath: dialog.sentences.Array.data[0]
-      value: 'You''re a sunflower
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1468304284165848531, guid: 122d85b17bfe01843a8a7908880754d6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1468304284165848531, guid: 122d85b17bfe01843a8a7908880754d6,
-        type: 3}
-      propertyPath: isTyped
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1468304284165848558, guid: 122d85b17bfe01843a8a7908880754d6,
         type: 3}
       propertyPath: m_Name
       value: Sign
       objectReference: {fileID: 0}
-    - target: {fileID: 1468304284165848558, guid: 122d85b17bfe01843a8a7908880754d6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1468304284967029224, guid: 122d85b17bfe01843a8a7908880754d6,
-        type: 3}
-      propertyPath: signal
-      value: 
-      objectReference: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122d85b17bfe01843a8a7908880754d6, type: 3}
 --- !u!1001 &1827933257
@@ -24248,6 +24242,79 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.08200237, y: 0.04150915}
   m_EdgeRadius: 0
+--- !u!1 &2012637903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012637904}
+  - component: {fileID: 2012637906}
+  - component: {fileID: 2012637905}
+  m_Layer: 5
+  m_Name: DialogStateImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2012637904
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012637903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1264283523}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 243, y: -79}
+  m_SizeDelta: {x: 34.5, y: 34.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2012637905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012637903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ac167623cf123eb42a7f5d17ff588a9f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2012637906
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012637903}
+  m_CullTransparentMesh: 0
 --- !u!1 &2024112702
 GameObject:
   m_ObjectHideFlags: 0
@@ -24527,12 +24594,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
         type: 3}
+      propertyPath: dialog.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
       propertyPath: dialog.sentences.Array.data[0]
       value: 'North: Go this way
 
         East: No, go this way
 
-        South: YEah,
+        South: Yeah,
         go that way
 
         West: You should go left'
@@ -24540,7 +24612,65 @@ PrefabInstance:
     - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
         type: 3}
       propertyPath: dialog.name
-      value: Directions
+      value: Directions Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: isTyped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialog.isTyped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialog.sentences.Array.data[1]
+      value: 'North: Go this way
+
+        East: No, go this way
+
+        South: Yeah,
+        go that way
+
+        West: You should go left'
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialog.sentences.Array.data[2]
+      value: 'North: Go this way
+
+        East: No, go this way
+
+        South: Yeah,
+        go that way
+
+        West: You should go left'
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialog.sentences.Array.data[3]
+      value: 'North: Go this way
+
+        East: No, go this way
+
+        South: Yeah,
+        go that way
+
+        West: You should go left'
+      objectReference: {fileID: 0}
+    - target: {fileID: 503255720515353746, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialog.sentences.Array.data[4]
+      value: 'North: Go this way
+
+        East: No, go this way
+
+        South: Yeah,
+        go that way
+
+        West: You should go left'
       objectReference: {fileID: 0}
     - target: {fileID: 503255720515353747, guid: 58044b48d8bc8414baafeedad75c9905,
         type: 3}
@@ -24608,6 +24738,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd,
         type: 2}
+    - target: {fileID: 503255720788445353, guid: 58044b48d8bc8414baafeedad75c9905,
+        type: 3}
+      propertyPath: dialogTrigger
+      value: 
+      objectReference: {fileID: 484607360}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58044b48d8bc8414baafeedad75c9905, type: 3}
 --- !u!1001 &5019608872407910880
@@ -24674,7 +24809,7 @@ PrefabInstance:
     - target: {fileID: 5019608872186270924, guid: ea4f4aa26d9cc68438730f6a38e50a1f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5019608872186270924, guid: ea4f4aa26d9cc68438730f6a38e50a1f,
         type: 3}
@@ -24827,15 +24962,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1253799878}
     m_Modifications:
+    - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -0.1863065
+      objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860162, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.8
+      value: -12.4
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860162, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 542.8
+      value: 529.5
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860162, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}

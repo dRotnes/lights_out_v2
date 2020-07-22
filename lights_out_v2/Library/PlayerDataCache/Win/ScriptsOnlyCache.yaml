@@ -37,6 +37,7 @@ ScriptsOnlyBuild:
     - CinemachineTrack
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -117,6 +118,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineBehaviourEditor
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -182,23 +184,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12032}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12422}
     - Class: 114
-      Script: {instanceID: 12504}
+      Script: {instanceID: 12502}
     - Class: 114
-      Script: {instanceID: 12644}
+      Script: {instanceID: 12642}
     - Class: 114
-      Script: {instanceID: 12712}
+      Script: {instanceID: 12710}
     - Class: 114
-      Script: {instanceID: 12776}
+      Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 13008}
+      Script: {instanceID: 13006}
     - Class: 114
-      Script: {instanceID: 13048}
+      Script: {instanceID: 13046}
     - Class: 114
-      Script: {instanceID: 13120}
+      Script: {instanceID: 13118}
     - Class: 114
-      Script: {instanceID: 13236}
+      Script: {instanceID: 13234}
     - Class: 114
       Script: {instanceID: 13594}
     - Class: 114
@@ -327,21 +329,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12072}
     - Class: 114
-      Script: {instanceID: 12376}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 12596}
+      Script: {instanceID: 12594}
     - Class: 114
-      Script: {instanceID: 12644}
+      Script: {instanceID: 12642}
     - Class: 114
-      Script: {instanceID: 12700}
+      Script: {instanceID: 12698}
     - Class: 114
-      Script: {instanceID: 12746}
+      Script: {instanceID: 12744}
     - Class: 114
-      Script: {instanceID: 12844}
+      Script: {instanceID: 12842}
     - Class: 114
-      Script: {instanceID: 12978}
+      Script: {instanceID: 12976}
     - Class: 114
-      Script: {instanceID: 13322}
+      Script: {instanceID: 13320}
+    - Class: 114
+      Script: {instanceID: 13348}
     - Class: 114
       Script: {instanceID: 13386}
     - Class: 114
@@ -404,8 +408,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15668}
     - Class: 114
       Script: {instanceID: 15692}
-    - Class: 114
-      Script: {instanceID: 35996}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -561,7 +563,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: f354d1483fb9a5cf37387eb80cbd9568
+      Hash: 30f801057f452b1af666415b48f5a404
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DialogManager
@@ -645,7 +647,7 @@ ScriptsOnlyBuild:
     className: RandomTile
   - hash:
       serializedVersion: 2
-      Hash: b1c1cf9095357b6efaf243c9a2a02f6f
+      Hash: 80d42f4243070dba7b2113a8464848be
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Sign
@@ -1083,7 +1085,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 2729d33dfd0c05cdc95e5da823d21deb
+      Hash: 13574c70dc18d7adca2e9e38dfa8c8a0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DialogTrigger
@@ -1099,6 +1101,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineTrackedDolly
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Attack
   - hash:
       serializedVersion: 2
       Hash: 0cceca996e1eb1401d74a841f34c4f83
@@ -2079,10 +2087,16 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
+      Hash: c8c5e65e9fb858572516474d6e2102bc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Attack
+    className: DialogStateImage
   platform: 5
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

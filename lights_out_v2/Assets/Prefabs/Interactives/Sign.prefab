@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1043807767
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1163804233491599699, guid: a553cc2a6d2059e46b446c407d5a9b8f,
     type: 3}
@@ -146,11 +146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog:
-    name: Sign
+    name: Help Sign
     sentences:
-    - 
-  isTyped: 0
-  playOnAwake: 0
+    - 'You''re a sunflower
+
+'
+    isTyped: 0
 --- !u!1 &1468304284967029221
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1468304284165848529}
   signalOn: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd, type: 2}
   signalOff: {fileID: 11400000, guid: 6f54626171cec984e90a0100d6d87b00, type: 2}
-  dialog: {fileID: 1468304284165848531}
+  dialogTrigger: {fileID: 1468304284165848531}
 --- !u!61 &1468304284967029223
 BoxCollider2D:
   m_ObjectHideFlags: 0

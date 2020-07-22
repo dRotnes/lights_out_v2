@@ -49,10 +49,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        _animator.SetTrigger("Die");
         _playerMovement.currentState = PlayerState.dead;
+        _animator.SetBool("Dead", true);
         footCollider.enabled = false;
-        this.enabled = false;
+        
     }
 
     public void Fall()

@@ -7,20 +7,26 @@ public class DialogTrigger : MonoBehaviour
 {
     private DialogManager _dialogManager;
     public Dialog dialog;
-    public bool isTyped;
-    public bool playOnAwake;
 
     private void Start()
     {
         _dialogManager = FindObjectOfType<DialogManager>();
-        if (playOnAwake)
-        {
-            TriggerDialog();
-        }
     }
     public void TriggerDialog()
     {
-        _dialogManager.StartDialog(dialog, isTyped);
+        _dialogManager.StartDialog(dialog);
+    }
+
+    public void DisplayNextSentence()
+    {
+        if (_dialogManager.canpass)
+        {
+            _dialogManager.DisplayNextSentence();
+        }
+        else 
+        {
+            return;
+        }
     }
 
     public void EndDialog()
@@ -30,8 +36,7 @@ public class DialogTrigger : MonoBehaviour
 
     public DialogState ReturnState()
     {
-        DialogState currentState = _dialogManager.currentState;
-        return currentState;
+        return _dialogManager.currentState;
     }
 
 }

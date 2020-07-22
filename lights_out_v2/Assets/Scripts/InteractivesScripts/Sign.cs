@@ -2,7 +2,7 @@
 
 public class Sign : Interactive
 {
-    public DialogTrigger dialog;
+    public DialogTrigger dialogTrigger;
     private bool _canDesactivate;
 
     private void Update()
@@ -11,18 +11,23 @@ public class Sign : Interactive
         {
             _canDesactivate = true;
 
-            if(Input.GetKeyDown("space") && dialog.ReturnState() == DialogState.unactive)
+            if (Input.GetKeyDown("space"))
             {
-                dialog.TriggerDialog();
+                if (dialogTrigger.ReturnState() == DialogState.unactive)
+                {
+                    dialogTrigger.TriggerDialog();
+                }
+                else if(dialogTrigger.ReturnState() == DialogState.active)
+                {
+                    dialogTrigger.DisplayNextSentence();
+                }
             }
-            
-
         }
         else
         {
-            if (dialog.ReturnState() != DialogState.unactive && _canDesactivate)
+            if (dialogTrigger.ReturnState() == DialogState.active && _canDesactivate)
             {
-                dialog.EndDialog();
+                dialogTrigger.EndDialog();
             }
             _canDesactivate = false;
         }

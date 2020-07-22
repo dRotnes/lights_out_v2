@@ -1,124 +1,132 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public enum DialogState
 {
     active,
-    unactive,
-    finished
+    unactive
 }
 public class DialogManager : MonoBehaviour
 {
-    public DialogState currentState;
-
     public TextMeshProUGUI titleDisplay;
     public TextMeshProUGUI textDisplay;
     public GameObject dialogBox;
     public float typingSpeed;
     public float timeBetweenPhrases;
+    public DialogState currentState;
+    public bool canpass;
+    public Image stateImage;
+    public Sprite continueImage;
+    public Sprite finishedImage;
+    public Sprite writingImage;
 
-    private Queue<string> sentenceQueue = new Queue<string>();
+    private Queue<string> sentenceQueue;
     private bool _isTyped;
 
-    private void Awake()
-    {
-        currentState = DialogState.unactive;
 
-    }
-    public void StartDialog(Dialog dialog, bool type)
+    private void Start()
     {
-        
-        _isTyped = type;
+        sentenceQueue = new Queue<string>();
+        currentState = DialogState.unactive;
+    }
+    public void StartDialog(Dialog dialog)
+    {
+        sentenceQueue.Clear();
         dialogBox.SetActive(true);
         titleDisplay.text = dialog.name;
-
+        _isTyped = dialog.isTyped;
         foreach (string sentence in dialog.sentences)
         {
             sentenceQueue.Enqueue(sentence);
         }
-
-        if (_isTyped == true)
-        {
-            StartCoroutine(DisplayTyped());
-        }
-        else{
-            DisplayNonTyped();
-        }
-
         currentState = DialogState.active;
-        
-        
-
-    }
-    
-    private void Update()
-    {
-        
-        if(currentState == DialogState.active)
-        {
-            if(sentenceQueue.Count == 0)
-            {
-                currentState = DialogState.finished;
-            }
-        }
-
-        if (!_isTyped)
-        {
-            DisplayNonTyped();
-        }
+        DisplayNextSentence();
         
     }
-
-    private void DisplayNonTyped()
+    public void DisplayNextSentence()
     {
-        if (Input.GetKeyDown("space") && currentState != DialogState.unactive)
-        {
-
-            if (currentState == DialogState.finished)
-            {
-                EndDialog();
-                return;
-            }
-
-            string sentence = sentenceQueue.Dequeue();
-            textDisplay.text = sentence;
-        }
-        
-
-    }
-    private IEnumerator DisplayTyped()
-    {
-        if (currentState == DialogState.finished)
+        canpass = false;
+        if (sentenceQueue.Count == 0)
         {
             EndDialog();
-            yield break;
+            return;
         }
-
-        textDisplay.text = "";
+        
+        if(_isTyped == true)
+        {
+            StopAllCoroutines();
+            StartCoroutine(DisplayTyped());
+        }
+        else
+        {
+            string sentence = sentenceQueue.Dequeue();
+            textDisplay.text = sentence;
+            canpass = true;
+            stateImage.sprite = continueImage;
+            if (sentenceQueue.Count == 0)
+            {
+                stateImage.sprite = finishedImage;
+            }
+        }
+        StartCoroutine(Blink());
+    }
+    
+    private IEnumerator DisplayTyped()
+    {
         string sentence = sentenceQueue.Dequeue();
+        textDisplay.text = "";
+        stateImage.sprite = writingImage;
         foreach (char letter in sentence.ToCharArray())
         {
-           
             textDisplay.text += letter;
-            yield return new WaitForSecondsRealtime(typingSpeed);
-
+            yield return null;
+            if (Input.GetKeyDown("space"))
+            {
+                textDisplay.text = sentence;
+                break;
+            }
         }
-        yield return new WaitForSecondsRealtime(timeBetweenPhrases);
-        StartCoroutine(DisplayTyped());
-    
-
-
-
+        stateImage.sprite = continueImage;
+        if (sentenceQueue.Count == 0)
+        {
+            stateImage.sprite = finishedImage;
+        }
+        canpass = true;
+        yield return new WaitForSeconds(timeBetweenPhrases);
+        DisplayNextSentence();
     }
+
 
     public void EndDialog()
     {
-        sentenceQueue.Clear();
+        StopAllCoroutines();
         textDisplay.text = "";
         titleDisplay.text = "";
         dialogBox.SetActive(false);
         currentState = DialogState.unactive;
     }
+
+    private IEnumerator Blink()
+    {
+        while (true)
+        {
+            switch (stateImage.color.a.ToString())
+            {
+                case "0":
+                    stateImage.color = new Color(stateImage.color.r, stateImage.color.g, stateImage.color.b, 1);
+                    //Play sound
+                    yield return new WaitForSeconds(0.3f);
+                    break;
+                case "1":
+                    stateImage.color = new Color(stateImage.color.r, stateImage.color.g, stateImage.color.b, 0);
+                    //Play sound
+                    yield return new WaitForSeconds(0.3f);
+                    break;
+            }
+        }
+    }
+
 
 }
