@@ -31,9 +31,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage, bool invencibility = false)
     {
         
-       
+      
         if (_isInvencible == false)
         {
+            _animator.SetTrigger("Hit");
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
             currentHealth.RuntimeValue -= damage;
             playerHealthSignal.RaiseSignal();
