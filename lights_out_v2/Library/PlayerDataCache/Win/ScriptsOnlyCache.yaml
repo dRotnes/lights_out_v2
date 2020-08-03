@@ -38,7 +38,6 @@ ScriptsOnlyBuild:
     - CinemachineTrack
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -119,7 +118,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineBehaviourEditor
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -139,6 +137,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Mask
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
@@ -410,6 +409,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15624}
     - Class: 114
+      Script: {instanceID: 15652}
+    - Class: 114
       Script: {instanceID: 15674}
     - Class: 114
       Script: {instanceID: 15698}
@@ -538,7 +539,7 @@ ScriptsOnlyBuild:
     className: Bloom
   - hash:
       serializedVersion: 2
-      Hash: a5f100a929b0ccafaf63056804ddb91d
+      Hash: 7da4b8b577c425cf88befbdbdec428e1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
@@ -1276,7 +1277,7 @@ ScriptsOnlyBuild:
     className: CameraScript
   - hash:
       serializedVersion: 2
-      Hash: 64388c23790b93a7aa0615bdb10f511f
+      Hash: 5bcdfbcc92abf9500532a6bcd69b143b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FollowerEnemy
@@ -1822,7 +1823,7 @@ ScriptsOnlyBuild:
     className: AnimationLink
   - hash:
       serializedVersion: 2
-      Hash: daaee6e1d0911c627b8ee3f00fb4e5be
+      Hash: 549c878ceac28aaf4161908bd520e9fb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Inventory
@@ -2108,6 +2109,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RangedEnemy
   platform: 5
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

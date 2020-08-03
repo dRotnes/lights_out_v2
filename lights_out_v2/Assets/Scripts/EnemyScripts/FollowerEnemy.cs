@@ -6,7 +6,6 @@ using Pathfinding.RVO;
 public class FollowerEnemy : Enemy
 {
     public float startTimeBtwAttacks;
-    private float _timeBtwAttacks;
     public float attackRange;
     public LayerMask playerLayer;
     public Transform attackPoint;
@@ -19,9 +18,11 @@ public class FollowerEnemy : Enemy
 
     private Path _path;
     private int _currentWaypoint = 0;
-    private bool _reachedEnd;
     public GameObject startingPosition;
 
+    private float _timeBtwAttacks;
+    private int counter = 0;
+    private bool _reachedEnd;
     private Seeker _seeker;
     private Rigidbody2D _rb;
 
@@ -52,12 +53,9 @@ public class FollowerEnemy : Enemy
     }
     private void Update()
     {
-        
         if (health <= 0)
         {
             Die();
-           
-            Debug.Log("im dead bitch");
         }
         if (currentState != EnemyState.dead)
         {
@@ -119,17 +117,27 @@ public class FollowerEnemy : Enemy
             _rb.isKinematic = false;
             target = player.transform;
             currentState = EnemyState.chasing;
+            enemyCanvas.SetActive(true);
+            counter = 0;
         }
         else if(playerDistance <= nextWaipointDistance)
         {
             _rb.isKinematic = true;
             _rb.velocity = Vector2.zero;
+            if(counter == 0)
+            {
+                AstarPath.active.Scan();
+                counter = 1;
+            }
+            
         }
         else
         {
             _rb.isKinematic = false;
             target = startingPosition.transform;
             currentState = EnemyState.returning;
+            counter = 0;
+            enemyCanvas.SetActive(false);
         }
         float distance = Vector2.Distance(_rb.position, _path.vectorPath[_currentWaypoint]);
         if (distance < nextWaipointDistance)
@@ -138,7 +146,7 @@ public class FollowerEnemy : Enemy
             
         }
 
-        if(Vector2.Distance(transform.position,startingPosition.transform.position) <= 0.2f)
+        if(Vector2.Distance(transform.position,startingPosition.transform.position) <= 0.1f)
         {
             currentState = EnemyState.idle;
         }

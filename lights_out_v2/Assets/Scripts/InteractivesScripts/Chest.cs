@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chest : Interactive
 {
-    private bool _canOpen = true;
+    private bool _canClose = true;
     private bool _isOpen;
     private Collider2D triggerArea;
 
@@ -28,7 +28,7 @@ public class Chest : Interactive
             }
             else
             {
-                if (_canOpen == false)
+                if (_canClose)
                     chestIsOpen();
                 else
                     return;
@@ -42,7 +42,7 @@ public class Chest : Interactive
         playerInventory.AddItem(playerInventory.currentItem);
         raiseItem.RaiseSignal();
         _isOpen = true;
-        _canOpen = false;
+        _canClose = true;
         
     }
     private void chestIsOpen()
@@ -50,5 +50,6 @@ public class Chest : Interactive
         raiseItem.RaiseSignal();
         signalOff.RaiseSignal();
         interrogation = false;
+        _canClose = false;
     }
 }
