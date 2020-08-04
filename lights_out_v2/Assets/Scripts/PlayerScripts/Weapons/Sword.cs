@@ -10,7 +10,8 @@ public class Sword : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Debug.Log("damaged");
-            collision.GetComponent<Enemy>().TakeDamage(attackDamage);
+            collision.GetComponent<Enemy>().TakeDamage(attackDamage, GetComponent<Collider2D>());
+
         }
     }
 

@@ -11,34 +11,30 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement _playerMovement;
     private bool _isInvencible;
     private Animator _animator;
+    private SpriteRenderer _sr;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _animator = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            TakeDamage(1);
-        }
         if (currentHealth.RuntimeValue <= 0)
         {
             Die();
         }
     }
-    public void TakeDamage(float damage, bool invencibility = false)
+    public void TakeDamage(float damage, Collider2D other = null, bool invencibility = false)
     {
         
-      
         if (_isInvencible == false)
         {
-            _animator.SetTrigger("Hit");
+            StartCoroutine(FlashDamage());
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
             currentHealth.RuntimeValue -= damage;
             playerHealthSignal.RaiseSignal();
-            /* _animator.SetTrigger("hit");*/
             if (invencibility == true)
             {
                 StartCoroutine(Invencible());
@@ -46,6 +42,13 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
+    }
+
+    private IEnumerator FlashDamage()
+    {
+        _sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _sr.color = Color.white;
     }
 
     private void Die()

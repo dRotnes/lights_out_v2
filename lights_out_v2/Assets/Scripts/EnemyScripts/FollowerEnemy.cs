@@ -114,7 +114,7 @@ public class FollowerEnemy : Enemy
         float playerDistance = Vector2.Distance(player.transform.position, transform.position);
         if(playerDistance <= chaseRadius && playerDistance > nextWaipointDistance)
         {
-            _rb.isKinematic = false;
+            _rb.WakeUp();
             target = player.transform;
             currentState = EnemyState.chasing;
             enemyCanvas.SetActive(true);
@@ -122,7 +122,7 @@ public class FollowerEnemy : Enemy
         }
         else if(playerDistance <= nextWaipointDistance)
         {
-            _rb.isKinematic = true;
+            _rb.Sleep();
             _rb.velocity = Vector2.zero;
             if(counter == 0)
             {
@@ -133,7 +133,7 @@ public class FollowerEnemy : Enemy
         }
         else
         {
-            _rb.isKinematic = false;
+            _rb.WakeUp();
             target = startingPosition.transform;
             currentState = EnemyState.returning;
             counter = 0;
@@ -174,7 +174,7 @@ public class FollowerEnemy : Enemy
             {
                 Debug.Log(collider.name);
                 GameObject player = collider.gameObject;
-                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8);
+                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8, GetComponent<Collider2D>());
             }
         }
     }

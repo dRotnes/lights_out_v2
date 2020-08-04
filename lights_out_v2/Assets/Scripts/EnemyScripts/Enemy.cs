@@ -24,18 +24,31 @@ public class Enemy : MonoBehaviour
     public Slider healthSlider;
     public Gradient gradient;
     public Image fill;
+    public Knockback knock;
+    public GameObject effect;
+    public SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         currentState = EnemyState.idle;
         health = maxHealth.initialValue;
+        knock = GetComponent<Knockback>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         SetMaxHealth();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Collider2D other)
     {
-        /*animator.SetTrigger("Hit");*/
+        StartCoroutine(FlashDamage());
+        knock.Knock(other, GetComponent<Rigidbody2D>());
+        Instantiate(effect, transform.position, Quaternion.identity);
         health -= damage;
         UpdateHealth();
+    }
+    private IEnumerator FlashDamage()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
     public void Die()
     {
