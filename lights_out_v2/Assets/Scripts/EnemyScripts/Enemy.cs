@@ -13,9 +13,11 @@ public enum EnemyState
 }
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy General")]
+    [Space]
     public float health;
     public float attackDamage;
-
+    public bool canKnock;
     public EnemyState currentState;
     public Animator animator;
     public FloatValue maxHealth;
@@ -25,7 +27,7 @@ public class Enemy : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     public Knockback knock;
-    public GameObject effect;
+    public GameObject bloodEffect;
     public SpriteRenderer spriteRenderer;
 
     private void Awake()
@@ -36,11 +38,15 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetMaxHealth();
     }
-    public void TakeDamage(float damage, Collider2D other)
+    public void TakeDamage(float damage, Collider2D other = null)
     {
         StartCoroutine(FlashDamage());
-        knock.Knock(other, GetComponent<Rigidbody2D>());
-        Instantiate(effect, transform.position, Quaternion.identity);
+        if (canKnock)
+        {
+            knock.Knock(other, GetComponent<Rigidbody2D>());
+        }
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        CinemachineShake.Instance.ShakeCam(1f, .1f);
         health -= damage;
         UpdateHealth();
     }

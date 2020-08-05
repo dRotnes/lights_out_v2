@@ -174,7 +174,7 @@ public class FollowerEnemy : Enemy
             {
                 Debug.Log(collider.name);
                 GameObject player = collider.gameObject;
-                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8, GetComponent<Collider2D>());
+                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8);
             }
         }
     }

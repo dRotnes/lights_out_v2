@@ -23,6 +23,15 @@ TextureImporter:
   - first:
       213: 9024157175184596212
     second: shockEnemyAttacking_6
+  - first:
+      213: 7131091612356822619
+    second: shockEnemyAttacking_7
+  - first:
+      213: -6590090226724776534
+    second: shockEnemyAttacking_8
+  - first:
+      213: -8713522500846716235
+    second: shockEnemyAttacking_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -321,6 +330,69 @@ TextureImporter:
       bones: []
       spriteID: 4fc9b28832f3c3d70800000000000000
       internalID: 9024157175184596212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shockEnemyAttacking_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b56cb4f0a0ab6f260800000000000000
+      internalID: 7131091612356822619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shockEnemyAttacking_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5db46cadb4b84a0800000000000000
+      internalID: -6590090226724776534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shockEnemyAttacking_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba78a2a379531780800000000000000
+      internalID: -8713522500846716235
       vertices: []
       indices: 
       edges: []

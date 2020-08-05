@@ -26,13 +26,14 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
-    public void TakeDamage(float damage, Collider2D other = null, bool invencibility = false)
+    public void TakeDamage(float damage, bool invencibility = false)
     {
         
         if (_isInvencible == false)
         {
             StartCoroutine(FlashDamage());
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
+            CinemachineShake.Instance.ShakeCam(1f, .1f);
             currentHealth.RuntimeValue -= damage;
             playerHealthSignal.RaiseSignal();
             if (invencibility == true)

@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public PlayerState currentState;
     public Inventory playerInventory;
     public SpriteRenderer receivedItemSprite;
+    public Transform attackPoint;
+    public LayerMask enemyLayer;
 
 
     [Space]
@@ -27,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Public Statistics")]
     public float movementSpeed;
     public float startTimeBtwAttacks;
+    public float attackDamage;
+    public float attackRange;
 
     [Space]
     [Header("Player Private Statistics")]
@@ -84,7 +88,9 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 
-                Attack();
+                currentState = PlayerState.attacking;
+                _movement = Vector2.zero;
+                _animator.SetTrigger("Attack");
                 _timeBtwAttacks = startTimeBtwAttacks;
             }
         }
@@ -115,11 +121,27 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("Receive", _isInteracting);
     }
 
-    private void Attack()
+    public void Attack()
     {
-        currentState = PlayerState.attacking;
-        _movement = Vector2.zero;
-        _animator.SetTrigger("Attack");
+        Collider2D[] hitArray = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        foreach (Collider2D collider in hitArray)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                if (collider.gameObject.GetComponent<Enemy>())
+                {
+                    Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+                    enemy.TakeDamage(attackDamage, GetComponent<Collider2D>());
+                }
+                else if (collider.gameObject.GetComponentInParent<Enemy>())
+                {
+                    Enemy enemy = collider.gameObject.GetComponentInParent<Enemy>();
+                    enemy.TakeDamage(attackDamage, GetComponent<Collider2D>());
+                }
+                
+
+            }
+        }
     }
 
     public void RaiseItem()
@@ -159,5 +181,11 @@ public class PlayerMovement : MonoBehaviour
             _canMove = true;
         }
     }
-    
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint.position == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
 }
