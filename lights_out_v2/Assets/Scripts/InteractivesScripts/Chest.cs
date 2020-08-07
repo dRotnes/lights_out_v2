@@ -19,19 +19,24 @@ public class Chest : Interactive
 
     private void Update()
     {
-        if (playerInRange && Input.GetKeyDown("space"))
+        if (playerInRange)
         {
-            if (!_isOpen)
+            if(interrogation)
+                HandleInteractivesUI();
+            if (Input.GetButtonDown("Fire2")) 
             {
+                if (!_isOpen)
+                {
 
-                Open();
-            }
-            else
-            {
-                if (_canClose)
-                    chestIsOpen();
+                    Open();
+                }
                 else
-                    return;
+                {
+                    if (_canClose)
+                        chestIsOpen();
+                    else
+                        return;
+                }
             }
         }
     }
@@ -48,7 +53,9 @@ public class Chest : Interactive
     private void chestIsOpen()
     {
         raiseItem.RaiseSignal();
-        signalOff.RaiseSignal();
+        controllerSignals[1].RaiseSignal();
+        pcSignals[1].RaiseSignal();
+        interrogationSignalOff.RaiseSignal();
         interrogation = false;
         _canClose = false;
     }

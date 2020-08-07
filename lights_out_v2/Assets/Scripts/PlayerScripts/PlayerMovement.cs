@@ -85,12 +85,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (_timeBtwAttacks <= 0)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("Fire1"))
             {
-
+                StopAllCoroutines();
                 currentState = PlayerState.attacking;
                 _movement = Vector2.zero;
                 _animator.SetTrigger("Attack");
+                StartCoroutine(Attack());
                 _timeBtwAttacks = startTimeBtwAttacks;
             }
         }
@@ -121,8 +122,9 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("Receive", _isInteracting);
     }
 
-    public void Attack()
+    private IEnumerator Attack()
     {
+        yield return new WaitForSeconds(.3f);
         Collider2D[] hitArray = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D collider in hitArray)
         {

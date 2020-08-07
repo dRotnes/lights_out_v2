@@ -9,9 +9,10 @@ public class Sign : Interactive
     {
         if (playerInRange)
         {
+            HandleInteractivesUI();
             _canDesactivate = true;
 
-            if (Input.GetKeyDown("space"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 if (dialogTrigger.ReturnState() == DialogState.unactive)
                 {
