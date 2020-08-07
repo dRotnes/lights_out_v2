@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
   items: []
+  heartContainerSignal: {fileID: 11400000, guid: 143bcdc288607e64abc6b9fdf03b19ce,
+    type: 2}
   numberOfKeys: 0
+  numberOfSouls: 0
+  runtimeNumberOfSouls: 0
+  runtimeNumberOfKeys: 0

@@ -20,7 +20,7 @@ public class FollowerEnemy : Enemy
     private int _currentWaypoint = 0;
     public GameObject startingPosition;
 
-    private float _timeBtwAttacks;
+    private float _timeBtwAttacks = 0;
     private int counter = 0;
     private bool _reachedEnd;
     private Seeker _seeker;
@@ -88,7 +88,7 @@ public class FollowerEnemy : Enemy
             GetComponent<SpriteRenderer>().sortingLayerName = "Enemy";
             this.enabled = false;
         }
-        
+
     }
     private void FixedUpdate()
     {

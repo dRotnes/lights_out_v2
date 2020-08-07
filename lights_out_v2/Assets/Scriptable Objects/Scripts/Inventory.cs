@@ -8,32 +8,48 @@ public class Inventory : ScriptableObject, ISerializationCallbackReceiver
 {
     public Item currentItem;
     public List<Item> items = new List<Item>();
+    public SignalSend heartContainerSignal;
     public int numberOfKeys;
+    public int numberOfSouls;
+    public int runtimeNumberOfSouls;
     public int runtimeNumberOfKeys;
 
     public void OnBeforeSerialize()
     {
         runtimeNumberOfKeys = numberOfKeys;
+        runtimeNumberOfSouls = numberOfSouls;
     }
 
     public void AddItem(Item item)
     {
-        if (item.isKey)
+        switch (item.type)
         {
-            numberOfKeys++;
+            case ItemType.key:
+                numberOfKeys++;
+                break;
+            case ItemType.soul:
+                numberOfSouls++;
+                break;
+            case ItemType.heart:
+                heartContainerSignal.RaiseSignal();
+                break;
+            case ItemType.common:
+                if (!items.Contains(item))
+                {
+                    items.Add(item);
+                }
+                break;
+
         }
-        else
-        {
-            if (!items.Contains(item))
-            {
-                items.Add(item);
-            }
-        }
+        
+       
+        
     }
 
     public void OnAfterDeserialize()
     {
         numberOfKeys = 0;
+        numberOfSouls = 0;
     }
 }
 

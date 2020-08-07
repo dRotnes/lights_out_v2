@@ -44,4 +44,10 @@ public class HealthUI : MonoBehaviour
             }
         }
     }
+
+    public void AddHeart()
+    {
+        heartContainer.RuntimeValue += 1;
+        InitHearts();
+    }
 }

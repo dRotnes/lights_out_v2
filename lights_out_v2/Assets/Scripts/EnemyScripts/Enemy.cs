@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour
     public Knockback knock;
     public GameObject bloodEffect;
     public SpriteRenderer spriteRenderer;
+    public GameObject soul;
+    public GameObject soulEffect;
+    public GameObject heart;
 
     private void Awake()
     {
@@ -59,10 +62,23 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        int[] randomArray = new int[] { 1, 1, 1, 1, 0 };
+        int randomNumber = Random.Range(0, 4);
+        if (randomArray[randomNumber] == 0)
+            Instantiate(heart, transform.position, Quaternion.identity);
         healthSlider.gameObject.SetActive(false);
         currentState = EnemyState.dead;
         animator.SetBool("Dead", true);
-        Destroy(destroyable, 5f);
+        Destroy(destroyable, 2f);
+        StartCoroutine(InstantiateSoul());
+        
+    }
+    private IEnumerator InstantiateSoul()
+    {
+        yield return new WaitForSeconds(1.9f);
+        Instantiate(soulEffect, transform.position, Quaternion.identity);
+        Instantiate(soul, transform.position, Quaternion.identity);
+
     }
     public void SetMaxHealth()
     {

@@ -20,7 +20,6 @@ public class RangedEnemy : Enemy
     private float _chargeTime;
     private bool _canAttack = true;
     private bool _playerInRange;
-    private bool _canDamage;
 
     private void Start()
     {
