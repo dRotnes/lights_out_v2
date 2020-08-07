@@ -605,6 +605,7 @@ MonoBehaviour:
   health: 0
   attackDamage: 1
   canKnock: 1
+  playerInvencible: 1
   currentState: 0
   animator: {fileID: 205057905142078276}
   maxHealth: {fileID: 11400000, guid: c5e9503515973e347aa74be7c414b046, type: 2}
@@ -642,7 +643,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   fill: {fileID: 554830632}
   knock: {fileID: 0}
-  effect: {fileID: 4926545740120610581, guid: 0541ec069413b8a49bd39acc97be4ee3, type: 3}
+  bloodEffect: {fileID: 4926545740120610581, guid: 0541ec069413b8a49bd39acc97be4ee3,
+    type: 3}
   spriteRenderer: {fileID: 0}
   startTimeBtwAttacks: 1
   attackRange: 0.3

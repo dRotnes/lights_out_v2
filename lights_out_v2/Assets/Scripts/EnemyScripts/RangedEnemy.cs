@@ -16,7 +16,7 @@ public class RangedEnemy : Enemy
     public float damageRate;
     public float attackTime;
     public GameObject enemyCollider;
-
+    
     private float _chargeTime;
     private bool _canAttack = true;
     private bool _playerInRange;
@@ -90,7 +90,7 @@ public class RangedEnemy : Enemy
             if (collider.CompareTag("Player") && currentState != EnemyState.dead)
             {
                 GameObject player = collider.gameObject;
-                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage, playerInvencible);
             }
         } 
     }

@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public float health;
     public float attackDamage;
     public bool canKnock;
+    public bool playerInvencible;
     public EnemyState currentState;
     public Animator animator;
     public FloatValue maxHealth;

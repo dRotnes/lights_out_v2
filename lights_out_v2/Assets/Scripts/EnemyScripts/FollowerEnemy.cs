@@ -172,9 +172,8 @@ public class FollowerEnemy : Enemy
         {
             if (collider.CompareTag("Player"))
             {
-                Debug.Log(collider.name);
                 GameObject player = collider.gameObject;
-                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8);
+                player.GetComponent<PlayerHealth>().TakeDamage(attackDamage / 8, playerInvencible);
             }
         }
     }
