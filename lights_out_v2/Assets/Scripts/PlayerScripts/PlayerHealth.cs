@@ -8,10 +8,10 @@ public class PlayerHealth : MonoBehaviour
     public FloatValue currentHealth;
     public Collider2D footCollider;
     public float startTimeInvencible;
-    public Material _blinkMat;
 
+    private Color _blinkColor;
     private float _timeInvencible;
-    private Material _mainMat;
+    private Material _mat;
     private PlayerMovement _playerMovement;
     private bool _isInvencible;
     private Animator _animator;
@@ -23,12 +23,14 @@ public class PlayerHealth : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _animator = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
-        _mainMat = GetComponent<SpriteRenderer>().material;
+        _mat = GetComponent<SpriteRenderer>().material;
     }
     private void Update()
     {
         if (currentHealth.RuntimeValue <= 0)
         {
+            _blinkColor = new Color(1f, 1f, 1f, 0f);
+            _mat.SetColor("_Tint", _blinkColor);
             _isInvencible = false;
             StopAllCoroutines();
             Die();
@@ -36,12 +38,13 @@ public class PlayerHealth : MonoBehaviour
         }
         if (_isInvencible)
         {
-            StartCoroutine(FlashInvencible());
+            
             if (_timeInvencible < 0)
             {
                 Debug.Log("Can damage again");
                 StopAllCoroutines();
-                _sr.material = _mainMat;
+                _blinkColor = new Color(1f, 1f, 1f, 0f);
+                _mat.SetColor("_Tint", _blinkColor);
                 _isInvencible = false;
                 _timeInvencible = startTimeInvencible;
             }
@@ -60,14 +63,14 @@ public class PlayerHealth : MonoBehaviour
             if (enemy)
             {
                 _isInvencible = true;
+                StartCoroutine(FlashInvencible());
             }
             else
             {
-
                 StartCoroutine(FlashDamage());
             }
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
-            CinemachineShake.Instance.ShakeCam(1f, .1f);
+            CinemachineShake.Instance.ShakeCam(0.7f, .1f);
             playerHealthSignal.RaiseSignal();
         }
         
@@ -76,22 +79,32 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator FlashDamage()
     {
-        _sr.material = _blinkMat;
+        _blinkColor = new Color(1f, 1f, 1f, 1f);
+        _mat.SetColor("_Tint", _blinkColor);
         yield return new WaitForSeconds(.1f);
-        _sr.material = _mainMat;
+        _blinkColor = new Color(1f, 1f, 1f, 0f);
+        _mat.SetColor("_Tint", _blinkColor);
     }
     private IEnumerator FlashInvencible() 
     {
-        _sr.material = _blinkMat;
-        yield return new WaitForSeconds(.05f);
-        _sr.material = _mainMat;
-        yield return new WaitForSeconds(.05f);
-        StartCoroutine(FlashInvencible());
+        while (_isInvencible)
+        {
+
+            _blinkColor = new Color(1f, 1f, 1f, 1f);
+            _mat.SetColor("_Tint", _blinkColor);
+            yield return new WaitForSeconds(.1f);
+            _blinkColor = new Color(1f, 1f, 1f, 0f);
+            _mat.SetColor("_Tint", _blinkColor);
+            yield return new WaitForSeconds(.1f);
+        }
+        _blinkColor = new Color(1f, 1f, 1f, 0f);
+        _mat.SetColor("_Tint", _blinkColor);
     }
 
     private void Die()
-    { 
-        _sr.material = _mainMat;
+    {
+        _blinkColor = new Color(1f, 1f, 1f, 0f);
+        _mat.SetColor("_Tint", _blinkColor);
         _playerMovement.currentState = PlayerState.dead;
         _animator.SetBool("Dead", true);
         footCollider.enabled = false;
