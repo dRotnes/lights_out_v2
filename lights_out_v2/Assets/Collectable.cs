@@ -15,6 +15,8 @@ public class Collectable : MonoBehaviour
     public Inventory playerInventory;
     public Item item;
     public float attractDistance;
+    public SignalSend updateSouls;
+
     private Transform _target;
     private Rigidbody2D _rb;
 
@@ -43,6 +45,7 @@ public class Collectable : MonoBehaviour
             {
                 case CollectableType.soul:
                     playerInventory.AddItem(item);
+                    updateSouls.RaiseSignal();
                     break;
                 case CollectableType.heart:
                     collision.GetComponent<PlayerHealth>().AddHealth(lifeAdded);

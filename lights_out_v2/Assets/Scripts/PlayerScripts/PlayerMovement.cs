@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerState{
     walking,
     attacking,
     blocked,
     receiving,
-    dead
+    dead,
+    ulting
 
 }
 public class PlayerMovement : MonoBehaviour
@@ -18,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer receivedItemSprite;
     public Transform attackPoint;
     public LayerMask enemyLayer;
+    public SignalSend specialAtkStarted;
 
 
     [Space]
@@ -39,8 +42,11 @@ public class PlayerMovement : MonoBehaviour
     private float _timeBtwAttacks;
     private bool _canMove;
     private bool _isInteracting;
+    private bool _specialAtk;
+    private bool _canSpecialAtk;
 
     private void Awake() {
+
         currentState = PlayerState.walking;
         _canMove = true;
         _timeBtwAttacks = 0;
@@ -60,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             _movement = Vector2.zero;
             _rigidbody.velocity = _movement;
         }
+            
     }
 
     void GetInputs()
@@ -75,13 +82,19 @@ public class PlayerMovement : MonoBehaviour
             _base_speed = Mathf.Clamp(_movement.magnitude, 0.0f, 1.0f);
         
         }
-        else
+
+        if(_canSpecialAtk && Input.GetButtonDown("Fire3"))
         {
+
+            _animator.SetTrigger("Ult");
+            currentState = PlayerState.ulting;
             _movement = Vector2.zero;
+            _canSpecialAtk = false;
+            _specialAtk = true;
+            specialAtkStarted.RaiseSignal();
+            currentState = PlayerState.walking;
+
         }
-
-
-
 
         if (_timeBtwAttacks <= 0)
         {
@@ -100,11 +113,7 @@ public class PlayerMovement : MonoBehaviour
             _timeBtwAttacks -= Time.deltaTime;
         }
 
-
-
         _movement.Normalize();
-        
-        
 
     }
     private void FixedUpdate()
@@ -120,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         }
         _animator.SetFloat("Velocity", _movement.sqrMagnitude);
         _animator.SetBool("Receive", _isInteracting);
+        _animator.SetBool("Special Attack", _specialAtk);
     }
 
     private IEnumerator Attack()
@@ -130,18 +140,19 @@ public class PlayerMovement : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
+                float damage = attackDamage;
+                if (_specialAtk)
+                    damage = damage * 2;
                 if (collider.gameObject.GetComponent<Enemy>())
                 {
                     Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-                    enemy.TakeDamage(attackDamage, GetComponent<Collider2D>());
+                    enemy.TakeDamage(damage, GetComponent<Collider2D>());
                 }
                 else if (collider.gameObject.GetComponentInParent<Enemy>())
                 {
                     Enemy enemy = collider.gameObject.GetComponentInParent<Enemy>();
-                    enemy.TakeDamage(attackDamage, GetComponent<Collider2D>());
+                    enemy.TakeDamage(damage, GetComponent<Collider2D>());
                 }
-                
-
             }
         }
     }
@@ -190,4 +201,12 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
+    public void CanSpecialAtk()
+    {
+        _canSpecialAtk = true;
+    }
+    public void SpecialAtkFinished()
+    {
+        _specialAtk = false;
+    }
 }

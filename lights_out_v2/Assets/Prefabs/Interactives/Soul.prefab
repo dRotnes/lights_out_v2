@@ -203,6 +203,7 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: f99a76509f11f944a86b15dbfee06e28, type: 2}
   item: {fileID: 11400000, guid: 2cf622403e2e2324489558a3467b1393, type: 2}
   attractDistance: 2
+  updateSouls: {fileID: 11400000, guid: e30f685447c74ea42b40ab92b32db509, type: 2}
 --- !u!95 &7221364641132945576
 Animator:
   serializedVersion: 3
