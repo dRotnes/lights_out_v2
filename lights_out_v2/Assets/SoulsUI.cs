@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class SoulsUI : MonoBehaviour
 {
-    private Slider _slider;
     private bool _decrease;
     private bool _increase;
     private float timeStartedLerping;
 
+    public Slider slider;
     public float lerpTimeDecrease;
     public float lerpTimeIncrease;
     public float maxValue;
@@ -18,7 +19,6 @@ public class SoulsUI : MonoBehaviour
 
     private void Start()
     {
-        _slider = GetComponent<Slider>();
         SetMaxSouls();
     }
     private void Update()
@@ -26,8 +26,8 @@ public class SoulsUI : MonoBehaviour
         if (_decrease)
         {
             _increase = false;
-            _slider.value = Lerp(_slider.maxValue, 0, timeStartedLerping, lerpTimeDecrease);
-            if(_slider.value == 0)
+            slider.value = Lerp(slider.maxValue, 0, timeStartedLerping, lerpTimeDecrease);
+            if(slider.value == 0)
             {
                 _decrease = false;
                 specialAtkFinished.RaiseSignal();
@@ -36,8 +36,8 @@ public class SoulsUI : MonoBehaviour
         }
         if (_increase)
         {
-            _slider.value += 1;
-            if (_slider.value == maxValue)
+            slider.value += 1;
+            if (slider.value == maxValue)
                 canUseSpecialAtk.RaiseSignal();
             _increase = false;
         }
@@ -52,9 +52,7 @@ public class SoulsUI : MonoBehaviour
     }
     public void SetMaxSouls()
     {
-        _slider.maxValue = maxValue;
-        _slider.value = 0;
-
+        slider.maxValue = maxValue;
     }
     public void UpdateSouls()
     {

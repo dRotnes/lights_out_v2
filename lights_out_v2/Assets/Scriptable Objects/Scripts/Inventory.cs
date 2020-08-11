@@ -3,22 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[System.Serializable]
 [CreateAssetMenu]
-public class Inventory : ScriptableObject, ISerializationCallbackReceiver
+public class Inventory : ScriptableObject
 {
     public Item currentItem;
     public List<Item> items = new List<Item>();
     public SignalSend heartContainerSignal;
     public int numberOfKeys;
     public int numberOfSouls;
-    public int runtimeNumberOfSouls;
-    public int runtimeNumberOfKeys;
-
-    public void OnBeforeSerialize()
-    {
-        runtimeNumberOfKeys = numberOfKeys;
-        runtimeNumberOfSouls = numberOfSouls;
-    }
 
     public void AddItem(Item item)
     {
@@ -41,9 +34,6 @@ public class Inventory : ScriptableObject, ISerializationCallbackReceiver
                 break;
 
         }
-        
-       
-        
     }
 
     public void OnAfterDeserialize()

@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public SignalSend playerHealthSignal;
-    public FloatValue currentHealth;
     public Collider2D footCollider;
     public float startTimeInvencible;
+    public FloatValue currentHealth;
+    public FloatValue maxHealth;
 
     private Color _blinkColor;
     private float _timeInvencible;
@@ -16,16 +17,14 @@ public class PlayerHealth : MonoBehaviour
     private bool _isInvencible;
     private Animator _animator;
     private SpriteRenderer _sr;
-    private float _maxHealth;
 
-    private void Awake()
+    private void Start()
     {
         _timeInvencible = startTimeInvencible;
         _playerMovement = GetComponent<PlayerMovement>();
         _animator = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
         _mat = GetComponent<SpriteRenderer>().material;
-        _maxHealth = currentHealth.initialValue;
     }
     private void Update()
     {
@@ -53,8 +52,8 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log(_isInvencible);
         if(_isInvencible == false)
         {
-            currentHealth.RuntimeValue -= damage;
-            if (currentHealth.RuntimeValue <= 0)
+            currentHealth.value -= damage;
+            if (currentHealth.value <= 0)
             {
                 Die();
                 return;
@@ -76,18 +75,18 @@ public class PlayerHealth : MonoBehaviour
     }
     public void AddHealth(float healthAdded)
     {
-        if(currentHealth.RuntimeValue + healthAdded >= _maxHealth)
+        if(currentHealth.value + healthAdded >= maxHealth.value)
         {
-            currentHealth.RuntimeValue = _maxHealth;
+            currentHealth.value = maxHealth.value;
         }
         else
-            currentHealth.RuntimeValue += healthAdded;
+            currentHealth.value += healthAdded;
         playerHealthSignal.RaiseSignal();
     }
     public void SetMaxHealth()
     {
-        _maxHealth += 2;
-        AddHealth(_maxHealth);
+        maxHealth.value += 2;
+        currentHealth.value = maxHealth.value;
     }
 
     private IEnumerator FlashDamage()

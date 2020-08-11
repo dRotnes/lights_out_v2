@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         currentState = EnemyState.idle;
-        health = maxHealth.initialValue;
+        health = maxHealth.value;
         knock = GetComponent<Knockback>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetMaxHealth();
