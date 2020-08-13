@@ -10,12 +10,14 @@ public class SoulsUI : MonoBehaviour
     private bool _increase;
     private float timeStartedLerping;
 
-    public Slider slider;
     public float lerpTimeDecrease;
     public float lerpTimeIncrease;
     public float maxValue;
+
+    public Slider slider;
     public SignalSend canUseSpecialAtk;
     public SignalSend specialAtkFinished;
+    public Player playerStats;
 
     private void Start()
     {
@@ -23,11 +25,12 @@ public class SoulsUI : MonoBehaviour
     }
     private void Update()
     {
+        slider.value = playerStats.souls;
         if (_decrease)
         {
             _increase = false;
-            slider.value = Lerp(slider.maxValue, 0, timeStartedLerping, lerpTimeDecrease);
-            if(slider.value == 0)
+            playerStats.souls = Lerp(slider.maxValue, 0, timeStartedLerping, lerpTimeDecrease);
+            if(playerStats.souls == 0)
             {
                 _decrease = false;
                 specialAtkFinished.RaiseSignal();
@@ -36,8 +39,8 @@ public class SoulsUI : MonoBehaviour
         }
         if (_increase)
         {
-            slider.value += 1;
-            if (slider.value == maxValue)
+            playerStats.souls += 1;
+            if (playerStats.souls == maxValue)
                 canUseSpecialAtk.RaiseSignal();
             _increase = false;
         }

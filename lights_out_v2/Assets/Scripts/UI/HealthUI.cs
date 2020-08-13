@@ -8,8 +8,7 @@ public class HealthUI : MonoBehaviour
     public Sprite fullHeart;
     public Sprite halfHeart;
     public Sprite emptyHeart;
-    public FloatValue heartContainer;
-    public FloatValue playerHealth;
+    public Player playerStats;
 
     private void Start()
     {
@@ -17,7 +16,11 @@ public class HealthUI : MonoBehaviour
     }
     public void InitHearts()
     {
-        for (int i = 0; i < heartContainer.value; i++)
+        foreach(Image image in hearts)
+        {
+            image.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < playerStats.numberOfHearts; i++)
         {
             hearts[i].gameObject.SetActive(true);
             hearts[i].sprite =fullHeart;
@@ -26,9 +29,13 @@ public class HealthUI : MonoBehaviour
 
     public void UpdateHearts()
     {
-        float tempHealth = playerHealth.value / 2;
+        foreach (Image image in hearts)
+        {
+            image.gameObject.SetActive(false);
+        }
+        float tempHealth = playerStats.currentHealth/ 2;
 
-        for (int i = 0; i < heartContainer.value; i++)
+        for (int i = 0; i < playerStats.numberOfHearts; i++)
         {
             hearts[i].gameObject.SetActive(true);
             if (i <= tempHealth-1)
@@ -48,7 +55,7 @@ public class HealthUI : MonoBehaviour
 
     public void AddHeart()
     {
-        heartContainer.value += 1;
+        playerStats.numberOfHearts += 1;
         InitHearts();
     }
 }

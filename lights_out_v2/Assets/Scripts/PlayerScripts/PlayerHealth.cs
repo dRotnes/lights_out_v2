@@ -5,10 +5,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public SignalSend playerHealthSignal;
-    public Collider2D footCollider;
     public float startTimeInvencible;
-    public FloatValue currentHealth;
-    public FloatValue maxHealth;
+    public Player playerStats;
 
     private Color _blinkColor;
     private float _timeInvencible;
@@ -52,9 +50,11 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log(_isInvencible);
         if(_isInvencible == false)
         {
-            currentHealth.value -= damage;
-            if (currentHealth.value <= 0)
+            
+            playerStats.currentHealth -= damage;
+            if (playerStats.currentHealth <= 0)
             {
+                playerHealthSignal.RaiseSignal();
                 Die();
                 return;
 
@@ -75,18 +75,18 @@ public class PlayerHealth : MonoBehaviour
     }
     public void AddHealth(float healthAdded)
     {
-        if(currentHealth.value + healthAdded >= maxHealth.value)
+        if(playerStats.currentHealth + healthAdded >= playerStats.maxHealth)
         {
-            currentHealth.value = maxHealth.value;
+            playerStats.currentHealth = playerStats.maxHealth;
         }
         else
-            currentHealth.value += healthAdded;
+            playerStats.currentHealth += healthAdded;
         playerHealthSignal.RaiseSignal();
     }
     public void SetMaxHealth()
     {
-        maxHealth.value += 2;
-        currentHealth.value = maxHealth.value;
+        playerStats.maxHealth += 2;
+        playerStats.currentHealth = playerStats.maxHealth;
     }
 
     private IEnumerator FlashDamage()
@@ -117,15 +117,12 @@ public class PlayerHealth : MonoBehaviour
     {
         StartCoroutine(FlashDamage());
         _playerMovement.currentState = PlayerState.dead;
-        _animator.SetBool("Dead", true);
-        footCollider.enabled = false;
         
     }
 
     public void Fall()
     {
         _animator.SetTrigger("fall");
-
     }
 
 

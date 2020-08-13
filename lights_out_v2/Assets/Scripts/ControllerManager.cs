@@ -5,9 +5,9 @@ using UnityEngine;
 public class ControllerManager : MonoBehaviour
 {
     public bool controllerOn;
-    void Update()
+    /*void Update()
     {
-        if (Input.GetJoystickNames()[0] == "Wireless Controller")
+        if (Input.GetJoystickNames()[0].Length > 0)
         {
             controllerOn = true;
         }
@@ -15,5 +15,5 @@ public class ControllerManager : MonoBehaviour
         {
             controllerOn = false;
         }
-    }
+    }*/
 }

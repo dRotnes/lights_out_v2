@@ -6,13 +6,13 @@ using Pathfinding.Ionic.Zip;
 
 public static class SavingSystem
 {
-    public static void SaveGame(HealthUI healthUI, SoulsUI soulsUI, PlayerHealth playerHealthScript, Inventory playerInventory, float[] positions)
+    public static void SaveGame(Player player,int sceneIndex)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/gamedata.data";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SavingData data = new SavingData(healthUI, soulsUI, playerHealthScript, playerInventory, positions);
+        SavingData data = new SavingData(player, sceneIndex);
         formatter.Serialize(stream, data);
         stream.Close();
 

@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa569957762b8947ac7b3a8f3b45f1a, type: 3}
   m_Name: ShockyHealth
   m_EditorClassIdentifier: 
-  initialValue: 5
-  RuntimeValue: 5
+  value: 5

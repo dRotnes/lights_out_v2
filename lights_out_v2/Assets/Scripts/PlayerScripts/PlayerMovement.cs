@@ -10,7 +10,6 @@ public enum PlayerState{
     receiving,
     dead,
     ulting
-
 }
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayer;
     public SignalSend specialAtkStarted;
+    public Collider2D footCollider;
+    public Player playerStats;
 
 
     [Space]
@@ -44,18 +45,22 @@ public class PlayerMovement : MonoBehaviour
     private bool _isInteracting;
     private bool _specialAtk;
     private bool _canSpecialAtk;
+    private bool _isDead;
 
     private void Awake() {
-
-        currentState = PlayerState.walking;
+        currentState = playerStats.state;
+        transform.position = new Vector3(playerStats.positions[0], playerStats.positions[1], playerStats.positions[2]);
         _canMove = true;
         _timeBtwAttacks = 0;
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
     private void Update() {
+       
         if (currentState != PlayerState.dead)
         {
+            _isDead = false;
+            footCollider.enabled = true;
             if (_canMove)
                 GetInputs();
             else
@@ -63,10 +68,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            _isDead = true;
             _movement = Vector2.zero;
-            _rigidbody.velocity = _movement;
+            _rigidbody.Sleep();
+            footCollider.enabled = false;
         }
-            
     }
 
     void GetInputs()
@@ -130,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Velocity", _movement.sqrMagnitude);
         _animator.SetBool("Receive", _isInteracting);
         _animator.SetBool("Special Attack", _specialAtk);
+        _animator.SetBool("Dead", _isDead);
     }
 
     private IEnumerator Attack()

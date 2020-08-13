@@ -7,6 +7,8 @@ public class CheckPoint : Interactive
     public SignalSend saveUISignalOn;
     public SignalSend saveUISignalOff;
     private SavingManager _savingManager;
+    public Transform checkPointPosition;
+    public Player playerStats;
 
     private void Start()
     {
@@ -29,6 +31,7 @@ public class CheckPoint : Interactive
     }
     private void Save()
     {
+        playerStats.positions = new float[] { checkPointPosition.position.x, checkPointPosition.position.y, checkPointPosition.position.z};
         _savingManager.SaveGame();
         saveUISignalOn.RaiseSignal();
     }

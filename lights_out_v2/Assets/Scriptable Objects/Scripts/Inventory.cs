@@ -10,18 +10,17 @@ public class Inventory : ScriptableObject
     public Item currentItem;
     public List<Item> items = new List<Item>();
     public SignalSend heartContainerSignal;
-    public int numberOfKeys;
-    public int numberOfSouls;
+    public Player playerStats;
 
     public void AddItem(Item item)
     {
         switch (item.type)
         {
             case ItemType.key:
-                numberOfKeys++;
+                playerStats.numberOfKeys++;
                 break;
             case ItemType.soul:
-                numberOfSouls++;
+                playerStats.numberOfSouls++;
                 break;
             case ItemType.heart:
                 heartContainerSignal.RaiseSignal();
@@ -34,12 +33,6 @@ public class Inventory : ScriptableObject
                 break;
 
         }
-    }
-
-    public void OnAfterDeserialize()
-    {
-        numberOfKeys = 0;
-        numberOfSouls = 0;
     }
 }
 
