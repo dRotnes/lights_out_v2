@@ -40,9 +40,6 @@ public class SavingManager : MonoBehaviour
         player.positions[0] = data.position[0];
         player.positions[1] = data.position[1];
         player.positions[2] = data.position[2];
-
         SceneManager.LoadScene(data.scene);
-
-
     }
 }

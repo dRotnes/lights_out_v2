@@ -13,6 +13,7 @@ public class HealthUI : MonoBehaviour
     private void Start()
     {
         InitHearts();
+        UpdateHearts();
     }
     public void InitHearts()
     {
