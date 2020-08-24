@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
                 StartCoroutine(FlashDamage());
             }
             /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
-            CinemachineShake.Instance.ShakeCam(0.7f, .1f);
+            CinemachineShake.Instance.ShakeCam(1f, .2f);
             playerHealthSignal.RaiseSignal();
         }
     }

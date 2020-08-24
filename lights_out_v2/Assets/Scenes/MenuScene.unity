@@ -500,6 +500,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &341577905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5581272583376653580, guid: d1cc1970165df2e40a814d9fcdb64550,
+    type: 3}
+  m_PrefabInstance: {fileID: 1040041945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae16c99d4b3efb4f83429cf3e58224a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &359922832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,9 +1279,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5581272583376653580, guid: d1cc1970165df2e40a814d9fcdb64550,
         type: 3}
+      propertyPath: chestBooleans.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581272583376653580, guid: d1cc1970165df2e40a814d9fcdb64550,
+        type: 3}
       propertyPath: loadingCanvas
       value: 
       objectReference: {fileID: 11400000, guid: cbd1d6002ef64b341aa2e89df5758b09,
+        type: 2}
+    - target: {fileID: 5581272583376653580, guid: d1cc1970165df2e40a814d9fcdb64550,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 11400000, guid: 08d72733581a524409b1bb38b11e421a,
+        type: 2}
+    - target: {fileID: 5581272583376653580, guid: d1cc1970165df2e40a814d9fcdb64550,
+        type: 3}
+      propertyPath: chestBooleans.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9fb962f69d48ec246bf2c222730e21f1,
         type: 2}
     - target: {fileID: 5581272583376653581, guid: d1cc1970165df2e40a814d9fcdb64550,
         type: 3}
@@ -1423,9 +1452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvas: {fileID: 311175926}
-  player: {fileID: 11400000, guid: 08d72733581a524409b1bb38b11e421a, type: 2}
-  newGame: {fileID: 0}
-  loadGame: {fileID: 0}
+  saveManager: {fileID: 341577905}
+  test: {fileID: 11400000, guid: df11e1eb3a3871c4c943de8f11c261b5, type: 2}
 --- !u!1 &1298430161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,9 +1578,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingCanvas: {fileID: 0}
-  player: {fileID: 0}
-  newGame: {fileID: 0}
-  loadGame: {fileID: 0}
+  saveManager: {fileID: 0}
+  test: {fileID: 0}
 --- !u!1 &1477882178
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,10 @@ public class Interactive : MonoBehaviour
             playerInRange = true;
             if (!isFixed)
             {
-                spriteRenderer.sortingLayerName = "MiddleGround";
+                if(collision.transform.position.y - transform.position.y > 0)
+                    spriteRenderer.sortingLayerName = "ForeGround";
+                else
+                    spriteRenderer.sortingLayerName = "MiddleGround";
             }
         }
     }

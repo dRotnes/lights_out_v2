@@ -22,6 +22,8 @@ public class DialogManager : MonoBehaviour
     public Sprite finishedImage;
     public Sprite writingImage;
 
+    public SignalSend dialogIsFinished;
+
     private Queue<string> sentenceQueue;
     private bool _isTyped;
 
@@ -81,7 +83,7 @@ public class DialogManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             textDisplay.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(typingSpeed);
             if (Input.GetKeyDown("space"))
             {
                 textDisplay.text = sentence;
@@ -106,6 +108,8 @@ public class DialogManager : MonoBehaviour
         titleDisplay.text = "";
         dialogBox.SetActive(false);
         currentState = DialogState.unactive;
+        if(dialogIsFinished)
+            dialogIsFinished.RaiseSignal();
     }
 
     private IEnumerator Blink()

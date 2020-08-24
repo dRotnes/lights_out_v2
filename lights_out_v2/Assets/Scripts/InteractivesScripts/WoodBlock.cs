@@ -18,8 +18,8 @@ public class WoodBlock : MonoBehaviour
             CloseDoor();
         }
     }
-    public void OpenDoor() {
-
+    public void OpenDoor() 
+    {
         isOpen = true;
         doorCollider.enabled = false;
         animator.SetBool("isOpen", isOpen);
@@ -31,5 +31,4 @@ public class WoodBlock : MonoBehaviour
         doorCollider.enabled = true;
         animator.SetBool("isOpen", isOpen);
     }
-
 }

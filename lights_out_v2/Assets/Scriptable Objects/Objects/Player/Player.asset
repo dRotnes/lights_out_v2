@@ -12,14 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11cd6879b330ac74cb50686649adbd27, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  currentHealth: 8
-  maxHealth: 8
-  souls: 2.370981
-  numberOfHearts: 4
+  DEFAULT_currentHealth: 6
+  DEFAULT_maxHealth: 6
+  DEFAULT_souls: 0
+  DEFAULT_numberOfHearts: 3
+  DEFAULT_numberOfSouls: 0
+  DEFAULT_numberOfKeys: 0
+  DEFAULT_positions:
+  - 1.17
+  - -7.13
+  - 0
+  DEFAULT_state: 0
+  currentHealth: 6
+  maxHealth: 6
+  souls: 0
+  numberOfHearts: 3
   numberOfSouls: 0
   numberOfKeys: 0
   positions:
-  - 0.807
-  - -6.355
+  - 1.17
+  - -7.13
   - 0
   state: 0

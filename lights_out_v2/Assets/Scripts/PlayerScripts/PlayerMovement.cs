@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _isDead;
 
     private void Awake() {
+        
+        Debug.Log(playerStats.positions);
         currentState = playerStats.state;
         transform.position = new Vector3(playerStats.positions[0], playerStats.positions[1], playerStats.positions[2]);
         _canMove = true;

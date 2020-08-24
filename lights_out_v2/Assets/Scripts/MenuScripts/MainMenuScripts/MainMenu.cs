@@ -6,21 +6,14 @@ using UnityEngine.EventSystems;
 public class MainMenu : MonoBehaviour
 {
     public GameObject loadingCanvas;
-    public Player player;
-    public SignalSend newGame;
-    public SignalSend loadGame;
+    public SavingManager saveManager;
+    public SignalSend test;
     public void PlayGame()
     {
-        player.currentHealth = 6;
-        player.maxHealth = 6;
-        player.numberOfHearts = 3;
-        player.numberOfKeys = 0;
-        player.numberOfSouls = 0;
-        player.souls = 0;
-        player.state = PlayerState.walking;
 
-
+        saveManager.ResetGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 
     public void LoadGame()

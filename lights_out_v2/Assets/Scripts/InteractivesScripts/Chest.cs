@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Chest : Interactive
 {
-    private bool _canClose = true;
-    private bool _isOpen;
+    private bool _canClose;
     private Collider2D triggerArea;
 
     public Inventory playerInventory;
     public Animator animator;
     public SignalSend raiseItem;
     public Item item;
+    public BoolValue isOpen;
     private void Start()
     {
         triggerArea = GetComponent<Collider2D>();
@@ -21,13 +21,19 @@ public class Chest : Interactive
     {
         if (playerInRange)
         {
-            if(interrogation)
-                HandleInteractivesUI();
-            if (Input.GetButtonDown("Fire2")) 
+            switch (!isOpen.value)
             {
-                if (!_isOpen)
+                case true:
+                    HandleInteractivesUI();
+                    break;
+                case false:
+                    break;
+            }
+            if (Input.GetButtonDown("Fire2"))
+            {
+                if (!isOpen.value)
                 {
-
+                    Debug.Log("cria");
                     Open();
                 }
                 else
@@ -40,14 +46,17 @@ public class Chest : Interactive
             }
         }
     }
+    private void LateUpdate()
+    {
+        animator.SetBool("Open", isOpen.value);
+    }
     private void Open()
     {
-        animator.SetTrigger("Open");
+        isOpen.value = true;
+        _canClose = true;
         playerInventory.currentItem = item;
         playerInventory.AddItem(playerInventory.currentItem);
         raiseItem.RaiseSignal();
-        _isOpen = true;
-        _canClose = true;
         
     }
     private void chestIsOpen()
@@ -56,7 +65,16 @@ public class Chest : Interactive
         controllerSignals[1].RaiseSignal();
         pcSignals[1].RaiseSignal();
         interrogationSignalOff.RaiseSignal();
-        interrogation = false;
         _canClose = false;
+    }
+
+    public void SetOpen(bool open)
+    {
+        isOpen.value = open;
+    }
+
+    public bool GetOpen()
+    {
+        return isOpen.value;
     }
 }
