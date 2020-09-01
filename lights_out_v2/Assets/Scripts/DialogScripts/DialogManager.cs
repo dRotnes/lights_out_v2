@@ -83,6 +83,7 @@ public class DialogManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             textDisplay.text += letter;
+            FindObjectOfType<AudioManager>().Play("TalkingSound");
             yield return new WaitForSeconds(typingSpeed);
             if (Input.GetKeyDown("space"))
             {

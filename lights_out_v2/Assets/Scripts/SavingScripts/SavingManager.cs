@@ -33,7 +33,7 @@ public class SavingManager : MonoBehaviour
         }
     }
 
-    public void SaveGame()
+    public void SaveGame(int index)
     {
         Chest[] chestsArray = FindObjectsOfType<Chest>();
         chests = new bool[chestsArray.Length];
@@ -44,16 +44,16 @@ public class SavingManager : MonoBehaviour
             Debug.Log(chests[i]);
             /*chests[i] = chestsArray[i].isOpen;*/
         }
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-        SavingSystem.SaveGame(player, chests, currentScene);
+        
+        SavingSystem.SaveGame(player, chests, index);
 
         Debug.Log("Game was saved");
     }
     public void LoadGame()
     {
-        Debug.Log("ou yea");
+        
         SavingData data = SavingSystem.LoadGame();
-        Debug.Log(data.playerHearts);
+        SceneManager.LoadScene(data.scene);
         player.numberOfHearts = data.playerHearts;
         player.souls = data.playerSouls;
         player.currentHealth = data.playerHealth;
@@ -90,5 +90,6 @@ public class SavingManager : MonoBehaviour
         {
             bv.value = bv.DEAFULT_VALUE;
         }
+        SaveGame(2);
     }
 }

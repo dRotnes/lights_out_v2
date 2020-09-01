@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CheckPoint : Interactive
@@ -32,7 +33,7 @@ public class CheckPoint : Interactive
     private void Save()
     {
         playerStats.positions = new float[] { checkPointPosition.position.x, checkPointPosition.position.y, checkPointPosition.position.z};
-        _savingManager.SaveGame();
+        _savingManager.SaveGame(SceneManager.GetActiveScene().buildIndex);
         saveUISignalOn.RaiseSignal();
     }
 

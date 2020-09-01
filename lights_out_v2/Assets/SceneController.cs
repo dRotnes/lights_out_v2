@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    public bool load;
+    public BoolValue load;
     private void Start()
     {
-        if(load)
+        if (load.value)
+        {
+            load.value = false;
             FindObjectOfType<SavingManager>().LoadGame();
+        }
+
     }
 
     public void NextScene()

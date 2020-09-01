@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public GameObject loadingCanvas;
     public SavingManager saveManager;
     public SignalSend test;
+    public BoolValue load;
     public void PlayGame()
     {
 
@@ -20,6 +21,7 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("ou yea");
         SavingData data = SavingSystem.LoadGame();
+        load.value = load.DEAFULT_VALUE;
         SceneManager.LoadScene(data.scene);
     }
 
