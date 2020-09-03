@@ -947,6 +947,21 @@ TextureImporter:
   - first:
       213: 6074828736836687641
     second: player_topdown_314
+  - first:
+      213: 4030502262736964046
+    second: player_topdown_315
+  - first:
+      213: -7518348991608174686
+    second: player_topdown_316
+  - first:
+      213: 7163092178047590282
+    second: player_topdown_317
+  - first:
+      213: -4801009197658804792
+    second: player_topdown_318
+  - first:
+      213: -1920687619712508550
+    second: player_topdown_319
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -7713,6 +7728,111 @@ TextureImporter:
       bones: []
       spriteID: 9175c72ec802e4450800000000000000
       internalID: 6074828736836687641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_topdown_315
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec948d414783fe730800000000000000
+      internalID: 4030502262736964046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_topdown_316
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a747c11d6579a790800000000000000
+      internalID: -7518348991608174686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_topdown_317
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8fd7ed526a686360800000000000000
+      internalID: 7163092178047590282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_topdown_318
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cde92252936f5db0800000000000000
+      internalID: -4801009197658804792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_topdown_319
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d9b8e39c85855e0800000000000000
+      internalID: -1920687619712508550
       vertices: []
       indices: 
       edges: []

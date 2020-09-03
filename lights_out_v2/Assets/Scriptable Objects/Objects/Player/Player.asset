@@ -19,8 +19,8 @@ MonoBehaviour:
   DEFAULT_numberOfSouls: 0
   DEFAULT_numberOfKeys: 0
   DEFAULT_positions:
-  - 1.17
-  - -7.13
+  - 0.15
+  - -1.44
   - 0
   DEFAULT_state: 0
   currentHealth: 6
@@ -30,7 +30,7 @@ MonoBehaviour:
   numberOfSouls: 0
   numberOfKeys: 0
   positions:
-  - 1.17
-  - -7.13
+  - 0.15
+  - -1.44
   - 0
   state: 0

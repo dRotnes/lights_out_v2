@@ -146,11 +146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog:
-    name: Help Sign
+    name: Sign
     sentences:
-    - 'You''re a sunflower
-
-'
+    - Just an old tree
     isTyped: 0
 --- !u!1 &1468304284967029221
 GameObject:
@@ -200,8 +198,17 @@ MonoBehaviour:
   isFixed: 0
   interrogation: 1
   spriteRenderer: {fileID: 1468304284165848529}
-  signalOn: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd, type: 2}
-  signalOff: {fileID: 11400000, guid: 6f54626171cec984e90a0100d6d87b00, type: 2}
+  interrogationSignalOn: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd,
+    type: 2}
+  interrogationSignalOff: {fileID: 11400000, guid: 6f54626171cec984e90a0100d6d87b00,
+    type: 2}
+  controllerSignals:
+  - {fileID: 11400000, guid: b21285028314822448223b57192de9e8, type: 2}
+  - {fileID: 11400000, guid: f659bfd880cb0714996576f48f7979e9, type: 2}
+  pcSignals:
+  - {fileID: 11400000, guid: c79d46bda92dbfd4fb247b4233435527, type: 2}
+  - {fileID: 11400000, guid: 2df27be7328b823458abaee9b85069bf, type: 2}
+  controllerManager: {fileID: 0}
   dialogTrigger: {fileID: 1468304284165848531}
 --- !u!61 &1468304284967029223
 BoxCollider2D:

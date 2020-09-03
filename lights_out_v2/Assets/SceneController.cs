@@ -11,13 +11,23 @@ public class SceneController : MonoBehaviour
         if (load.value)
         {
             load.value = false;
-            FindObjectOfType<SavingManager>().LoadGame();
+            SavingManager savemanager = FindObjectOfType<SavingManager>();
+            if (savemanager!=null)
+            {
+
+                savemanager.LoadGame();
+            }
         }
 
     }
 
     public void NextScene()
     {
+        StartCoroutine(NextSceneCO());
+    }
+    private IEnumerator NextSceneCO()
+    {
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

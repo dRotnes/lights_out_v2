@@ -43,11 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15aac9e068416c4e9a667f8d3b8faad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: MenuSong
-    clip: {fileID: 8300000, guid: e186c5ab0b27c3a4f8a69c1dcfea8a58, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-    playOnAwake: 1
+  sounds: []
