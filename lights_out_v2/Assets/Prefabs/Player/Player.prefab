@@ -116,7 +116,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.27
-  m_PointLightOuterRadius: 0.66
+  m_PointLightOuterRadius: 0.9
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 4800894928984334339}
   - component: {fileID: 4800894928984334338}
   - component: {fileID: 4800894928984334336}
+  - component: {fileID: 954367011342191218}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -810,6 +811,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialAtkEffect: {fileID: 2018161278729068638, guid: 90e424bb91798ac4d9002e77a2e536df,
     type: 3}
+--- !u!114 &954367011342191218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800894928984334358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 6a47c66ebb42ef048b7c1bcd2bfed7fe, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4800894928984334359}
+        m_MethodName: CanSpecialAtk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4800894929052913515
 GameObject:
   m_ObjectHideFlags: 0

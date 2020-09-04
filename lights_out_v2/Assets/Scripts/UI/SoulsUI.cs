@@ -9,6 +9,7 @@ public class SoulsUI : MonoBehaviour
     private bool _decrease;
     private bool _increase;
     private float timeStartedLerping;
+    private ControllerManager _cManager;
 
     public float lerpTimeDecrease;
     public float lerpTimeIncrease;
@@ -16,11 +17,13 @@ public class SoulsUI : MonoBehaviour
 
     public Slider slider;
     public SignalSend canUseSpecialAtk;
+    public SignalSend canUseSpecialAtkController;
     public SignalSend specialAtkFinished;
     public Player playerStats;
 
     private void Start()
     {
+        _cManager = FindObjectOfType<ControllerManager>();
         SetMaxSouls();
     }
     private void Update()
@@ -41,7 +44,15 @@ public class SoulsUI : MonoBehaviour
         {
             playerStats.souls += 1;
             if (playerStats.souls == maxValue)
-                canUseSpecialAtk.RaiseSignal();
+                switch (_cManager.controllerOn)
+                {
+                    case true:
+                        canUseSpecialAtkController.RaiseSignal();
+                        break;
+                    case false:
+                        canUseSpecialAtk.RaiseSignal();
+                        break;
+                }
             _increase = false;
         }
     }

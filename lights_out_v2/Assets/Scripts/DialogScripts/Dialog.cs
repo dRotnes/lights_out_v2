@@ -10,6 +10,7 @@ public class Dialog
     public string[] sentences;
 
     public bool isTyped;
+    public bool finishedSignal;
     
 }
     

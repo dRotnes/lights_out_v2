@@ -14,6 +14,10 @@ public class Interactive : MonoBehaviour
     public SignalSend[] controllerSignals;
     public SignalSend[] pcSignals;
     public ControllerManager controllerManager;
+    private void Awake()
+    {
+        controllerManager = FindObjectOfType<ControllerManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

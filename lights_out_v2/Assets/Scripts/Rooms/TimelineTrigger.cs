@@ -6,8 +6,6 @@ using UnityEngine.Playables;
 public class TimelineTrigger : MonoBehaviour
 {
     private PlayableDirector _playable;
-
-
     private void Awake()
     {
         _playable = GetComponent<PlayableDirector>();

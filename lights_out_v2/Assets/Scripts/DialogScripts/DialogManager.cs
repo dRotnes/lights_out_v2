@@ -24,24 +24,26 @@ public class DialogManager : MonoBehaviour
 
     public SignalSend dialogIsFinished;
 
-    private Queue<string> sentenceQueue;
+    private Queue<string> _sentenceQueue;
+    private bool _dialogFinishSignal;
     private bool _isTyped;
 
 
     private void Start()
     {
-        sentenceQueue = new Queue<string>();
+        _sentenceQueue = new Queue<string>();
         currentState = DialogState.unactive;
     }
     public void StartDialog(Dialog dialog)
     {
-        sentenceQueue.Clear();
+        _sentenceQueue.Clear();
         dialogBox.SetActive(true);
         titleDisplay.text = dialog.name;
         _isTyped = dialog.isTyped;
+        _dialogFinishSignal = dialog.finishedSignal;
         foreach (string sentence in dialog.sentences)
         {
-            sentenceQueue.Enqueue(sentence);
+            _sentenceQueue.Enqueue(sentence);
         }
         currentState = DialogState.active;
         DisplayNextSentence();
@@ -50,7 +52,7 @@ public class DialogManager : MonoBehaviour
     public void DisplayNextSentence()
     {
         canpass = false;
-        if (sentenceQueue.Count == 0)
+        if (_sentenceQueue.Count == 0)
         {
             EndDialog();
             return;
@@ -63,11 +65,11 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            string sentence = sentenceQueue.Dequeue();
+            string sentence = _sentenceQueue.Dequeue();
             textDisplay.text = sentence;
             canpass = true;
             stateImage.sprite = continueImage;
-            if (sentenceQueue.Count == 0)
+            if (_sentenceQueue.Count == 0)
             {
                 stateImage.sprite = finishedImage;
             }
@@ -77,7 +79,7 @@ public class DialogManager : MonoBehaviour
     
     private IEnumerator DisplayTyped()
     {
-        string sentence = sentenceQueue.Dequeue();
+        string sentence = _sentenceQueue.Dequeue();
         textDisplay.text = "";
         stateImage.sprite = writingImage;
         foreach (char letter in sentence.ToCharArray())
@@ -92,7 +94,7 @@ public class DialogManager : MonoBehaviour
             }
         }
         stateImage.sprite = continueImage;
-        if (sentenceQueue.Count == 0)
+        if (_sentenceQueue.Count == 0)
         {
             stateImage.sprite = finishedImage;
         }
@@ -109,7 +111,7 @@ public class DialogManager : MonoBehaviour
         titleDisplay.text = "";
         dialogBox.SetActive(false);
         currentState = DialogState.unactive;
-        if(dialogIsFinished)
+        if(_dialogFinishSignal)
             dialogIsFinished.RaiseSignal();
     }
 

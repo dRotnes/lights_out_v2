@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -535392637
-  m_SortingLayer: 2
+  m_SortingLayerID: -1043807767
+  m_SortingLayer: 6
   m_SortingOrder: 3
   m_Sprite: {fileID: 6474278674946417186, guid: 2d5e465efca1b9645b1e1a3ef1bc524b,
     type: 3}
@@ -140,6 +140,7 @@ MonoBehaviour:
   playerInventory: {fileID: 0}
   item: {fileID: 0}
   attractDistance: 1
+  updateSouls: {fileID: 0}
 --- !u!50 &1603588207335410033
 Rigidbody2D:
   serializedVersion: 4
