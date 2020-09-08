@@ -22,10 +22,9 @@ public class DialogManager : MonoBehaviour
     public Sprite finishedImage;
     public Sprite writingImage;
 
-    public SignalSend dialogIsFinished;
 
+    private SignalSend _dialogIsFinished;
     private Queue<string> _sentenceQueue;
-    private bool _dialogFinishSignal;
     private bool _isTyped;
 
 
@@ -40,7 +39,7 @@ public class DialogManager : MonoBehaviour
         dialogBox.SetActive(true);
         titleDisplay.text = dialog.name;
         _isTyped = dialog.isTyped;
-        _dialogFinishSignal = dialog.finishedSignal;
+        _dialogIsFinished = dialog.finishedSignal;
         foreach (string sentence in dialog.sentences)
         {
             _sentenceQueue.Enqueue(sentence);
@@ -111,8 +110,8 @@ public class DialogManager : MonoBehaviour
         titleDisplay.text = "";
         dialogBox.SetActive(false);
         currentState = DialogState.unactive;
-        if(_dialogFinishSignal)
-            dialogIsFinished.RaiseSignal();
+        if(_dialogIsFinished)
+            _dialogIsFinished.RaiseSignal();
     }
 
     private IEnumerator Blink()

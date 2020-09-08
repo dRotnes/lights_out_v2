@@ -6,12 +6,14 @@ public class Chest : Interactive
 {
     private bool _canClose;
     private Collider2D triggerArea;
+    private bool _isAppearing;
 
     public Inventory playerInventory;
     public Animator animator;
     public SignalSend raiseItem;
     public Item item;
     public BoolValue isOpen;
+    public SignalSend finishedAppearing;
     private void Start()
     {
         triggerArea = GetComponent<Collider2D>();
@@ -45,6 +47,15 @@ public class Chest : Interactive
                 }
             }
         }
+        if (_isAppearing)
+        {
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, Mathf.Lerp(0, 1, 3f * Time.deltaTime));
+            if(spriteRenderer.color.a == 1) 
+            {
+                _isAppearing = false;
+                finishedAppearing.RaiseSignal();
+            }
+        }
     }
     private void LateUpdate()
     {
@@ -76,5 +87,15 @@ public class Chest : Interactive
     public bool GetOpen()
     {
         return isOpen.value;
+    }
+
+    public void Appear()
+    {
+        _isAppearing = true;
+        
+    }
+    public void TriggerAppearence(GameObject anim)
+    {
+        anim.SetActive(true);
     }
 }

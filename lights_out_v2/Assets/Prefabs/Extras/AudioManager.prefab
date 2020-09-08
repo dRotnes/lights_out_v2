@@ -43,4 +43,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15aac9e068416c4e9a667f8d3b8faad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: MenuSong
+    clip: {fileID: 8300000, guid: e186c5ab0b27c3a4f8a69c1dcfea8a58, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    playOnAwake: 1
+  - name: TalkingSound
+    clip: {fileID: 8300000, guid: 3fe43d6823f793d4daf949c17a957bd4, type: 3}
+    volume: 0.031
+    pitch: 0.44
+    loop: 0
+    source: {fileID: 0}
+    playOnAwake: 0
+  - name: RainSound
+    clip: {fileID: 8300000, guid: 2f27ca57583047940995bba17f3a051f, type: 3}
+    volume: 0.088
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    playOnAwake: 0

@@ -370,71 +370,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: TalkingSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3fe43d6823f793d4daf949c17a957bd4, type: 3}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.031
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].pitch
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[1].playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[2].name
-      value: RainSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2f27ca57583047940995bba17f3a051f, type: 3}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[2].volume
-      value: 0.088
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[2].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828674370176547698, guid: 1cf1868ed029b3d4887d880ddd469236,
-        type: 3}
-      propertyPath: sounds.Array.data[2].loop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6828674370176547699, guid: 1cf1868ed029b3d4887d880ddd469236,
         type: 3}
       propertyPath: m_Name
@@ -617,6 +552,7 @@ MonoBehaviour:
     - Good luck, I'll be watching your journey as I don't have much to do. Be careful
       with traps and puzzles, nothing is exactly what it seems.
     isTyped: 1
+    finishedSignal: {fileID: 0}
 --- !u!4 &1013845643
 Transform:
   m_ObjectHideFlags: 0
