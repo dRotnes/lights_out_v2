@@ -62,8 +62,8 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
-        int[] randomArray = new int[] { 1, 1, 1, 1, 0 };
-        int randomNumber = Random.Range(0, 4);
+        int[] randomArray = new int[] { 1, 0, 1, 0, 1, 1 };
+        int randomNumber = Random.Range(0, 5);
         if (randomArray[randomNumber] == 0)
             Instantiate(heart, transform.position, Quaternion.identity);
         healthSlider.gameObject.SetActive(false);

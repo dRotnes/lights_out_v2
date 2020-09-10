@@ -27,6 +27,16 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.minMaxState
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2918600308204055422, guid: 0541ec069413b8a49bd39acc97be4ee3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918600308204055422, guid: 0541ec069413b8a49bd39acc97be4ee3,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3225130937708123358, guid: 0541ec069413b8a49bd39acc97be4ee3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -85,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 4926545740120610581, guid: 0541ec069413b8a49bd39acc97be4ee3,
         type: 3}
       propertyPath: m_Name
-      value: BloodEffect
+      value: SoulEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0541ec069413b8a49bd39acc97be4ee3, type: 3}
