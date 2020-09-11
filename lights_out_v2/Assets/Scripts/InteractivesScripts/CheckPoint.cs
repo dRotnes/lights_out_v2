@@ -20,8 +20,7 @@ public class CheckPoint : Interactive
     {
         if (playerInRange)
         {
-            if (interrogation)
-                HandleInteractivesUI();
+            HandleInteractivesUI();
 
             if (Input.GetButtonDown("Fire2"))
             {

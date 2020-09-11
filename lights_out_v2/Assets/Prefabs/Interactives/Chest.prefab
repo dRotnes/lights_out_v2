@@ -89,7 +89,8 @@ MonoBehaviour:
   animator: {fileID: 1475258986922977853}
   raiseItem: {fileID: 11400000, guid: 04fe1e165744c9f47b5a9b867368cbac, type: 2}
   item: {fileID: 11400000, guid: 53f5b7aa99fe19d4ba09b7710d87b298, type: 2}
-  isOpen: {fileID: 0}
+  finishedAppearing: {fileID: 0}
+  _sm: {fileID: 0}
 --- !u!1 &1475258986922977852
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,24 +6,28 @@ using System.Xml.Serialization;
 
 public class SavingManager : MonoBehaviour
 {
+    [SerializeField] private List<Chest> chestArray = new List<Chest>();
+    [SerializeField] private List<FireLighter> flArray = new List<FireLighter>();
+    [SerializeField] private List<WoodBlock> wbArray= new List<WoodBlock>();
+
     private int currentScene;
-    private bool[] chests;
+
+    private bool[] chestBools;
+    private bool[] flBools;
+    private bool[] woodBools;
+
     public Player player;
-    public BoolValue[] chestBooleans;
 
-    public static SavingManager instance;
-
-    private void Awake()
+    public BoolValue load;
+    private void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
+        if (load.value)
         {
-            Destroy(gameObject);
-            return;
+            load.value = false;
+            LoadGame();
+            
         }
-        
-        DontDestroyOnLoad(gameObject);
+
     }
     private void Update()
     {
@@ -35,17 +39,25 @@ public class SavingManager : MonoBehaviour
 
     public void SaveGame(int index)
     {
-        Chest[] chestsArray = FindObjectsOfType<Chest>();
-        chests = new bool[chestsArray.Length];
-        for (int i = 0; i < chestsArray.Length; i++)
+        chestBools = new bool[chestArray.Count];
+        for (int i = 0; i < chestArray.Count; i++)
         {
-            Debug.Log(chestsArray[i].isOpen);
-            chests[i] = chestsArray[i].GetOpen();
-            Debug.Log(chests[i]);
-            /*chests[i] = chestsArray[i].isOpen;*/
+            chestBools[i] = chestArray[i].GetStatus();
         }
-        
-        SavingSystem.SaveGame(player, chests, index);
+
+        flBools = new bool[flArray.Count];
+        for (int i = 0; i < flArray.Count; i++)
+        {
+            flBools[i] = flArray[i].GetStatus();
+        }
+
+        woodBools = new bool[wbArray.Count];
+        for (int i = 0; i < wbArray.Count; i++)
+        {
+            woodBools[i] = wbArray[i].GetStatus();
+        }
+
+        SavingSystem.SaveGame(player, chestBools, flBools, woodBools, index);
 
         Debug.Log("Game was saved");
     }
@@ -53,7 +65,6 @@ public class SavingManager : MonoBehaviour
     {
         
         SavingData data = SavingSystem.LoadGame();
-        SceneManager.LoadScene(data.scene);
         player.numberOfHearts = data.playerHearts;
         player.souls = data.playerSouls;
         player.currentHealth = data.playerHealth;
@@ -62,15 +73,19 @@ public class SavingManager : MonoBehaviour
         player.numberOfSouls = data.numberOfSouls;
         player.positions = data.position;
 
-        Chest[] chestsArray = FindObjectsOfType<Chest>();
         for (int i = 0; i < data.chests.Length; i++)
         {
-            Debug.Log("DEBUGUEI");
-            Debug.Log(data.chests[i]);
-            chestsArray[i].SetOpen(data.chests[i]);
-            Debug.Log(chestsArray[i].isOpen);
+            chestArray[i].SetOpen(data.chests[i]);
         }
-        
+        for (int i = 0; i < data.firelighters.Length; i++)
+        {
+            flArray[i].SetStatus(data.firelighters[i]);
+        }
+        for (int i = 0; i < data.woodblocks.Length; i++)
+        {
+            wbArray[i].SetStatus(data.woodblocks[i]);
+        }
+
     }
 
     public void ResetGame()
@@ -86,10 +101,16 @@ public class SavingManager : MonoBehaviour
         player.positions[1] = player.DEFAULT_positions[1];
         player.positions[2] = player.DEFAULT_positions[2];
         Debug.Log(player.positions);
-        foreach (BoolValue bv in chestBooleans)
-        {
-            bv.value = bv.DEAFULT_VALUE;
-        }
         SaveGame(2);
+    }
+
+    public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null)
+    {
+        if (chest!=null)
+            chestArray.Add(chest);
+        else if (fl != null)
+            flArray.Add(fl);
+        else if (wb != null)
+            wbArray.Add(wb);
     }
 }

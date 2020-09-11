@@ -26,6 +26,9 @@ public class DialogManager : MonoBehaviour
     private SignalSend _dialogIsFinished;
     private Queue<string> _sentenceQueue;
     private bool _isTyped;
+    private bool typing;
+    private bool _breakCO;
+    private string _currentString;
 
 
     private void Start()
@@ -48,6 +51,32 @@ public class DialogManager : MonoBehaviour
         DisplayNextSentence();
         
     }
+    private void Update()
+    {
+        if (_isTyped)
+        {
+
+            if (Input.GetButtonDown("Fire2") && currentState == DialogState.active)
+            {
+                if (typing)
+                {
+
+                    _breakCO = true;
+                    textDisplay.text = _currentString;
+                }
+                else if (canpass)
+                {
+                    StopAllCoroutines();
+                    DisplayNextSentence();
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+          
+    }
     public void DisplayNextSentence()
     {
         canpass = false;
@@ -64,10 +93,10 @@ public class DialogManager : MonoBehaviour
         }
         else
         {
-            string sentence = _sentenceQueue.Dequeue();
-            textDisplay.text = sentence;
-            canpass = true;
+            _currentString= _sentenceQueue.Dequeue();
+            textDisplay.text = _currentString;
             stateImage.sprite = continueImage;
+            canpass = true;
             if (_sentenceQueue.Count == 0)
             {
                 stateImage.sprite = finishedImage;
@@ -78,20 +107,20 @@ public class DialogManager : MonoBehaviour
     
     private IEnumerator DisplayTyped()
     {
-        string sentence = _sentenceQueue.Dequeue();
+        _currentString = _sentenceQueue.Dequeue();
         textDisplay.text = "";
         stateImage.sprite = writingImage;
-        foreach (char letter in sentence.ToCharArray())
+        typing = true;
+        foreach (char letter in _currentString.ToCharArray())
         {
+            if (_breakCO)
+                break;
             textDisplay.text += letter;
             FindObjectOfType<AudioManager>().Play("TalkingSound");
             yield return new WaitForSeconds(typingSpeed);
-            if (Input.GetKeyDown("space"))
-            {
-                textDisplay.text = sentence;
-                break;
-            }
         }
+        _breakCO = false;
+        typing = false;
         stateImage.sprite = continueImage;
         if (_sentenceQueue.Count == 0)
         {

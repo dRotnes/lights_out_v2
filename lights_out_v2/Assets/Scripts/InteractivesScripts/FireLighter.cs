@@ -5,8 +5,8 @@ using UnityEngine;
 public class FireLighter : Interactive
 {
     private bool _canDisactivate;
+    private bool _isActive;
 
-    public BoolValue isActive;
     public Animator animator;
     public SignalSend activated;
 
@@ -15,11 +15,18 @@ public class FireLighter : Interactive
     public List<GameObject> deactivatingStuff = new List<GameObject>();*/
 
     public FireLighter[] fireLighterToDeactivate;
+
+    [SerializeField] private SavingManager _sm;
+    private void Awake()
+    {
+        _sm = FindObjectOfType<SavingManager>();
+        _sm.AddToArray(null, this, null);
+    }
     private void Update()
     {
         if (playerInRange)
         {
-            switch (!isActive.value)
+            switch (!_isActive)
             {
                 case true:
                     HandleInteractivesUI();
@@ -29,7 +36,7 @@ public class FireLighter : Interactive
             }
             if (Input.GetButtonDown("Fire2"))
             {
-                if (!isActive.value)
+                if (!_isActive)
                 {
                     Debug.Log("cria");
                     Activate();
@@ -40,12 +47,12 @@ public class FireLighter : Interactive
     }
     private void LateUpdate()
     {
-        animator.SetBool("Active", isActive.value);
+        animator.SetBool("Active", _isActive);
     }
 
     public void Activate()
     {
-        isActive.value = true;
+        _isActive= true;
         activated.RaiseSignal();
         /*if (activatingStuff.Count > 0)
         {
@@ -74,11 +81,15 @@ public class FireLighter : Interactive
 
     public void Disactivate()
     {
-        isActive.value = false;
+        _isActive = false;
     }
 
     public bool GetStatus()
     {
-        return isActive.value;
+        return _isActive;
+    }
+    public void SetStatus(bool status)
+    {
+        _isActive = status;
     }
 }

@@ -5,22 +5,6 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    public BoolValue load;
-    private void Start()
-    {
-        if (load.value)
-        {
-            load.value = false;
-            SavingManager savemanager = FindObjectOfType<SavingManager>();
-            if (savemanager!=null)
-            {
-
-                savemanager.LoadGame();
-            }
-        }
-
-    }
-
     public void NextScene()
     {
         StartCoroutine(NextSceneCO());

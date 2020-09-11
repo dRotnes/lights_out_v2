@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     public SavingManager saveManager;
     public SignalSend test;
     public BoolValue load;
+
+    private void Start()
+    {
+        load.value = false;
+    }
     public void PlayGame()
     {
 

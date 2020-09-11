@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 public class WoodBlock : MonoBehaviour
 { 
-    public BoolValue isOpen;
+    private bool _isOpen;
     public Animator animator;
     public Collider2D doorCollider;
 
+    [SerializeField] private SavingManager _sm;
+    
+    private void Awake()
+    {
+        _sm = FindObjectOfType<SavingManager>();
+        _sm.AddToArray(null, null,this);
+        
+    }
     private void Start()
     {
-        if (isOpen.value)
+        if (_isOpen)
         {
             OpenDoor();
         }
@@ -21,18 +29,24 @@ public class WoodBlock : MonoBehaviour
 
     private void LateUpdate()
     {
-        animator.SetBool("isOpen", isOpen.value);
+        animator.SetBool("isOpen", _isOpen);
+        doorCollider.enabled = !_isOpen;
     }
     public void OpenDoor() 
     {
-        isOpen.value = true;
-        doorCollider.enabled = false;
-       
+        _isOpen = true;
     }
 
     public void CloseDoor()
     {
-        isOpen.value = false;
-        doorCollider.enabled = true;
+        _isOpen = false;
+    }
+    public bool GetStatus()
+    {
+        return _isOpen;
+    }
+    public void SetStatus(bool status)
+    {
+        _isOpen = status;
     }
 }

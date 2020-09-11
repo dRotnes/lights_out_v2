@@ -18,9 +18,11 @@ public class SavingData
 
     //scenario and other stuff
     public bool[] chests = new bool[] { };
+    public bool[] firelighters = new bool[] { };
+    public bool[] woodblocks = new bool[] { };
     public int scene;
 
-    public SavingData(Player player, bool[] chestsArray, int sceneIndex)
+    public SavingData(Player player, bool[] chestsArray,bool[] flArray, bool[] wbArray, int sceneIndex)
     {
         numberOfSouls = player.numberOfSouls;
         numberOfKeys = player.numberOfKeys;
@@ -39,5 +41,7 @@ public class SavingData
         scene = sceneIndex;
 
         chests = chestsArray;
+        woodblocks = wbArray;
+        firelighters = flArray;
     }
 }

@@ -12,18 +12,22 @@ public class Chest : Interactive
     public Animator animator;
     public SignalSend raiseItem;
     public Item item;
-    public BoolValue isOpen;
     public SignalSend finishedAppearing;
-    private void Start()
+    private bool _isOpen;
+
+    private SavingManager _sm;
+    private void Awake()
     {
+        _sm = FindObjectOfType<SavingManager>();
         triggerArea = GetComponent<Collider2D>();
+        _sm.AddToArray(this, null, null);
     }
 
     private void Update()
     {
         if (playerInRange)
         {
-            switch (!isOpen.value)
+            switch (!_isOpen)
             {
                 case true:
                     HandleInteractivesUI();
@@ -33,7 +37,7 @@ public class Chest : Interactive
             }
             if (Input.GetButtonDown("Fire2"))
             {
-                if (!isOpen.value)
+                if (!_isOpen)
                 {
                     Debug.Log("cria");
                     Open();
@@ -59,11 +63,11 @@ public class Chest : Interactive
     }
     private void LateUpdate()
     {
-        animator.SetBool("Open", isOpen.value);
+        animator.SetBool("Open", _isOpen);
     }
     private void Open()
     {
-        isOpen.value = true;
+        _isOpen = true;
         _canClose = true;
         playerInventory.currentItem = item;
         playerInventory.AddItem(playerInventory.currentItem);
@@ -75,27 +79,16 @@ public class Chest : Interactive
         raiseItem.RaiseSignal();
         controllerSignals[1].RaiseSignal();
         pcSignals[1].RaiseSignal();
-        interrogationSignalOff.RaiseSignal();
         _canClose = false;
     }
 
     public void SetOpen(bool open)
     {
-        isOpen.value = open;
+        _isOpen = open;
     }
 
-    public bool GetOpen()
+    public bool GetStatus()
     {
-        return isOpen.value;
-    }
-
-    public void Appear()
-    {
-        _isAppearing = true;
-        
-    }
-    public void TriggerAppearence(GameObject anim)
-    {
-        anim.SetActive(true);
+        return _isOpen;
     }
 }

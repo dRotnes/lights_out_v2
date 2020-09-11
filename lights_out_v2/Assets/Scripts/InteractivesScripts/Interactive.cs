@@ -7,10 +7,8 @@ public class Interactive : MonoBehaviour
 {
     public bool playerInRange;
     public bool isFixed;
-    public bool interrogation = true;
+    public bool canInteract = true;
     public SpriteRenderer spriteRenderer;
-    public SignalSend interrogationSignalOn;
-    public SignalSend interrogationSignalOff;
     public SignalSend[] controllerSignals;
     public SignalSend[] pcSignals;
     public ControllerManager controllerManager;
@@ -22,8 +20,6 @@ public class Interactive : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (interrogation)
-                interrogationSignalOn.RaiseSignal();
             playerInRange = true;
             if (!isFixed)
             {
@@ -38,10 +34,8 @@ public class Interactive : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (interrogation)
-                controllerSignals[1].RaiseSignal();
-                pcSignals[1].RaiseSignal();
-                interrogationSignalOff.RaiseSignal();
+            controllerSignals[1].RaiseSignal();
+            pcSignals[1].RaiseSignal();
             playerInRange = false;
             if (!isFixed)
                 spriteRenderer.sortingLayerName = "ForeGround";
@@ -60,6 +54,12 @@ public class Interactive : MonoBehaviour
             pcSignals[0].RaiseSignal();
             controllerSignals[1].RaiseSignal();
         }
+    }
+
+    public void SetCanInteract(bool value)
+    {
+        canInteract = value;
+
     }
 
    

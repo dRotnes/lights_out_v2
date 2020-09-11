@@ -9,7 +9,11 @@ public class Sign : Interactive
     {
         if (playerInRange)
         {
-            HandleInteractivesUI();
+            if (canInteract)
+            {
+
+                HandleInteractivesUI();
+            }
             _canDesactivate = true;
 
             if (Input.GetButtonDown("Fire2"))
@@ -18,7 +22,7 @@ public class Sign : Interactive
                 {
                     dialogTrigger.TriggerDialog();
                 }
-                else if(dialogTrigger.ReturnState() == DialogState.active)
+                else if(dialogTrigger.ReturnState() == DialogState.active && dialogTrigger.dialog.isTyped != true)
                 {
                     dialogTrigger.DisplayNextSentence();
                 }
@@ -33,5 +37,4 @@ public class Sign : Interactive
             _canDesactivate = false;
         }
     }
-  
 }

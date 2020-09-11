@@ -6,13 +6,14 @@ using System.Collections.Generic;
 
 public static class SavingSystem
 {
-    public static void SaveGame(Player player, bool[] chestsArray, int sceneIndex)
+    public static DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath + "/gamedata.data");
+    public static void SaveGame(Player player, bool[] chestsArray, bool[] flArray, bool[] wbArray, int sceneIndex)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/gamedata.data";
+        string path = dir.FullName;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SavingData data = new SavingData(player, chestsArray, sceneIndex);
+        SavingData data = new SavingData(player, chestsArray, flArray, wbArray, sceneIndex);
         formatter.Serialize(stream, data);
         stream.Close();
 
@@ -20,7 +21,7 @@ public static class SavingSystem
 
     public static SavingData LoadGame()
     {
-        string path = Application.persistentDataPath + "/gamedata.data";
+        string path = dir.FullName;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

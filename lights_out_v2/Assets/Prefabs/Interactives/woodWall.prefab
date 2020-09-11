@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c629d824f34f8141b9e63d8dfe3ef4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpen: {fileID: 0}
   animator: {fileID: 6773999892379408023}
   doorCollider: {fileID: 6773999892379408016}
 --- !u!114 &6773999892379408018
