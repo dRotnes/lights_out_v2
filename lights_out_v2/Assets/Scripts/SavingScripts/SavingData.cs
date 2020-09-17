@@ -20,9 +20,12 @@ public class SavingData
     public bool[] chests = new bool[] { };
     public bool[] firelighters = new bool[] { };
     public bool[] woodblocks = new bool[] { };
+    public bool[] enemies = new bool[] { };
+    public bool[] triggers = new bool[] { };
+
     public int scene;
 
-    public SavingData(Player player, bool[] chestsArray,bool[] flArray, bool[] wbArray, int sceneIndex)
+    public SavingData(Player player, bool[] chestsArray,bool[] flArray, bool[] wbArray, bool[] enArray, bool[] trArray, int sceneIndex)
     {
         numberOfSouls = player.numberOfSouls;
         numberOfKeys = player.numberOfKeys;
@@ -43,5 +46,7 @@ public class SavingData
         chests = chestsArray;
         woodblocks = wbArray;
         firelighters = flArray;
+        enemies = enArray;
+        triggers = trArray;
     }
 }

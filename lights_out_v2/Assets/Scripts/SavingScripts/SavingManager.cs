@@ -9,12 +9,16 @@ public class SavingManager : MonoBehaviour
     [SerializeField] private List<Chest> chestArray = new List<Chest>();
     [SerializeField] private List<FireLighter> flArray = new List<FireLighter>();
     [SerializeField] private List<WoodBlock> wbArray= new List<WoodBlock>();
+    [SerializeField] private List<Enemy> enArray = new List<Enemy>();
+    [SerializeField] private List<GeneralTrigger> trArray = new List<GeneralTrigger>();
 
     private int currentScene;
 
     private bool[] chestBools;
     private bool[] flBools;
     private bool[] woodBools;
+    private bool[] enBools;
+    private bool[] trBools;
 
     public Player player;
 
@@ -57,7 +61,19 @@ public class SavingManager : MonoBehaviour
             woodBools[i] = wbArray[i].GetStatus();
         }
 
-        SavingSystem.SaveGame(player, chestBools, flBools, woodBools, index);
+        enBools = new bool[enArray.Count];
+        for (int i = 0; i < enArray.Count; i++)
+        {
+            enBools[i] = enArray[i].GetStatus();
+        }
+
+        trBools = new bool[trArray.Count];
+        for (int i = 0; i < trArray.Count; i++)
+        {
+            trBools[i] = trArray[i].GetStatus();
+        }
+
+        SavingSystem.SaveGame(player, chestBools, flBools, woodBools, enBools, trBools, index);
 
         Debug.Log("Game was saved");
     }
@@ -85,6 +101,14 @@ public class SavingManager : MonoBehaviour
         {
             wbArray[i].SetStatus(data.woodblocks[i]);
         }
+        for (int i = 0; i < data.enemies.Length; i++)
+        {
+            enArray[i].SetStatus(data.enemies[i]);
+        }
+        for (int i = 0; i < data.triggers.Length; i++)
+        {
+            trArray[i].SetStatus(data.triggers[i]);
+        }
 
     }
 
@@ -104,7 +128,7 @@ public class SavingManager : MonoBehaviour
         SaveGame(2);
     }
 
-    public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null)
+    public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null, Enemy en=null, GeneralTrigger tr = null)
     {
         if (chest!=null)
             chestArray.Add(chest);
@@ -112,5 +136,9 @@ public class SavingManager : MonoBehaviour
             flArray.Add(fl);
         else if (wb != null)
             wbArray.Add(wb);
+        else if (en != null)
+            enArray.Add(en);
+        else if (tr != null)
+            trArray.Add(tr);
     }
 }

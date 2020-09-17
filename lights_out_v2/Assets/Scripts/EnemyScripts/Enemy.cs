@@ -11,6 +11,7 @@ public enum EnemyState
     returning,
     dead
 }
+
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy General")]
@@ -33,9 +34,13 @@ public class Enemy : MonoBehaviour
     public GameObject soul;
     public GameObject soulEffect;
     public GameObject heart;
+    public bool isDead = false;
+    public SavingManager sm;
 
     private void Awake()
     {
+        sm = FindObjectOfType<SavingManager>();
+        sm.AddToArray(null, null, null, this);
         currentState = EnemyState.idle;
         health = maxHealth.value;
         knock = GetComponent<Knockback>();
@@ -62,6 +67,7 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        isDead = true;
         int[] randomArray = new int[] { 1, 0, 1, 0, 1, 1 };
         int randomNumber = Random.Range(0, 5);
         if (randomArray[randomNumber] == 0)
@@ -69,16 +75,14 @@ public class Enemy : MonoBehaviour
         healthSlider.gameObject.SetActive(false);
         currentState = EnemyState.dead;
         animator.SetBool("Dead", true);
-        Destroy(destroyable, 2f);
         StartCoroutine(InstantiateSoul());
-        
     }
     private IEnumerator InstantiateSoul()
     {
         yield return new WaitForSeconds(1.9f);
         Instantiate(soulEffect, transform.position, Quaternion.identity);
         Instantiate(soul, transform.position, Quaternion.identity);
-
+        destroyable.SetActive(false);
     }
     public void SetMaxHealth()
     {
@@ -90,7 +94,15 @@ public class Enemy : MonoBehaviour
     public void UpdateHealth()
     {
         healthSlider.value = health;
-        fill.color = gradient.Evaluate(healthSlider.normalizedValue);
-        
+        fill.color = gradient.Evaluate(healthSlider.normalizedValue);   
+    }
+
+    public void SetStatus(bool value)
+    {
+        isDead = value;
+    }
+    public bool GetStatus()
+    {
+        return isDead;
     }
 }

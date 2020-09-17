@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class TimelineTrigger : MonoBehaviour
+public class TimelineTrigger : GeneralTrigger
 {
     private PlayableDirector _playable;
-    private void Awake()
+    private void Start()
     {
         _playable = GetComponent<PlayableDirector>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if(collision.CompareTag("Player"))
+        if (playerInRange && !status)
+        {
             _playable.Play();
-    }
-
-    public void DestroySelf() {
-        Destroy(this.gameObject);
+            status = true;
+        }
     }
 }
+

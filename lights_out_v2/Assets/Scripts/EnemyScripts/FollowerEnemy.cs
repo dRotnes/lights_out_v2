@@ -28,6 +28,7 @@ public class FollowerEnemy : Enemy
 
     private void Start()
     {
+        
         _seeker = GetComponent<Seeker>();
         _rb = GetComponent<Rigidbody2D>();
         transform.position = startingPosition.transform.position;
@@ -53,6 +54,10 @@ public class FollowerEnemy : Enemy
     }
     private void Update()
     {
+        if (isDead && gameObject.activeSelf)
+        {
+            destroyable.SetActive(!isDead);
+        }
         if (health <= 0)
         {
             Die();

@@ -7,13 +7,13 @@ using System.Collections.Generic;
 public static class SavingSystem
 {
     public static DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath + "/gamedata.data");
-    public static void SaveGame(Player player, bool[] chestsArray, bool[] flArray, bool[] wbArray, int sceneIndex)
+    public static void SaveGame(Player player, bool[] chestsArray, bool[] flArray, bool[] wbArray, bool[] enArray, bool[] trArray, int sceneIndex)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = dir.FullName;
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SavingData data = new SavingData(player, chestsArray, flArray, wbArray, sceneIndex);
+        SavingData data = new SavingData(player, chestsArray, flArray, wbArray, enArray, trArray, sceneIndex);
         formatter.Serialize(stream, data);
         stream.Close();
 
