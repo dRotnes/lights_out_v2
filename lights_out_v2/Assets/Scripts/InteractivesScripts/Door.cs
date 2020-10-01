@@ -12,7 +12,6 @@ public class Door : Interactive
 
     public DoorType doortype;
     public Player player;
-    public bool canOpen = true;
 
     public Animator animator;
     public Collider2D mainCollider;
@@ -26,7 +25,7 @@ public class Door : Interactive
             switch (!_isOpen)
             {
                 case true:
-                    if(canOpen)
+                    if(canInteract)
                         HandleInteractivesUI();
                     break;
                 case false:
@@ -34,7 +33,7 @@ public class Door : Interactive
             }
             if (Input.GetButtonDown("Fire2"))
             {
-                if (!_isOpen && canOpen)
+                if (!_isOpen && canInteract)
                 {
                     OpenDoor();
                 }
@@ -64,7 +63,7 @@ public class Door : Interactive
                 break;
 
         }
-        canOpen = false;
+        SetCanInteract(false);
     }
     public void CloseDoor()
     {

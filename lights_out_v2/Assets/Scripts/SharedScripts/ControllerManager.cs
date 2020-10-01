@@ -7,13 +7,18 @@ public class ControllerManager : MonoBehaviour
     public bool controllerOn;
     void Update()
     {
-        if (Input.GetJoystickNames()[0].Length > 1)
+        string[] array = Input.GetJoystickNames();
+        if (array.Length > 0)
         {
-            controllerOn = true;
-        }
-        else
-        {
-            controllerOn = false;
+            if (array[0].Length > 1)
+            {
+                controllerOn = true;
+            }
+            else
+            {
+                controllerOn = false;
+            }
+
         }
         
     }

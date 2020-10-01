@@ -23,12 +23,12 @@ public class SavingManager : MonoBehaviour
     public Player player;
 
     public BoolValue load;
-    private void Start()
+    private void Awake()
     {
         if (load.value)
         {
-            load.value = false;
             LoadGame();
+            load.value = false;
             
         }
 
