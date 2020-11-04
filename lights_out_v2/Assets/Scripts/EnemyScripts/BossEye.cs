@@ -6,7 +6,6 @@ public enum EyeState
 {
     idle,
     preparing,
-    ready,
     waiting,
     attacking,
     recharging
@@ -19,33 +18,36 @@ public class BossEye: MonoBehaviour
     public SignalSend damageTaken;
     public SignalSend inSpot;
     public SignalSend attack;
+    public SignalSend finishedAttacking;
+
     [Space]
     public BossManager bossManag;
     public float damage;
     public float speed = 150;
-    public bool canAttack;
 
     public PlayerMovement player;
 
     [Header("MinX, MaxX, MinY, MaxY")]
-    public float[] bounds = new float[4];
+    public float[] bounds;
     [Space]
     private float _timeBtwBlink;
     private Vector2 _originalSpot;
     private Vector2 _nextSpot;
     private Rigidbody2D _rb;
-    private Animator _animator;
+
+    public Animator animator;
 
     private void Start()
     {
         bossManag.eyes.Add(this);
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         InvokeRepeating("RandomSpot", Time.time, 2f);
 
         _originalSpot = transform.position;
         _timeBtwBlink = Random.Range(1, 3);
         state = EyeState.idle;
+        bounds = new float[] { 11.82f, 21.18f, -8.79f, -3.63f };
     }
     private void LateUpdate()
     {
@@ -54,7 +56,7 @@ public class BossEye: MonoBehaviour
 
             if (_timeBtwBlink <= 0)
             {
-                _animator.SetTrigger("Blink");
+                animator.SetTrigger("Blink");
                 _timeBtwBlink = Random.Range(1,5);
             }
             else
@@ -74,11 +76,6 @@ public class BossEye: MonoBehaviour
 
             case EyeState.preparing:
                 MoveToAttack();
-                break;
-
-            case EyeState.ready:
-                _animator.SetTrigger("Close");
-                state = EyeState.waiting;
                 break;
         }
     }
@@ -116,20 +113,38 @@ public class BossEye: MonoBehaviour
     {
         if ((Vector2)transform.position == _originalSpot)
         {
-            /*inSpot.RaiseSignal();*/
+            inSpot.RaiseSignal();
             Debug.Log("Eh o bala");
-            state = EyeState.ready;
+            animator.SetTrigger("Close");
+            state = EyeState.waiting;
             return;
         }
         transform.position = Vector2.MoveTowards(transform.position, _originalSpot, speed/80 * Time.deltaTime);
     }
     public void Idle()
     {
-        _animator.SetTrigger("Open");
+        animator.SetTrigger("Open");
         state = EyeState.idle;
     }
     public void StartAttacking()
     {
+        
         attack.RaiseSignal();
     }
+
+    public IEnumerator FallCO()
+    {
+        finishedAttacking.RaiseSignal();
+        animator.SetTrigger("Finished");
+        state = EyeState.recharging;
+        yield return new WaitForSeconds(8f);
+        animator.SetTrigger("Rise");
+        state = EyeState.idle;
+    }
+
+    public void Fall()
+    {
+        StartCoroutine(FallCO());
+    }
+
 }

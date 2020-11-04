@@ -89,25 +89,46 @@ public class SavingManager : MonoBehaviour
         player.numberOfSouls = data.numberOfSouls;
         player.positions = data.position;
 
-        for (int i = 0; i < data.chests.Length; i++)
+        if(chestArray.Count > 0)
         {
-            chestArray[i].SetOpen(data.chests[i]);
+
+            for (int i = 0; i < data.chests.Length; i++)
+            {
+                chestArray[i].SetOpen(data.chests[i]);
+            }
+
         }
-        for (int i = 0; i < data.firelighters.Length; i++)
+
+        if (flArray.Count > 0)
         {
-            flArray[i].SetStatus(data.firelighters[i]);
+            for (int i = 0; i < data.firelighters.Length; i++)
+            {
+                flArray[i].SetStatus(data.firelighters[i]);
+            }
         }
-        for (int i = 0; i < data.woodblocks.Length; i++)
+
+        if (wbArray.Count > 0)
         {
-            wbArray[i].SetStatus(data.woodblocks[i]);
+            for (int i = 0; i < data.woodblocks.Length; i++)
+            {
+                wbArray[i].SetStatus(data.woodblocks[i]);
+            }
         }
-        for (int i = 0; i < data.enemies.Length; i++)
+
+        if (enArray.Count > 0)
         {
-            enArray[i].SetStatus(data.enemies[i]);
+            for (int i = 0; i < data.enemies.Length; i++)
+            {
+                enArray[i].SetStatus(data.enemies[i]);
+            }
         }
-        for (int i = 0; i < data.triggers.Length; i++)
+
+        if (trArray.Count > 0)
         {
-            trArray[i].SetStatus(data.triggers[i]);
+            for (int i = 0; i < data.triggers.Length; i++)
+            {
+                trArray[i].SetStatus(data.triggers[i]);
+            }
         }
 
     }

@@ -9,8 +9,13 @@ public class YellowEye : BossEye
         StartCoroutine(StartAtkCO());
     }
 
+
+
     private IEnumerator StartAtkCO()
     {
+        Debug.Log(this.name + " monkeydonkey");
+        state = EyeState.attacking;
+        animator.SetTrigger("Attack");
         //Instancia circulos de dano igual do inimigozinho na posicao que o player está!
         yield return null;
     }

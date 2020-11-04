@@ -131,9 +131,10 @@ GameObject:
   m_Component:
   - component: {fileID: 23181010}
   - component: {fileID: 23181011}
-  - component: {fileID: 23181012}
   - component: {fileID: 23181013}
   - component: {fileID: 23181014}
+  - component: {fileID: 23181012}
+  - component: {fileID: 23181015}
   m_Layer: 0
   m_Name: Red
   m_TagString: Untagged
@@ -149,10 +150,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23181009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.735, y: 0.3913293, z: 233.41394}
+  m_LocalPosition: {x: 0.735, y: 0.3913293, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1469535381}
+  - {fileID: 1437525317}
   m_Father: {fileID: 1571613553}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -216,23 +218,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 23181009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea959e8f19240be488298ce046cb9200, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ee1fe152a61abe4db4a4d9627abc684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   damageTaken: {fileID: 0}
-  inSpot: {fileID: 0}
-  attack: {fileID: 0}
+  inSpot: {fileID: 11400000, guid: 48f7439edf69bd54b9b0ea8895035347, type: 2}
+  attack: {fileID: 11400000, guid: 5544e248a800b734cb11652566607464, type: 2}
+  finishedAttacking: {fileID: 0}
   bossManag: {fileID: 1571613554}
   damage: 0
   speed: 150
-  canAttack: 1
-  player: {fileID: 0}
+  player: {fileID: 993043855}
   bounds:
-  - -2.61
-  - 2.942
-  - 5.88
-  - 9.298
+  - 0
+  - 0
+  - 0
+  - 0
+  animator: {fileID: 0}
+  startTimeBtwShots: 10
+  force: 10
+  bullet: {fileID: 5699400464815694121, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe, type: 3}
+  shotPoint: {fileID: 1437525317}
+  playerPos: {fileID: 1524569328}
 --- !u!50 &23181013
 Rigidbody2D:
   serializedVersion: 4
@@ -273,6 +281,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &23181015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23181009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 5544e248a800b734cb11652566607464, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 23181012}
+        m_MethodName: StartAtk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &47323827
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,12 +4120,12 @@ PrefabInstance:
     - target: {fileID: 4800894928984334346, guid: 233eb1b43bcd66440808f13167d0d8fa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 4800894928984334346, guid: 233eb1b43bcd66440808f13167d0d8fa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.05
+      value: 5.96
       objectReference: {fileID: 0}
     - target: {fileID: 4800894928984334346, guid: 233eb1b43bcd66440808f13167d0d8fa,
         type: 3}
@@ -4480,9 +4515,10 @@ GameObject:
   m_Component:
   - component: {fileID: 392261614}
   - component: {fileID: 392261615}
-  - component: {fileID: 392261616}
   - component: {fileID: 392261617}
   - component: {fileID: 392261618}
+  - component: {fileID: 392261616}
+  - component: {fileID: 392261619}
   m_Layer: 0
   m_Name: Green
   m_TagString: Untagged
@@ -4498,7 +4534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392261613}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.011, y: 0.3913293, z: 233.41394}
+  m_LocalPosition: {x: -0.011, y: 0.3913293, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 47323828}
@@ -4565,23 +4601,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 392261613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea959e8f19240be488298ce046cb9200, type: 3}
+  m_Script: {fileID: 11500000, guid: dcf964d325669de4c982971b78fcaefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   damageTaken: {fileID: 0}
-  inSpot: {fileID: 0}
-  attack: {fileID: 0}
+  inSpot: {fileID: 11400000, guid: 48f7439edf69bd54b9b0ea8895035347, type: 2}
+  attack: {fileID: 11400000, guid: 268dbe47331d7614e9136427a32c1a6c, type: 2}
+  finishedAttacking: {fileID: 0}
   bossManag: {fileID: 1571613554}
   damage: 0
   speed: 150
-  canAttack: 1
-  player: {fileID: 0}
+  player: {fileID: 993043855}
   bounds:
-  - -2.61
-  - 2.942
-  - 5.88
-  - 9.298
+  - 0
+  - 0
+  - 0
+  - 0
+  animator: {fileID: 0}
 --- !u!50 &392261617
 Rigidbody2D:
   serializedVersion: 4
@@ -4622,6 +4659,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &392261619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392261613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 268dbe47331d7614e9136427a32c1a6c, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 392261616}
+        m_MethodName: StartAtk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &787602305
 GameObject:
   m_ObjectHideFlags: 0
@@ -4831,9 +4895,10 @@ GameObject:
   m_Component:
   - component: {fileID: 935563747}
   - component: {fileID: 935563749}
-  - component: {fileID: 935563748}
   - component: {fileID: 935563750}
   - component: {fileID: 935563751}
+  - component: {fileID: 935563748}
+  - component: {fileID: 935563752}
   m_Layer: 0
   m_Name: Yellow
   m_TagString: Untagged
@@ -4849,7 +4914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935563746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.457, y: 0.559, z: 233.41394}
+  m_LocalPosition: {x: 1.457, y: 0.559, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 921687001}
@@ -4865,23 +4930,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 935563746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea959e8f19240be488298ce046cb9200, type: 3}
+  m_Script: {fileID: 11500000, guid: df626b6c0f0b82140820b525a6533191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   damageTaken: {fileID: 0}
-  inSpot: {fileID: 0}
-  attack: {fileID: 0}
+  inSpot: {fileID: 11400000, guid: 48f7439edf69bd54b9b0ea8895035347, type: 2}
+  attack: {fileID: 11400000, guid: 85e3e3b5491fd154f998811dc45de733, type: 2}
+  finishedAttacking: {fileID: 0}
   bossManag: {fileID: 1571613554}
   damage: 0
   speed: 150
-  canAttack: 1
-  player: {fileID: 0}
+  player: {fileID: 993043855}
   bounds:
-  - -2.61
-  - 2.942
-  - 5.88
-  - 9.298
+  - 0
+  - 0
+  - 0
+  - 0
+  animator: {fileID: 0}
 --- !u!212 &935563749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4973,6 +5039,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &935563752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935563746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 85e3e3b5491fd154f998811dc45de733, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 935563748}
+        m_MethodName: StartAtk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &993043855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4800894928984334359, guid: 233eb1b43bcd66440808f13167d0d8fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 217680662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76ba62fc99c15f48bd8040bb57acb06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1226074216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,6 +5193,36 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1437525316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1437525317}
+  m_Layer: 0
+  m_Name: ShotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1437525317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437525316}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -0.007000029, y: -0.12900019, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 23181010}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &1469535380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5170,6 +5305,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1524569328 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4800894928984334346, guid: 233eb1b43bcd66440808f13167d0d8fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 217680662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1571613552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5180,6 +5321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571613553}
   - component: {fileID: 1571613554}
+  - component: {fileID: 1571613555}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -5195,7 +5337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571613552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18, y: 8.429, z: -233.41394}
+  m_LocalPosition: {x: -0.18, y: 8.429, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1605147336}
@@ -5218,6 +5360,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eyes: []
+--- !u!114 &1571613555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571613552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 48f7439edf69bd54b9b0ea8895035347, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1571613554}
+        m_MethodName: CanAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1576869923
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,9 +5550,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1605147336}
   - component: {fileID: 1605147337}
-  - component: {fileID: 1605147338}
   - component: {fileID: 1605147339}
   - component: {fileID: 1605147340}
+  - component: {fileID: 1605147338}
+  - component: {fileID: 1605147341}
   m_Layer: 0
   m_Name: Purple
   m_TagString: Untagged
@@ -5399,7 +5569,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605147335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7736749, y: 0.559, z: 233.41394}
+  m_LocalPosition: {x: -0.69, y: 0.5710001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 217065119}
@@ -5466,23 +5636,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1605147335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea959e8f19240be488298ce046cb9200, type: 3}
+  m_Script: {fileID: 11500000, guid: 88438a3fb5b7afa4a8f5e198d207ecea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   damageTaken: {fileID: 0}
-  inSpot: {fileID: 0}
-  attack: {fileID: 0}
+  inSpot: {fileID: 11400000, guid: 48f7439edf69bd54b9b0ea8895035347, type: 2}
+  attack: {fileID: 11400000, guid: 0db21e3b91c6ecf4d954b84c77fed099, type: 2}
+  finishedAttacking: {fileID: 0}
   bossManag: {fileID: 1571613554}
   damage: 0
   speed: 150
-  canAttack: 1
-  player: {fileID: 0}
+  player: {fileID: 993043855}
   bounds:
-  - -2.61
-  - 2.942
-  - 5.88
-  - 9.298
+  - -2.4
+  - 3.06
+  - -2.66
+  - 0.75
+  animator: {fileID: 0}
 --- !u!50 &1605147339
 Rigidbody2D:
   serializedVersion: 4
@@ -5523,6 +5694,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1605147341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605147335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a910d5ddfc825b148a80aefd6fb68ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 0db21e3b91c6ecf4d954b84c77fed099, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1605147338}
+        m_MethodName: StartAtk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1819440341
 GameObject:
   m_ObjectHideFlags: 0
@@ -5688,3 +5886,72 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &6782362016868349760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5699400464815694121, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5787771114546933726, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a3aa0b8fb9ab0c41a0f90e733870afe, type: 3}
