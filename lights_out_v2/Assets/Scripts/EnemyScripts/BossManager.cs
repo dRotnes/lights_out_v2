@@ -10,9 +10,9 @@ public enum BossState
 public class BossManager : MonoBehaviour
 {
     public List<BossEye> eyes = new List<BossEye>();
-    
+
     private BossEye currentEye;
-    
+
     private float health;
     private int counter;
 
@@ -25,18 +25,18 @@ public class BossManager : MonoBehaviour
     {
         if (Input.GetKeyDown("q"))
         {
-            foreach(BossEye eye in eyes)
+            foreach (BossEye eye in eyes)
             {
                 eye.PrepareToAttack();
             }
         }
-        
+
     }
 
     private IEnumerator Attack()
     {
         int index = Random.Range(0, 3);
-        index = 3;
+        index = 0;
         currentEye = eyes[index];
         yield return new WaitForSeconds(2f);
         currentEye.StartAttacking();

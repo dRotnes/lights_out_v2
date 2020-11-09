@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class RedEye : BossEye
 {
-    public float startTimeBtwShots;
+    public float startAttackTime;
     public float force;
     public GameObject bullet;
     public Transform shotPoint;
-    public Transform playerPos;
 
-    private float _timeBtwShots;
+
+    private float _attackTime;
     private bool canShoot;
     public void StartAtk()
     {
         Debug.Log(this.name + " monkeydonkey");
         state = EyeState.attacking;
         animator.SetTrigger("Attack");
-        _timeBtwShots = startTimeBtwShots;
+        _attackTime = startAttackTime;
         canShoot = true;
         StartCoroutine(Shoot());
     }
@@ -26,7 +26,7 @@ public class RedEye : BossEye
     {
         if (canShoot)
         {
-            if(_timeBtwShots <= 0)
+            if (_attackTime <= 0)
             {
                 StopAllCoroutines();
                 canShoot = false;
@@ -34,8 +34,8 @@ public class RedEye : BossEye
             }
             else
             {
-                _timeBtwShots -= Time.deltaTime;
-                
+                _attackTime -= Time.deltaTime;
+
             }
         }
 
@@ -45,7 +45,7 @@ public class RedEye : BossEye
 
     private IEnumerator Shoot()
     {
-        
+
         GameObject ob = Instantiate(bullet, shotPoint.position, Quaternion.identity);
         Rigidbody2D rb = ob.GetComponent<Rigidbody2D>();
         rb.AddForce(shotPoint.forward * force, ForceMode2D.Impulse);

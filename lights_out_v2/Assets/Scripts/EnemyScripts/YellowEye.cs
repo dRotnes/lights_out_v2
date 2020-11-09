@@ -4,19 +4,44 @@ using UnityEngine;
 
 public class YellowEye : BossEye
 {
+    public float startAttackTime;
+    public GameObject circle;
+
+    private float _attackTime;
+    private bool canAttack;
     public void StartAtk()
-    {
-        StartCoroutine(StartAtkCO());
-    }
-
-
-
-    private IEnumerator StartAtkCO()
     {
         Debug.Log(this.name + " monkeydonkey");
         state = EyeState.attacking;
         animator.SetTrigger("Attack");
-        //Instancia circulos de dano igual do inimigozinho na posicao que o player está!
-        yield return null;
+        _attackTime = startAttackTime;
+        canAttack = true;
+        StartCoroutine(Attack());
+    }
+
+    private void Update()
+    {
+        if (canAttack)
+        {
+            if (_attackTime <= 0)
+            {
+                StopAllCoroutines();
+                canAttack = false;
+                Fall();
+            }
+            else
+            {
+                _attackTime -= Time.deltaTime;
+
+            }
+        }
+    }
+
+
+    private IEnumerator Attack()
+    {
+        Instantiate(circle, playerPos.position, Quaternion.identity);
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(Attack());
     }
 }

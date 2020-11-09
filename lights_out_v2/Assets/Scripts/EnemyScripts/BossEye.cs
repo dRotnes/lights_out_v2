@@ -11,7 +11,7 @@ public enum EyeState
     recharging
 }
 
-public class BossEye: MonoBehaviour
+public class BossEye : MonoBehaviour
 {
     public EyeState state;
     [Header("Signals")]
@@ -26,6 +26,7 @@ public class BossEye: MonoBehaviour
     public float speed = 150;
 
     public PlayerMovement player;
+    public Transform playerPos;
 
     [Header("MinX, MaxX, MinY, MaxY")]
     public float[] bounds;
@@ -51,13 +52,13 @@ public class BossEye: MonoBehaviour
     }
     private void LateUpdate()
     {
-        if(state == EyeState.idle)
+        if (state == EyeState.idle)
         {
 
             if (_timeBtwBlink <= 0)
             {
                 animator.SetTrigger("Blink");
-                _timeBtwBlink = Random.Range(1,5);
+                _timeBtwBlink = Random.Range(1, 5);
             }
             else
             {
@@ -107,7 +108,7 @@ public class BossEye: MonoBehaviour
 
     public void PrepareToAttack()
     {
-        state = EyeState.preparing;   
+        state = EyeState.preparing;
     }
     private void MoveToAttack()
     {
@@ -119,7 +120,7 @@ public class BossEye: MonoBehaviour
             state = EyeState.waiting;
             return;
         }
-        transform.position = Vector2.MoveTowards(transform.position, _originalSpot, speed/80 * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, _originalSpot, speed / 80 * Time.deltaTime);
     }
     public void Idle()
     {
@@ -128,7 +129,7 @@ public class BossEye: MonoBehaviour
     }
     public void StartAttacking()
     {
-        
+
         attack.RaiseSignal();
     }
 
