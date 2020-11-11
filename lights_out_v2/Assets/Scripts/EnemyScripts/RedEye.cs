@@ -45,11 +45,11 @@ public class RedEye : BossEye
 
     private IEnumerator Shoot()
     {
-
+        FindObjectOfType<AudioManager>().Play("Shot");
         GameObject ob = Instantiate(bullet, shotPoint.position, Quaternion.identity);
         Rigidbody2D rb = ob.GetComponent<Rigidbody2D>();
         rb.AddForce(shotPoint.forward * force, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         StartCoroutine(Shoot());
     }
 

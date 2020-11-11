@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LoadBool
   m_EditorClassIdentifier: 
   DEAFULT_VALUE: 1
-  value: 1
+  value: 0

@@ -9,6 +9,7 @@ public class PurpleEye : BossEye
     public Transform firePoint;
     public Transform finalPoint;
     public GameObject globalLight;
+    public GameObject laser;
     public GameObject effectStart;
     public GameObject effectEnd;
 
@@ -16,7 +17,10 @@ public class PurpleEye : BossEye
     private bool _canShoot;
     private void Awake()
     {
-        DisableLaser();
+        laser.SetActive(true);
+        lineRenderer.enabled = false;
+        globalLight.SetActive(false);
+        effectEnd.SetActive(false);
     }
     public void StartAtk()
     {
@@ -58,6 +62,7 @@ public class PurpleEye : BossEye
     private void EnableLaser()
     {
         lineRenderer.enabled = true;
+        FindObjectOfType<AudioManager>().Play("LaserSound");
         globalLight.SetActive(true);
         effectEnd.SetActive(true);
         GameObject effect = Instantiate(effectStart, firePoint.position, Quaternion.identity);
@@ -87,6 +92,7 @@ public class PurpleEye : BossEye
 
     private void DisableLaser()
     {
+        FindObjectOfType<AudioManager>().Stop("LaserSound");
         lineRenderer.enabled = false;
         globalLight.SetActive(false);
         effectEnd.SetActive(false);

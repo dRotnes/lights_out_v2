@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public PlayerMovement player;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             if (!paused)
             {
@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                return;
+                Resume();
             }
         }
     }

@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEngine.Playables;
 
 public class SavingManager : MonoBehaviour
 {
@@ -20,25 +21,30 @@ public class SavingManager : MonoBehaviour
     private bool[] enBools;
     private bool[] trBools;
 
+    public GameObject playerMO;
     public Player player;
-
+    public SignalSend timeline;
+    public BoolValue timelineBool;
     public BoolValue load;
-    private void Awake()
+    private void Start()
     {
         if (load.value)
         {
             LoadGame();
-            load.value = false;
-            
+            playerMO.transform.position = new Vector3(player.positions[0], player.positions[1], player.positions[2]);
+            Debug.Log(playerMO.transform.position);
+        }
+    }
+    private void Awake() 
+    { 
+        if (timelineBool.value)
+        {
+            playerMO.transform.position = new Vector3(player.DEFAULT_positions[0], player.DEFAULT_positions[1], player.DEFAULT_positions[2]);
+            timeline.RaiseSignal();
+            timelineBool.value = false;
+
         }
 
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown("l"))
-        {
-            LoadGame();
-        }
     }
 
     public void SaveGame(int index)
@@ -79,7 +85,7 @@ public class SavingManager : MonoBehaviour
     }
     public void LoadGame()
     {
-        
+        Debug.Log("ok");
         SavingData data = SavingSystem.LoadGame();
         player.numberOfHearts = data.playerHearts;
         player.souls = data.playerSouls;
@@ -87,9 +93,11 @@ public class SavingManager : MonoBehaviour
         player.maxHealth = data.maxHealth;
         player.numberOfKeys = data.numberOfKeys;
         player.numberOfSouls = data.numberOfSouls;
-        player.positions = data.position;
+        player.positions[0] = data.position[0];
+        player.positions[1] = data.position[1];
+        player.positions[2] = data.position[2];
 
-        if(chestArray.Count > 0)
+        if (chestArray.Count > 0)
         {
 
             for (int i = 0; i < data.chests.Length; i++)
@@ -145,8 +153,12 @@ public class SavingManager : MonoBehaviour
         player.positions[0] = player.DEFAULT_positions[0];
         player.positions[1] = player.DEFAULT_positions[1];
         player.positions[2] = player.DEFAULT_positions[2];
-        Debug.Log(player.positions);
         SaveGame(2);
+        Debug.Log(player.positions[0]);
+        Debug.Log(player.positions[1]);
+        Debug.Log(player.positions[2]);
+        Debug.Log("GameSaved");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null, Enemy en=null, GeneralTrigger tr = null)

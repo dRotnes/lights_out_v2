@@ -10,9 +10,6 @@ public class FireLighter : Interactive
     public Animator animator;
     public SignalSend activated;
 
-    //puzzle stuff
-    /*public List<GameObject> activatingStuff = new List<GameObject>();
-    public List<GameObject> deactivatingStuff = new List<GameObject>();*/
 
     public FireLighter[] fireLighterToDeactivate;
 
@@ -26,12 +23,12 @@ public class FireLighter : Interactive
     {
         if (playerInRange)
         {
-            switch (!_isActive)
+            switch (_isActive)
             {
-                case true:
+                case false:
                     HandleInteractivesUI();
                     break;
-                case false:
+                case true:
                     break;
             }
             if (Input.GetButtonDown("Fire2"))
@@ -54,29 +51,6 @@ public class FireLighter : Interactive
     {
         _isActive= true;
         activated.RaiseSignal();
-        /*if (activatingStuff.Count > 0)
-        {
-            foreach(GameObject gO in activatingStuff)
-            {
-                gO.SetActive(true);
-            }
-        }
-        if (deactivatingStuff.Count > 0)
-        {
-            foreach (GameObject gO in deactivatingStuff)
-            {
-                gO.SetActive(false);
-
-            }
-        }
-        if (fireLighterToDeactivate.Length > 0)
-        {
-            foreach (FireLighter fl in fireLighterToDeactivate)
-            {
-                fl.Disactivate();
-
-            }
-        }*/
     }
 
     public void Disactivate()

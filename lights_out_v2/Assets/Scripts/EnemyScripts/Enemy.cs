@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
         {
             knock.Knock(other, GetComponent<Rigidbody2D>());
         }
+        FindObjectOfType<AudioManager>().Play("HitSound");
         Instantiate(bloodEffect, transform.position, Quaternion.identity);
         CinemachineShake.Instance.ShakeCam(1f, .1f);
         health -= damage;

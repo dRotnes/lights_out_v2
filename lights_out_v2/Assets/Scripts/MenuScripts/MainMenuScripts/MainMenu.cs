@@ -9,45 +9,29 @@ public class MainMenu : MonoBehaviour
     public SavingManager saveManager;
     public SignalSend test;
     public BoolValue load;
+    public BoolValue timeline;
 
-    private void Start()
+    private void Awake()
     {
         load.value = false;
+        timeline.value = false;
     }
     public void PlayGame()
     {
-
+        timeline.value = true;
+        load.value = true;
         saveManager.ResetGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        
     }
 
     public void LoadGame()
     {
-        Debug.Log("ou yea");
-        SavingData data = SavingSystem.LoadGame();
-        load.value = load.DEAFULT_VALUE;
-        SceneManager.LoadScene(data.scene);
+        load.value = true;
+        SceneManager.LoadScene(2);
     }
 
     public void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit();
-    }
-    private IEnumerator LoadingCanvasCO(bool load)
-    {
-        Debug.Log("coroutine started");
-        loadingCanvas.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        if (load == true)
-        {
-            Debug.Log("yes");
-            LoadGame();
-        }
-        else
-        {
-            PlayGame();
-        }
     }
 }

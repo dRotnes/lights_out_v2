@@ -1,33 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum BossState
-{
-    alive,
-    dead
-}
+using UnityEngine.UI;
 public class BossManager : MonoBehaviour
 {
     public List<BossEye> eyes = new List<BossEye>();
+    public float health;
+    public float startAttackTime;
+    public Slider healthSlider;
+    public Gradient gradient;
+    public Image fill;
+    public SignalSend dead;
 
     private BossEye currentEye;
+    private float _attackTime;
+    private bool _canAttack;
+    private bool _isDead;
 
-    private float health;
+
+
+    private void Start()
+    {
+        health = 50;
+        _attackTime = startAttackTime;
+        _canAttack = true;
+        healthSlider.maxValue = health;
+        UpdateHealth();
+    }
     private int counter;
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        UpdateHealth();
     }
 
+    private void UpdateHealth()
+    {
+        healthSlider.value = health;
+        fill.color = gradient.Evaluate(healthSlider.normalizedValue);
+    }
     private void Update()
     {
-        if (Input.GetKeyDown("q"))
+        if (health <= 0 && !_isDead)
         {
-            foreach (BossEye eye in eyes)
+            dead.RaiseSignal();
+            Done();
+            _isDead = true;
+        }
+        if (_canAttack && !_isDead)
+        {
+            if (_attackTime < 0)
             {
-                eye.PrepareToAttack();
+                foreach (BossEye eye in eyes)
+                {
+                    eye.PrepareToAttack();
+                }
+                _canAttack = false;
+                _attackTime = startAttackTime;
+            }
+            else
+            {
+                _attackTime -= Time.deltaTime;
             }
         }
 
@@ -36,7 +70,6 @@ public class BossManager : MonoBehaviour
     private IEnumerator Attack()
     {
         int index = Random.Range(0, 3);
-        index = 0;
         currentEye = eyes[index];
         yield return new WaitForSeconds(2f);
         currentEye.StartAttacking();
@@ -66,5 +99,15 @@ public class BossManager : MonoBehaviour
             StartCoroutine(Attack());
             counter = 0;
         }
+    }
+
+    public void Ready()
+    {
+        _canAttack = true;
+    }
+
+    public void Done()
+    {
+        CinemachineShake.Instance.ShakeCam(1f, 2f);
     }
 }

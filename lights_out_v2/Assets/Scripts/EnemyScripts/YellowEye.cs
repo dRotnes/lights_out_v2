@@ -40,6 +40,7 @@ public class YellowEye : BossEye
 
     private IEnumerator Attack()
     {
+        FindObjectOfType<AudioManager>().Play("CircleYellow");
         Instantiate(circle, playerPos.position, Quaternion.identity);
         yield return new WaitForSeconds(3f);
         StartCoroutine(Attack());

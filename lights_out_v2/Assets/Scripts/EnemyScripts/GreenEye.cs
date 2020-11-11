@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class GreenEye : BossEye
 {
+    public float startAttackTime;
+    public GameObject circle;
+    public Transform centerPoint;
+
+    private float _attackTime;
+    private bool canShoot;
+
+
     public void StartAtk()
     {
         StartCoroutine(StartAtkCO());
     }
 
-
     private IEnumerator StartAtkCO()
     {
-        Debug.Log(this.name + " monkeydonkey");
-        state = EyeState.attacking;
         animator.SetTrigger("Attack");
-        //Instancia circulos de dano igual do inimigozinho na posicao que o player está!
-        yield return null;
+        yield return new WaitForSeconds(.4f);
+        FindObjectOfType<AudioManager>().Play("CircleGreen");
+        GameObject c = Instantiate(circle, centerPoint.position, Quaternion.identity);
+        yield return new WaitForSeconds(startAttackTime);
+        Destroy(c);
+        FindObjectOfType<AudioManager>().Stop("CircleGreen");
+        Fall();
     }
 }

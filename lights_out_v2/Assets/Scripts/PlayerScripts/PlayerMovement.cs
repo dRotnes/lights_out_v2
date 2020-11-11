@@ -47,11 +47,10 @@ public class PlayerMovement : MonoBehaviour
     private bool _canSpecialAtk;
     private bool _isDead;
 
-    private void Awake() {
+    private void Start() {
         
-        Debug.Log(playerStats.positions);
         currentState = playerStats.state;
-        transform.position = new Vector3(playerStats.positions[0], playerStats.positions[1], playerStats.positions[2]);
+        
         _canMove = true;
         _timeBtwAttacks = 0;
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -143,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        FindObjectOfType<AudioManager>().Play("SwordSound");
         yield return new WaitForSeconds(.3f);
         Collider2D[] hitArray = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D collider in hitArray)
@@ -163,6 +163,20 @@ public class PlayerMovement : MonoBehaviour
                     enemy.TakeDamage(damage, GetComponent<Collider2D>());
                 }
             }
+
+            else if (collider.CompareTag("Boss"))
+            {
+                float damage = attackDamage;
+                if (_specialAtk)
+                    damage = damage * 2;
+                if (collider.gameObject.GetComponent<BossEye>())
+                {
+                    Debug.Log("MONKEY");
+                    BossEye enemy = collider.gameObject.GetComponent<BossEye>();
+                    enemy.TakeDamage(damage);
+                }
+            }
+
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public SignalSend playerHealthSignal;
+    public SignalSend gameOver;
     public float startTimeInvencible;
     public Player playerStats;
 
@@ -68,8 +69,8 @@ public class PlayerHealth : MonoBehaviour
             {
                 StartCoroutine(FlashDamage());
             }
-            /*FindObjectOfType<AudioManager>().Play("hit_sound");*/
-            CinemachineShake.Instance.ShakeCam(1f, .2f);
+            FindObjectOfType<AudioManager>().Play("HitSound");
+            CinemachineShake.Instance.ShakeCam(1f, .3f);
             playerHealthSignal.RaiseSignal();
         }
     }
@@ -117,6 +118,7 @@ public class PlayerHealth : MonoBehaviour
     {
         StartCoroutine(FlashDamage());
         _playerMovement.currentState = PlayerState.dead;
+        gameOver.RaiseSignal();
         
     }
 

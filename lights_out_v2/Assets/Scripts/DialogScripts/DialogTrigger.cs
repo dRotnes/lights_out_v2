@@ -12,8 +12,22 @@ public class DialogTrigger : MonoBehaviour
     {
         _dialogManager = FindObjectOfType<DialogManager>();
     }
-    public void TriggerDialog()
+    public void TriggerDialog(bool delay = false)
     {
+        if (delay)
+        {
+            StartCoroutine(DelayedTrigger());
+        }
+        else
+        {
+            _dialogManager.StartDialog(dialog);
+
+        }
+    }
+
+    private IEnumerator DelayedTrigger()
+    {
+        yield return new WaitForSeconds(2f);
         _dialogManager.StartDialog(dialog);
     }
 

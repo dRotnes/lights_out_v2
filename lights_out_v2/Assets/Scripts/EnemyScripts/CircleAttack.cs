@@ -47,6 +47,7 @@ public class CircleAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(attackTime);
         canDamage = false;
+        FindObjectOfType<AudioManager>().Stop("CircleYellow");
         Destroy(gameObject);
     }
 

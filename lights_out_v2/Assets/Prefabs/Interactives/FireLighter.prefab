@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 0.715
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
@@ -134,12 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInRange: 0
   isFixed: 0
-  interrogation: 1
+  canInteract: 1
   spriteRenderer: {fileID: 303959391678382826}
-  interrogationSignalOn: {fileID: 11400000, guid: ab55a3ba0de47744d8462eb530e51efd,
-    type: 2}
-  interrogationSignalOff: {fileID: 11400000, guid: 6f54626171cec984e90a0100d6d87b00,
-    type: 2}
   controllerSignals:
   - {fileID: 11400000, guid: b21285028314822448223b57192de9e8, type: 2}
   - {fileID: 11400000, guid: f659bfd880cb0714996576f48f7979e9, type: 2}
@@ -147,10 +143,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c79d46bda92dbfd4fb247b4233435527, type: 2}
   - {fileID: 11400000, guid: 2df27be7328b823458abaee9b85069bf, type: 2}
   controllerManager: {fileID: 0}
-  isActive: {fileID: 0}
   animator: {fileID: 303959391678382827}
   activated: {fileID: 0}
   fireLighterToDeactivate: []
+  _sm: {fileID: 0}
 --- !u!1 &303959391678382825
 GameObject:
   m_ObjectHideFlags: 0

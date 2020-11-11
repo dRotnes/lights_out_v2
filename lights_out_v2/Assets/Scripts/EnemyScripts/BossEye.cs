@@ -8,7 +8,8 @@ public enum EyeState
     preparing,
     waiting,
     attacking,
-    recharging
+    recharging,
+    dead
 }
 
 public class BossEye : MonoBehaviour
@@ -19,6 +20,7 @@ public class BossEye : MonoBehaviour
     public SignalSend inSpot;
     public SignalSend attack;
     public SignalSend finishedAttacking;
+    public SignalSend finishedAll;
 
     [Space]
     public BossManager bossManag;
@@ -27,6 +29,8 @@ public class BossEye : MonoBehaviour
 
     public PlayerMovement player;
     public Transform playerPos;
+    public GameObject bloodEffect;
+
 
     [Header("MinX, MaxX, MinY, MaxY")]
     public float[] bounds;
@@ -35,6 +39,8 @@ public class BossEye : MonoBehaviour
     private Vector2 _originalSpot;
     private Vector2 _nextSpot;
     private Rigidbody2D _rb;
+    private Collider2D _co;
+    private SpriteRenderer _sr;
 
     public Animator animator;
 
@@ -42,13 +48,15 @@ public class BossEye : MonoBehaviour
     {
         bossManag.eyes.Add(this);
         _rb = GetComponent<Rigidbody2D>();
+        _co = GetComponent<Collider2D>();
+        _sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         InvokeRepeating("RandomSpot", Time.time, 2f);
 
         _originalSpot = transform.position;
         _timeBtwBlink = Random.Range(1, 3);
         state = EyeState.idle;
-        bounds = new float[] { 11.82f, 21.18f, -8.79f, -3.63f };
+        bounds = new float[] { 11.74f, 20.98f, -8.87f, -3.8f };
     }
     private void LateUpdate()
     {
@@ -78,6 +86,10 @@ public class BossEye : MonoBehaviour
             case EyeState.preparing:
                 MoveToAttack();
                 break;
+
+            case EyeState.dead:
+                Destroy(gameObject);
+                break;
         }
     }
 
@@ -95,15 +107,19 @@ public class BossEye : MonoBehaviour
         _rb.AddForce(force);
     }
 
-    public void Damage(PlayerHealth player)
-    {
-        state = EyeState.attacking;
-        player.TakeDamage(damage);
-    }
-
     public void TakeDamage(float damage)
     {
+        FindObjectOfType<AudioManager>().Play("HitSound");
+        StartCoroutine(FlashDamage());
         bossManag.TakeDamage(damage);
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
+        CinemachineShake.Instance.ShakeCam(1f, .2f);
+    }
+    private IEnumerator FlashDamage()
+    {
+        _sr.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        _sr.color = Color.white;
     }
 
     public void PrepareToAttack()
@@ -129,23 +145,33 @@ public class BossEye : MonoBehaviour
     }
     public void StartAttacking()
     {
-
         attack.RaiseSignal();
     }
 
     public IEnumerator FallCO()
     {
+        _rb.isKinematic = true;
+        _co.enabled = true;
         finishedAttacking.RaiseSignal();
         animator.SetTrigger("Finished");
         state = EyeState.recharging;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(7f);
+        _rb.isKinematic = false;
+        _co.enabled = false;
         animator.SetTrigger("Rise");
         state = EyeState.idle;
+        finishedAll.RaiseSignal();
     }
 
     public void Fall()
     {
         StartCoroutine(FallCO());
     }
+
+    public void Dead()
+    {
+        state = EyeState.dead;
+    }
+
 
 }

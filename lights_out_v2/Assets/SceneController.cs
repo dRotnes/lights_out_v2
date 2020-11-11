@@ -14,4 +14,9 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void OneScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 }

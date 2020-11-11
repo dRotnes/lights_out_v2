@@ -10,7 +10,6 @@ public class GeneralTrigger : MonoBehaviour
 
     private void Awake()
     {
-        sm = FindObjectOfType<SavingManager>();
         sm.AddToArray(null, null, null, null, this);
     }
     private void OnTriggerEnter2D(Collider2D collision)

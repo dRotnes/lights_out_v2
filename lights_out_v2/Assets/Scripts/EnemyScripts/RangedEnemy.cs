@@ -30,6 +30,7 @@ public class RangedEnemy : Enemy
         if (health <= 0)
         {
             Die();
+            FindObjectOfType<AudioManager>().Stop("CircleYellow");
             Destroy(enemyCollider);
         }
         if(currentState == EnemyState.dead)
@@ -95,12 +96,14 @@ public class RangedEnemy : Enemy
     }
     public IEnumerator Attack()
     {
+        FindObjectOfType<AudioManager>().Play("CircleYellow");
         Debug.Log("Attacking");
         InvokeRepeating("Damage", 0f, damageRate);
         yield return new WaitForSeconds(attackTime);
         Debug.Log("Finished Attack");
         CancelInvoke("Damage");
         animator.SetBool("Attack", false);
+        FindObjectOfType<AudioManager>().Stop("CircleYellow");
         StartCoroutine(ResetAttack());
     }
 
