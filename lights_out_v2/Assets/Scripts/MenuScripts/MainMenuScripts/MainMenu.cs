@@ -5,22 +5,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 public class MainMenu : MonoBehaviour
 {
-    public GameObject loadingCanvas;
-    public SavingManager saveManager;
-    public SignalSend test;
     public BoolValue load;
-    public BoolValue timeline;
 
-    private void Awake()
-    {
-        load.value = false;
-        timeline.value = false;
-    }
     public void PlayGame()
     {
-        timeline.value = true;
-        load.value = true;
-        saveManager.ResetGame();
+        load.value = false;
+        SceneManager.LoadScene(1);
     }
 
     public void LoadGame()

@@ -9,10 +9,6 @@ public class TimelineTrigger : GeneralTrigger
     private void Start()
     {
         _playable = GetComponent<PlayableDirector>();
-        if (status)
-        {
-            Destroy(gameObject);
-        }
     }
     private void Update()
     {

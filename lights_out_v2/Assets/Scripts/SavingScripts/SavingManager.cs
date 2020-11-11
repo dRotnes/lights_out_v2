@@ -24,27 +24,25 @@ public class SavingManager : MonoBehaviour
     public GameObject playerMO;
     public Player player;
     public SignalSend timeline;
-    public BoolValue timelineBool;
     public BoolValue load;
-    private void Start()
+    private void OnEnable() 
     {
         if (load.value)
         {
             LoadGame();
-            playerMO.transform.position = new Vector3(player.positions[0], player.positions[1], player.positions[2]);
-            Debug.Log(playerMO.transform.position);
         }
-    }
-    private void Awake() 
-    { 
-        if (timelineBool.value)
+        else
         {
-            playerMO.transform.position = new Vector3(player.DEFAULT_positions[0], player.DEFAULT_positions[1], player.DEFAULT_positions[2]);
-            timeline.RaiseSignal();
-            timelineBool.value = false;
-
+            ResetGame();
         }
 
+    }
+    private void Start()
+    {
+        if (!load.value)
+        {
+            timeline.RaiseSignal();
+        }
     }
 
     public void SaveGame(int index)
@@ -73,19 +71,13 @@ public class SavingManager : MonoBehaviour
             enBools[i] = enArray[i].GetStatus();
         }
 
-        trBools = new bool[trArray.Count];
-        for (int i = 0; i < trArray.Count; i++)
-        {
-            trBools[i] = trArray[i].GetStatus();
-        }
 
-        SavingSystem.SaveGame(player, chestBools, flBools, woodBools, enBools, trBools, index);
+        SavingSystem.SaveGame(player, chestBools, flBools, woodBools, enBools, index);
 
         Debug.Log("Game was saved");
     }
     public void LoadGame()
     {
-        Debug.Log("ok");
         SavingData data = SavingSystem.LoadGame();
         player.numberOfHearts = data.playerHearts;
         player.souls = data.playerSouls;
@@ -122,6 +114,7 @@ public class SavingManager : MonoBehaviour
                 wbArray[i].SetStatus(data.woodblocks[i]);
             }
         }
+        
 
         if (enArray.Count > 0)
         {
@@ -131,13 +124,9 @@ public class SavingManager : MonoBehaviour
             }
         }
 
-        if (trArray.Count > 0)
-        {
-            for (int i = 0; i < data.triggers.Length; i++)
-            {
-                trArray[i].SetStatus(data.triggers[i]);
-            }
-        }
+       
+
+        playerMO.transform.position = new Vector3(player.positions[0], player.positions[1], player.positions[2]);
 
     }
 
@@ -154,14 +143,9 @@ public class SavingManager : MonoBehaviour
         player.positions[1] = player.DEFAULT_positions[1];
         player.positions[2] = player.DEFAULT_positions[2];
         SaveGame(2);
-        Debug.Log(player.positions[0]);
-        Debug.Log(player.positions[1]);
-        Debug.Log(player.positions[2]);
-        Debug.Log("GameSaved");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null, Enemy en=null, GeneralTrigger tr = null)
+    public void AddToArray(Chest chest = null, FireLighter fl = null, WoodBlock wb = null, Enemy en=null)
     {
         if (chest!=null)
             chestArray.Add(chest);
@@ -171,7 +155,5 @@ public class SavingManager : MonoBehaviour
             wbArray.Add(wb);
         else if (en != null)
             enArray.Add(en);
-        else if (tr != null)
-            trArray.Add(tr);
     }
 }

@@ -25,7 +25,7 @@ public class SavingData
 
     public int scene;
 
-    public SavingData(Player player, bool[] chestsArray,bool[] flArray, bool[] wbArray, bool[] enArray, bool[] trArray, int sceneIndex)
+    public SavingData(Player player, bool[] chestsArray,bool[] flArray, bool[] wbArray, bool[] enArray, int sceneIndex)
     {
         numberOfSouls = player.numberOfSouls;
         numberOfKeys = player.numberOfKeys;
@@ -47,6 +47,5 @@ public class SavingData
         woodblocks = wbArray;
         firelighters = flArray;
         enemies = enArray;
-        triggers = trArray;
     }
 }

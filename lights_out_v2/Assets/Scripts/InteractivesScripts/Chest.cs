@@ -23,6 +23,7 @@ public class Chest : Interactive
         _sm.AddToArray(this, null, null);
     }
 
+
     private void Update()
     {
         if (playerInRange)

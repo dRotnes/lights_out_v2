@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start() {
         
         currentState = playerStats.state;
-        
         _canMove = true;
         _timeBtwAttacks = 0;
         _rigidbody = GetComponent<Rigidbody2D>();

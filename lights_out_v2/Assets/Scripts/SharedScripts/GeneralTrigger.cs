@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GeneralTrigger : MonoBehaviour
 {
     public bool playerInRange;
     public bool status;
     public SavingManager sm;
-
-    private void Awake()
+    private PlayableDirector _playable;
+    private void Start()
     {
-        sm.AddToArray(null, null, null, null, this);
+        _playable = GetComponent<PlayableDirector>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -31,5 +32,18 @@ public class GeneralTrigger : MonoBehaviour
     public bool GetStatus()
     {
         return status;
+    }
+    private void Update()
+    {
+        if (playerInRange && !status)
+        {
+            StartTimeline();
+        }
+    }
+
+    public void StartTimeline()
+    {
+        _playable.Play();
+        status = true;
     }
 }

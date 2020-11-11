@@ -28,17 +28,16 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         paused = false;
-        player.BlockOrAllowMovement();
     }
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         paused = true;
-        player.BlockOrAllowMovement();
     }
     public void Quit()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 }
