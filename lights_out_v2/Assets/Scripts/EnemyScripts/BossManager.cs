@@ -69,7 +69,7 @@ public class BossManager : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        int index = Random.Range(0, 3);
+        int index = Random.Range(0, 4);
         currentEye = eyes[index];
         yield return new WaitForSeconds(2f);
         currentEye.StartAttacking();

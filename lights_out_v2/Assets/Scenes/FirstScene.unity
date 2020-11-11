@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -662,37 +662,37 @@ PrefabInstance:
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_margin.z
-      value: 103.5628
+      value: 106.19997
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_margin.x
-      value: 87.06445
+      value: 97.61257
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_margin.w
-      value: 52.33249
+      value: 41.784286
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860132860161, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
@@ -847,7 +847,7 @@ PrefabInstance:
     - target: {fileID: 8001847860657456137, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8001847860962968245, guid: ccb300dac9ac01843be140c2c6f108aa,
         type: 3}

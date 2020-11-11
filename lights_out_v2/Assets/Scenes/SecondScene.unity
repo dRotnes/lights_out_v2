@@ -69086,8 +69086,9 @@ MonoBehaviour:
       course. '
     - If you see an enemy, you can use C or SQUARE to attack. Make Sure to collect
       everything they drop, it can be very helpful.
-    - Enemies always drop their souls, which can be used to trigger your special
-      attack. Sometimes they may also drop hearts that help you recover some health.
+    - 'Enemies always drop their souls, which can be used to trigger your special
+      attack. '
+    - Sometimes they may also drop hearts that help you recover some health.
     - I guess that's it...
     - Good luck!
     isTyped: 1

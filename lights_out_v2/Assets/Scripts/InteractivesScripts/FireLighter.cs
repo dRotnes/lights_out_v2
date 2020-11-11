@@ -9,6 +9,7 @@ public class FireLighter : Interactive
 
     public Animator animator;
     public SignalSend activated;
+    public bool canActivate;
 
 
     public FireLighter[] fireLighterToDeactivate;
@@ -35,10 +36,16 @@ public class FireLighter : Interactive
             {
                 if (!_isActive)
                 {
-                    Debug.Log("cria");
                     Activate();
                 }
             }
+        }
+
+        if(_isActive && canActivate)
+        {
+            activated.RaiseSignal();
+            Debug.Log("UDJAJS");
+            canActivate = false;
         }
        
     }
@@ -64,6 +71,10 @@ public class FireLighter : Interactive
     }
     public void SetStatus(bool status)
     {
-        _isActive = status;
+        if(status == true)
+        {
+            _isActive = true;
+            canActivate = true;
+        }
     }
 }

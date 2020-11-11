@@ -7,11 +7,12 @@ public class PuzzleManager : MonoBehaviour
 
     public SignalSend finishSignal;
 
-    private int numberOfActive;
+    private int numberOfActive = 0;
 
     public void AddOne()
     {
         numberOfActive += 1;
+        Debug.Log(numberOfActive);
         
         if(numberOfActive == 3)
         {
